@@ -1,0 +1,799 @@
+CPU 1 is empty
+CPU 2 is empty
+cpus=4
+             ssh-24099 [003] 76612.965626: funcgraph_exit:         0.221 us   |                        }
+             ssh-24099 [003] 76612.965626: funcgraph_exit:       + 10.808 us  |                      }
+             ssh-24099 [003] 76612.965626: funcgraph_exit:       + 14.820 us  |                    }
+             ssh-24099 [003] 76612.965627: funcgraph_entry:                   |                    ttwu_do_wakeup.isra.4() {
+             ssh-24099 [003] 76612.965627: funcgraph_entry:                   |                      check_preempt_curr() {
+             ssh-24099 [003] 76612.965627: funcgraph_entry:        0.281 us   |                        resched_curr();
+             ssh-24099 [003] 76612.965628: funcgraph_exit:         0.810 us   |                      }
+             ssh-24099 [003] 76612.965628: funcgraph_exit:         1.875 us   |                    }
+             ssh-24099 [003] 76612.965629: funcgraph_exit:       + 17.308 us  |                  }
+             ssh-24099 [003] 76612.965629: funcgraph_entry:                   |                  _raw_spin_unlock() {
+             ssh-24099 [003] 76612.965629: funcgraph_entry:        0.215 us   |                    preempt_count_sub();
+             ssh-24099 [003] 76612.965629: funcgraph_exit:         0.633 us   |                  }
+             ssh-24099 [003] 76612.965630: funcgraph_entry:        0.219 us   |                  ttwu_stat();
+             ssh-24099 [003] 76612.965630: funcgraph_entry:                   |                  _raw_spin_unlock_irqrestore() {
+             ssh-24099 [003] 76612.965630: funcgraph_entry:        0.217 us   |                    preempt_count_sub();
+             ssh-24099 [003] 76612.965631: funcgraph_exit:         0.638 us   |                  }
+             ssh-24099 [003] 76612.965631: funcgraph_exit:       + 27.226 us  |                }
+             ssh-24099 [003] 76612.965631: funcgraph_exit:       + 27.653 us  |              }
+             ssh-24099 [003] 76612.965631: funcgraph_exit:       + 28.178 us  |            }
+             ssh-24099 [003] 76612.965632: funcgraph_entry:                   |            autoremove_wake_function() {
+             ssh-24099 [003] 76612.965632: funcgraph_entry:                   |              default_wake_function() {
+             ssh-24099 [003] 76612.965632: funcgraph_entry:                   |                try_to_wake_up() {
+             ssh-24099 [003] 76612.965632: funcgraph_entry:                   |                  __lock_text_start() {
+             ssh-24099 [003] 76612.965633: funcgraph_entry:        0.212 us   |                    preempt_count_add();
+             ssh-24099 [003] 76612.965633: funcgraph_exit:         0.773 us   |                  }
+             ssh-24099 [003] 76612.965633: funcgraph_entry:                   |                  select_task_rq_fair() {
+             ssh-24099 [003] 76612.965634: funcgraph_entry:        0.220 us   |                    __rcu_read_lock();
+             ssh-24099 [003] 76612.965634: funcgraph_entry:        0.221 us   |                    available_idle_cpu();
+             ssh-24099 [003] 76612.965634: funcgraph_entry:        0.418 us   |                    update_cfs_rq_h_load();
+             ssh-24099 [003] 76612.965635: funcgraph_entry:                   |                    select_idle_sibling() {
+             ssh-24099 [003] 76612.965635: funcgraph_entry:        0.226 us   |                      available_idle_cpu();
+             ssh-24099 [003] 76612.965636: funcgraph_entry:        0.215 us   |                      available_idle_cpu();
+             ssh-24099 [003] 76612.965637: funcgraph_entry:        0.244 us   |                      available_idle_cpu();
+             ssh-24099 [003] 76612.965637: funcgraph_entry:        0.226 us   |                      available_idle_cpu();
+             ssh-24099 [003] 76612.965638: funcgraph_entry:        0.232 us   |                      available_idle_cpu();
+             ssh-24099 [003] 76612.965638: funcgraph_entry:        0.196 us   |                      available_idle_cpu();
+             ssh-24099 [003] 76612.965639: funcgraph_entry:        0.230 us   |                      available_idle_cpu();
+             ssh-24099 [003] 76612.965639: funcgraph_exit:         3.867 us   |                    }
+             ssh-24099 [003] 76612.965639: funcgraph_entry:        0.227 us   |                    __rcu_read_unlock();
+             ssh-24099 [003] 76612.965640: funcgraph_exit:         6.293 us   |                  }
+             ssh-24099 [003] 76612.965640: funcgraph_entry:                   |                  set_task_cpu() {
+             ssh-24099 [003] 76612.965640: funcgraph_entry:                   |                    migrate_task_rq_fair() {
+             ssh-24099 [003] 76612.965641: funcgraph_entry:                   |                      remove_entity_load_avg() {
+             ssh-24099 [003] 76612.965641: funcgraph_entry:        0.266 us   |                        __update_load_avg_blocked_se();
+             ssh-24099 [003] 76612.965641: funcgraph_entry:                   |                        __lock_text_start() {
+             ssh-24099 [003] 76612.965642: funcgraph_entry:        0.210 us   |                          preempt_count_add();
+             ssh-24099 [003] 76612.965642: funcgraph_exit:         0.620 us   |                        }
+             ssh-24099 [003] 76612.965642: funcgraph_entry:                   |                        _raw_spin_unlock_irqrestore() {
+             ssh-24099 [003] 76612.965642: funcgraph_entry:        0.218 us   |                          preempt_count_sub();
+             ssh-24099 [003] 76612.965643: funcgraph_exit:         0.628 us   |                        }
+             ssh-24099 [003] 76612.965643: funcgraph_exit:         2.368 us   |                      }
+             ssh-24099 [003] 76612.965643: funcgraph_exit:         2.863 us   |                    }
+             ssh-24099 [003] 76612.965643: funcgraph_entry:        0.262 us   |                    set_task_rq_fair();
+             ssh-24099 [003] 76612.965644: funcgraph_exit:         3.853 us   |                  }
+             ssh-24099 [003] 76612.965644: funcgraph_entry:                   |                  _raw_spin_lock() {
+             ssh-24099 [003] 76612.965644: funcgraph_entry:        0.219 us   |                    preempt_count_add();
+             ssh-24099 [003] 76612.965645: funcgraph_exit:         0.615 us   |                  }
+             ssh-24099 [003] 76612.965645: funcgraph_entry:        0.288 us   |                  update_rq_clock();
+             ssh-24099 [003] 76612.965645: funcgraph_entry:                   |                  ttwu_do_activate() {
+             ssh-24099 [003] 76612.965645: funcgraph_entry:                   |                    activate_task() {
+             ssh-24099 [003] 76612.965646: funcgraph_entry:                   |                      psi_task_change() {
+             ssh-24099 [003] 76612.965646: funcgraph_entry:        0.434 us   |                        record_times();
+             ssh-24099 [003] 76612.965647: funcgraph_entry:        0.294 us   |                        record_times();
+             ssh-24099 [003] 76612.965647: funcgraph_entry:        0.261 us   |                        record_times();
+             ssh-24099 [003] 76612.965648: funcgraph_entry:        0.213 us   |                        record_times();
+             ssh-24099 [003] 76612.965648: funcgraph_exit:         2.299 us   |                      }
+             ssh-24099 [003] 76612.965648: funcgraph_entry:                   |                      enqueue_task_fair() {
+             ssh-24099 [003] 76612.965648: funcgraph_entry:                   |                        enqueue_entity() {
+             ssh-24099 [003] 76612.965649: funcgraph_entry:        0.229 us   |                          update_curr();
+             ssh-24099 [003] 76612.965649: funcgraph_entry:        0.265 us   |                          __update_load_avg_cfs_rq();
+             ssh-24099 [003] 76612.965650: funcgraph_entry:        0.238 us   |                          attach_entity_load_avg();
+             ssh-24099 [003] 76612.965650: funcgraph_entry:        0.220 us   |                          update_cfs_group();
+             ssh-24099 [003] 76612.965650: funcgraph_entry:        0.228 us   |                          account_entity_enqueue();
+             ssh-24099 [003] 76612.965651: funcgraph_entry:        0.209 us   |                          place_entity();
+             ssh-24099 [003] 76612.965651: funcgraph_entry:        0.216 us   |                          __enqueue_entity();
+             ssh-24099 [003] 76612.965652: funcgraph_exit:         3.218 us   |                        }
+             ssh-24099 [003] 76612.965652: funcgraph_entry:                   |                        enqueue_entity() {
+             ssh-24099 [003] 76612.965652: funcgraph_entry:        0.216 us   |                          update_curr();
+             ssh-24099 [003] 76612.965653: funcgraph_entry:                   |                          __update_load_avg_se() {
+             ssh-24099 [003] 76612.965653: funcgraph_entry:                   |                            __accumulate_pelt_segments() {
+             ssh-24099 [003] 76622.720607: funcgraph_exit:         0.440 us   |                    }
+             ssh-24099 [003] 76622.720610: funcgraph_entry:                   |                    smp_irq_work_interrupt() {
+             ssh-24099 [003] 76622.720611: funcgraph_entry:                   |                      irq_enter() {
+             ssh-24099 [003] 76622.720611: funcgraph_entry:        0.369 us   |                        rcu_irq_enter();
+             ssh-24099 [003] 76622.720612: funcgraph_entry:        0.571 us   |                        irqtime_account_irq();
+             ssh-24099 [003] 76622.720613: funcgraph_entry:        0.343 us   |                        preempt_count_add();
+             ssh-24099 [003] 76622.720613: funcgraph_exit:         2.801 us   |                      }
+             ssh-24099 [003] 76622.720614: funcgraph_entry:                   |                      __wake_up() {
+             ssh-24099 [003] 76622.720615: funcgraph_entry:                   |                        __wake_up_common_lock() {
+             ssh-24099 [003] 76622.720615: funcgraph_entry:                   |                          __lock_text_start() {
+             ssh-24099 [003] 76622.720615: funcgraph_entry:        0.341 us   |                            preempt_count_add();
+             ssh-24099 [003] 76622.720616: funcgraph_exit:         0.958 us   |                          }
+             ssh-24099 [003] 76622.720616: funcgraph_entry:        0.355 us   |                          __wake_up_common();
+             ssh-24099 [003] 76622.720617: funcgraph_entry:                   |                          _raw_spin_unlock_irqrestore() {
+             ssh-24099 [003] 76622.720617: funcgraph_entry:        0.317 us   |                            preempt_count_sub();
+             ssh-24099 [003] 76622.720618: funcgraph_exit:         0.939 us   |                          }
+             ssh-24099 [003] 76622.720618: funcgraph_exit:         3.450 us   |                        }
+             ssh-24099 [003] 76622.720618: funcgraph_exit:         4.169 us   |                      }
+             ssh-24099 [003] 76622.720619: funcgraph_entry:                   |                      __wake_up() {
+             ssh-24099 [003] 76622.720619: funcgraph_entry:                   |                        __wake_up_common_lock() {
+             ssh-24099 [003] 76622.720620: funcgraph_entry:                   |                          __lock_text_start() {
+             ssh-24099 [003] 76622.720620: funcgraph_entry:        0.313 us   |                            preempt_count_add();
+             ssh-24099 [003] 76622.720620: funcgraph_exit:         0.925 us   |                          }
+             ssh-24099 [003] 76622.720621: funcgraph_entry:                   |                          __wake_up_common() {
+             ssh-24099 [003] 76622.720621: funcgraph_entry:                   |                            autoremove_wake_function() {
+             ssh-24099 [003] 76622.720622: funcgraph_entry:                   |                              default_wake_function() {
+             ssh-24099 [003] 76622.720622: funcgraph_entry:                   |                                try_to_wake_up() {
+             ssh-24099 [003] 76622.720623: funcgraph_entry:                   |                                  __lock_text_start() {
+             ssh-24099 [003] 76622.720623: funcgraph_entry:        0.318 us   |                                    preempt_count_add();
+             ssh-24099 [003] 76622.720624: funcgraph_exit:         1.211 us   |                                  }
+             ssh-24099 [003] 76622.720625: funcgraph_entry:                   |                                  select_task_rq_fair() {
+             ssh-24099 [003] 76622.720626: funcgraph_entry:        0.336 us   |                                    __rcu_read_lock();
+             ssh-24099 [003] 76622.720627: funcgraph_entry:        0.766 us   |                                    available_idle_cpu();
+             ssh-24099 [003] 76622.720628: funcgraph_entry:        1.248 us   |                                    update_cfs_rq_h_load();
+             ssh-24099 [003] 76622.720630: funcgraph_entry:                   |                                    select_idle_sibling() {
+             ssh-24099 [003] 76622.720630: funcgraph_entry:        0.515 us   |                                      available_idle_cpu();
+             ssh-24099 [003] 76622.720631: funcgraph_exit:         1.155 us   |                                    }
+             ssh-24099 [003] 76622.720631: funcgraph_entry:        0.362 us   |                                    __rcu_read_unlock();
+             ssh-24099 [003] 76622.720632: funcgraph_exit:         6.685 us   |                                  }
+             ssh-24099 [003] 76622.720632: funcgraph_entry:                   |                                  _raw_spin_lock() {
+             ssh-24099 [003] 76622.720632: funcgraph_entry:        0.332 us   |                                    preempt_count_add();
+             ssh-24099 [003] 76622.720633: funcgraph_exit:         0.981 us   |                                  }
+             ssh-24099 [003] 76622.720633: funcgraph_entry:        0.571 us   |                                  update_rq_clock();
+             ssh-24099 [003] 76622.720634: funcgraph_entry:                   |                                  ttwu_do_activate() {
+             ssh-24099 [003] 76622.720635: funcgraph_entry:                   |                                    activate_task() {
+             ssh-24099 [003] 76622.720635: funcgraph_entry:                   |                                      psi_task_change() {
+             ssh-24099 [003] 76622.720636: funcgraph_entry:        1.011 us   |                                        record_times();
+             ssh-24099 [003] 76622.720638: funcgraph_entry:        0.719 us   |                                        record_times();
+             ssh-24099 [003] 76622.720639: funcgraph_entry:        0.555 us   |                                        record_times();
+             ssh-24099 [003] 76622.720639: funcgraph_entry:        0.329 us   |                                        record_times();
+             ssh-24099 [003] 76622.720640: funcgraph_exit:         4.752 us   |                                      }
+             ssh-24099 [003] 76622.720640: funcgraph_entry:                   |                                      enqueue_task_fair() {
+             ssh-24099 [003] 76622.720641: funcgraph_entry:                   |                                        enqueue_entity() {
+             ssh-24099 [003] 76622.720641: funcgraph_entry:        0.362 us   |                                          update_curr();
+             ssh-24099 [003] 76622.720642: funcgraph_entry:                   |                                          __update_load_avg_se() {
+             ssh-24099 [003] 76622.720642: funcgraph_entry:        0.348 us   |                                            __accumulate_pelt_segments();
+             ssh-24099 [003] 76622.720643: funcgraph_exit:         1.217 us   |                                          }
+             ssh-24099 [003] 76622.720643: funcgraph_entry:                   |                                          __update_load_avg_cfs_rq() {
+             ssh-24099 [003] 76622.720644: funcgraph_entry:        0.354 us   |                                            __accumulate_pelt_segments();
+             ssh-24099 [003] 76622.720644: funcgraph_exit:         1.114 us   |                                          }
+             ssh-24099 [003] 76622.720645: funcgraph_entry:        0.333 us   |                                          update_cfs_group();
+             ssh-24099 [003] 76622.720646: funcgraph_entry:        0.468 us   |                                          account_entity_enqueue();
+             ssh-24099 [003] 76622.720646: funcgraph_entry:        0.358 us   |                                          place_entity();
+             ssh-24099 [003] 76622.720647: funcgraph_entry:        0.357 us   |                                          __enqueue_entity();
+             ssh-24099 [003] 76622.720648: funcgraph_exit:         6.875 us   |                                        }
+             ssh-24099 [003] 76622.720648: funcgraph_entry:                   |                                        enqueue_entity() {
+             ssh-24099 [003] 76622.720648: funcgraph_entry:        0.315 us   |                                          update_curr();
+             ssh-24099 [003] 76622.720649: funcgraph_entry:                   |                                          __update_load_avg_se() {
+             ssh-24099 [003] 76622.720649: funcgraph_entry:        0.332 us   |                                            __accumulate_pelt_segments();
+             ssh-24099 [003] 76622.720650: funcgraph_exit:         0.998 us   |                                          }
+             ssh-24099 [003] 76622.720650: funcgraph_entry:                   |                                          __update_load_avg_cfs_rq() {
+             ssh-24099 [003] 76622.720651: funcgraph_entry:        0.319 us   |                                            __accumulate_pelt_segments();
+             ssh-24099 [003] 76622.720651: funcgraph_exit:         1.097 us   |                                          }
+             ssh-24099 [003] 76622.720652: funcgraph_entry:                   |                                          update_cfs_group() {
+             ssh-24099 [003] 76622.720652: funcgraph_entry:        0.392 us   |                                            reweight_entity();
+             ssh-24099 [003] 76622.720653: funcgraph_exit:         1.170 us   |                                          }
+             ssh-24099 [003] 76622.720653: funcgraph_entry:        0.372 us   |                                          account_entity_enqueue();
+             ssh-24099 [003] 76622.720654: funcgraph_entry:        0.328 us   |                                          place_entity();
+             ssh-24099 [003] 76622.720655: funcgraph_entry:        0.414 us   |                                          __enqueue_entity();
+             ssh-24099 [003] 76622.720655: funcgraph_exit:         7.231 us   |                                        }
+             ssh-24099 [003] 76622.720656: funcgraph_entry:        0.330 us   |                                        hrtick_update();
+             ssh-24099 [003] 76622.720656: funcgraph_exit:       + 15.804 us  |                                      }
+             ssh-24099 [003] 76622.720754: funcgraph_entry:                   |                                  _raw_spin_unlock_irqrestore() {
+             ssh-24099 [003] 76622.720755: funcgraph_entry:        0.394 us   |                                    preempt_count_sub();
+             ssh-24099 [003] 76622.720755: funcgraph_exit:         1.360 us   |                                  }
+             ssh-24099 [003] 76622.720755: funcgraph_exit:       + 38.876 us  |                                }
+             ssh-24099 [003] 76622.720756: funcgraph_exit:       + 39.557 us  |                              }
+             ssh-24099 [003] 76622.720756: funcgraph_exit:       + 40.250 us  |                            }
+             ssh-24099 [003] 76622.720756: funcgraph_exit:       ! 135.698 us |                          }
+             ssh-24099 [003] 76622.720757: funcgraph_entry:                   |                          _raw_spin_unlock_irqrestore() {
+             ssh-24099 [003] 76622.720757: funcgraph_entry:        0.485 us   |                            preempt_count_sub();
+             ssh-24099 [003] 76622.720760: funcgraph_exit:         2.867 us   |                          }
+             ssh-24099 [003] 76622.720760: funcgraph_exit:       ! 140.851 us |                        }
+             ssh-24099 [003] 76622.720761: funcgraph_exit:       ! 141.609 us |                      }
+             ssh-24099 [003] 76622.720761: funcgraph_entry:                   |                      irq_exit() {
+             ssh-24099 [003] 76622.720762: funcgraph_entry:        0.649 us   |                        irqtime_account_irq();
+             ssh-24099 [003] 76622.720763: funcgraph_entry:        0.740 us   |                        preempt_count_sub();
+             ssh-24099 [003] 76622.720764: funcgraph_entry:        0.604 us   |                        idle_cpu();
+             ssh-24099 [003] 76622.720765: funcgraph_entry:        0.750 us   |                        rcu_irq_exit();
+             ssh-24099 [003] 76622.720766: funcgraph_exit:         5.170 us   |                      }
+             ssh-24099 [003] 76622.720767: funcgraph_exit:       ! 156.482 us |                    }
+             ssh-24099 [003] 76622.720768: funcgraph_entry:                   |                    smp_irq_work_interrupt() {
+             ssh-24099 [003] 76622.720768: funcgraph_entry:                   |                      irq_enter() {
+             ssh-24099 [003] 76622.720769: funcgraph_entry:        0.665 us   |                        rcu_irq_enter();
+             ssh-24099 [003] 76622.720770: funcgraph_entry:        0.662 us   |                        irqtime_account_irq();
+             ssh-24099 [003] 76622.720771: funcgraph_entry:        0.611 us   |                        preempt_count_add();
+             ssh-24099 [003] 76622.720772: funcgraph_exit:         3.970 us   |                      }
+             ssh-24099 [003] 76622.720773: funcgraph_entry:                   |                      __wake_up() {
+             ssh-24099 [003] 76622.720773: funcgraph_entry:                   |                        __wake_up_common_lock() {
+             ssh-24099 [003] 76622.720774: funcgraph_entry:                   |                          __lock_text_start() {
+             ssh-24099 [003] 76622.720774: funcgraph_entry:        0.415 us   |                            preempt_count_add();
+             ssh-24099 [003] 76622.720775: funcgraph_exit:         1.355 us   |                          }
+             ssh-24099 [003] 76622.720777: funcgraph_entry:        1.057 us   |                          __wake_up_common();
+             ssh-24099 [003] 76622.720779: funcgraph_entry:                   |                          _raw_spin_unlock_irqrestore() {
+             ssh-24099 [003] 76622.720779: funcgraph_entry:        0.799 us   |                            preempt_count_sub();
+             ssh-24099 [003] 76622.720781: funcgraph_exit:         2.210 us   |                          }
+             ssh-24099 [003] 76622.720781: funcgraph_exit:         7.831 us   |                        }
+             ssh-24099 [003] 76622.720781: funcgraph_exit:         8.677 us   |                      }
+             ssh-24099 [003] 76622.720782: funcgraph_entry:                   |                      __wake_up() {
+             ssh-24099 [003] 76622.720783: funcgraph_entry:                   |                        __wake_up_common_lock() {
+             ssh-24099 [003] 76622.720783: funcgraph_entry:                   |                          __lock_text_start() {
+             ssh-24099 [003] 76622.720784: funcgraph_entry:        0.529 us   |                            preempt_count_add();
+             ssh-24099 [003] 76622.720785: funcgraph_exit:         1.849 us   |                          }
+             ssh-24099 [003] 76622.720786: funcgraph_entry:        0.789 us   |                          __wake_up_common();
+             ssh-24099 [003] 76622.720787: funcgraph_entry:                   |                          _raw_spin_unlock_irqrestore() {
+             ssh-24099 [003] 76622.720787: funcgraph_entry:        0.443 us   |                            preempt_count_sub();
+             ssh-24099 [003] 76622.720788: funcgraph_exit:         1.260 us   |                          }
+             ssh-24099 [003] 76622.720788: funcgraph_exit:         5.864 us   |                        }
+             ssh-24099 [003] 76622.720789: funcgraph_exit:         6.769 us   |                      }
+             ssh-24099 [003] 76622.720789: funcgraph_entry:                   |                      irq_exit() {
+             ssh-24099 [003] 76622.720790: funcgraph_entry:        0.594 us   |                        irqtime_account_irq();
+             ssh-24099 [003] 76622.720791: funcgraph_entry:        0.419 us   |                        preempt_count_sub();
+             ssh-24099 [003] 76622.720792: funcgraph_entry:        0.468 us   |                        idle_cpu();
+             ssh-24099 [003] 76622.720793: funcgraph_entry:        0.449 us   |                        rcu_irq_exit();
+             ssh-24099 [003] 76622.720793: funcgraph_exit:         4.088 us   |                      }
+             ssh-24099 [003] 76622.720794: funcgraph_exit:       + 26.098 us  |                    }
+             ssh-24099 [003] 76622.720795: funcgraph_entry:                   |                    smp_irq_work_interrupt() {
+             ssh-24099 [003] 76622.720795: funcgraph_entry:                   |                      irq_enter() {
+             ssh-24099 [003] 76622.720796: funcgraph_entry:        0.529 us   |                        rcu_irq_enter();
+             ssh-24099 [003] 76622.720797: funcgraph_entry:        0.564 us   |                        irqtime_account_irq();
+             ssh-24099 [003] 76622.720798: funcgraph_entry:        0.513 us   |                        preempt_count_add();
+             ssh-24099 [003] 76622.720799: funcgraph_exit:         3.599 us   |                      }
+             ssh-24099 [003] 76622.720799: funcgraph_entry:                   |                      __wake_up() {
+             ssh-24099 [003] 76622.720800: funcgraph_entry:                   |                        __wake_up_common_lock() {
+             ssh-24099 [003] 76622.720800: funcgraph_entry:                   |                          __lock_text_start() {
+             ssh-24099 [003] 76622.720801: funcgraph_entry:        0.482 us   |                            preempt_count_add();
+             ssh-24099 [003] 76622.720802: funcgraph_exit:         1.277 us   |                          }
+             ssh-24099 [003] 76622.720802: funcgraph_entry:        0.469 us   |                          __wake_up_common();
+             ssh-24099 [003] 76622.720803: funcgraph_entry:                   |                          _raw_spin_unlock_irqrestore() {
+             ssh-24099 [003] 76622.720803: funcgraph_entry:        0.519 us   |                            preempt_count_sub();
+             ssh-24099 [003] 76622.720804: funcgraph_exit:         1.411 us   |                          }
+             ssh-24099 [003] 76622.720805: funcgraph_exit:         4.930 us   |                        }
+             ssh-24099 [003] 76622.720805: funcgraph_exit:         5.759 us   |                      }
+             ssh-24099 [003] 76622.720806: funcgraph_entry:                   |                      irq_exit() {
+             ssh-24099 [003] 76622.720806: funcgraph_entry:        0.557 us   |                        irqtime_account_irq();
+             ssh-24099 [003] 76622.720807: funcgraph_entry:        0.456 us   |                        preempt_count_sub();
+             ssh-24099 [003] 76622.720808: funcgraph_entry:        0.443 us   |                        idle_cpu();
+             ssh-24099 [003] 76622.720809: funcgraph_entry:        0.482 us   |                        rcu_irq_exit();
+             ssh-24099 [003] 76622.720810: funcgraph_exit:         4.203 us   |                      }
+             ssh-24099 [003] 76622.720810: funcgraph_exit:       + 15.496 us  |                    }
+             ssh-24099 [003] 76622.720811: funcgraph_entry:        0.521 us   |                    preempt_count_sub();
+             ssh-24099 [003] 76622.720812: funcgraph_exit:       ! 206.466 us |                  }
+             ssh-24099 [003] 76622.819798: funcgraph_exit:         0.228 us   |                                        }
+             ssh-24099 [003] 76622.819799: funcgraph_exit:       + 11.571 us  |                                      }
+             ssh-24099 [003] 76622.819799: funcgraph_exit:       + 15.476 us  |                                    }
+             ssh-24099 [003] 76622.819799: funcgraph_entry:                   |                                    ttwu_do_wakeup.isra.4() {
+             ssh-24099 [003] 76622.819799: funcgraph_entry:                   |                                      check_preempt_curr() {
+             ssh-24099 [003] 76622.819800: funcgraph_entry:        0.370 us   |                                        resched_curr();
+             ssh-24099 [003] 76622.819800: funcgraph_exit:         1.129 us   |                                      }
+             ssh-24099 [003] 76622.819801: funcgraph_exit:         2.335 us   |                                    }
+             ssh-24099 [003] 76622.819802: funcgraph_exit:       + 18.514 us  |                                  }
+             ssh-24099 [003] 76622.819802: funcgraph_entry:                   |                                  _raw_spin_unlock() {
+             ssh-24099 [003] 76622.819802: funcgraph_entry:        0.313 us   |                                    preempt_count_sub();
+             ssh-24099 [003] 76622.819803: funcgraph_exit:         0.818 us   |                                  }
+             ssh-24099 [003] 76622.819803: funcgraph_entry:        0.381 us   |                                  ttwu_stat();
+             ssh-24099 [003] 76622.819803: funcgraph_entry:                   |                                  _raw_spin_unlock_irqrestore() {
+             ssh-24099 [003] 76622.819804: funcgraph_entry:        0.226 us   |                                    preempt_count_sub();
+             ssh-24099 [003] 76622.819804: funcgraph_exit:         0.860 us   |                                  }
+             ssh-24099 [003] 76622.819804: funcgraph_exit:       + 29.925 us  |                                }
+             ssh-24099 [003] 76622.819805: funcgraph_exit:       + 30.382 us  |                              }
+             ssh-24099 [003] 76622.819805: funcgraph_exit:       + 30.935 us  |                            }
+             ssh-24099 [003] 76622.819805: funcgraph_entry:                   |                            autoremove_wake_function() {
+             ssh-24099 [003] 76622.819806: funcgraph_entry:                   |                              default_wake_function() {
+             ssh-24099 [003] 76622.819806: funcgraph_entry:                   |                                try_to_wake_up() {
+             ssh-24099 [003] 76622.819806: funcgraph_entry:                   |                                  __lock_text_start() {
+             ssh-24099 [003] 76622.819806: funcgraph_entry:        0.306 us   |                                    preempt_count_add();
+             ssh-24099 [003] 76622.819807: funcgraph_exit:         0.979 us   |                                  }
+             ssh-24099 [003] 76622.819807: funcgraph_entry:                   |                                  select_task_rq_fair() {
+             ssh-24099 [003] 76622.819808: funcgraph_entry:        0.219 us   |                                    __rcu_read_lock();
+             ssh-24099 [003] 76622.819808: funcgraph_entry:        0.281 us   |                                    available_idle_cpu();
+             ssh-24099 [003] 76622.819809: funcgraph_entry:        0.298 us   |                                    update_cfs_rq_h_load();
+             ssh-24099 [003] 76622.819810: funcgraph_entry:                   |                                    select_idle_sibling() {
+             ssh-24099 [003] 76622.819810: funcgraph_entry:        0.244 us   |                                      available_idle_cpu();
+             ssh-24099 [003] 76622.819810: funcgraph_exit:         0.787 us   |                                    }
+             ssh-24099 [003] 76622.819811: funcgraph_entry:        0.245 us   |                                    __rcu_read_unlock();
+             ssh-24099 [003] 76622.819811: funcgraph_exit:         3.752 us   |                                  }
+             ssh-24099 [003] 76622.819811: funcgraph_entry:                   |                                  _raw_spin_lock() {
+             ssh-24099 [003] 76622.819811: funcgraph_entry:        0.219 us   |                                    preempt_count_add();
+             ssh-24099 [003] 76622.819812: funcgraph_exit:         0.631 us   |                                  }
+             ssh-24099 [003] 76622.819812: funcgraph_entry:        0.284 us   |                                  update_rq_clock();
+             ssh-24099 [003] 76622.819813: funcgraph_entry:                   |                                  ttwu_do_activate() {
+             ssh-24099 [003] 76622.819813: funcgraph_entry:                   |                                    activate_task() {
+             ssh-24099 [003] 76622.819813: funcgraph_entry:                   |                                      psi_task_change() {
+             ssh-24099 [003] 76622.819814: funcgraph_entry:        0.447 us   |                                        record_times();
+             ssh-24099 [003] 76622.819814: funcgraph_entry:        0.290 us   |                                        record_times();
+             ssh-24099 [003] 76622.819815: funcgraph_entry:        0.281 us   |                                        record_times();
+             ssh-24099 [003] 76622.819815: funcgraph_entry:        0.243 us   |                                        record_times();
+             ssh-24099 [003] 76622.819815: funcgraph_exit:         2.473 us   |                                      }
+             ssh-24099 [003] 76622.819816: funcgraph_entry:                   |                                      enqueue_task_fair() {
+             ssh-24099 [003] 76622.819816: funcgraph_entry:                   |                                        enqueue_entity() {
+             ssh-24099 [003] 76622.819816: funcgraph_entry:        0.224 us   |                                          update_curr();
+             ssh-24099 [003] 76622.819817: funcgraph_entry:                   |                                          __update_load_avg_se() {
+             ssh-24099 [003] 76622.819817: funcgraph_entry:        0.242 us   |                                            __accumulate_pelt_segments();
+             ssh-24099 [003] 76622.819817: funcgraph_exit:         0.758 us   |                                          }
+             ssh-24099 [003] 76622.819818: funcgraph_entry:                   |                                          __update_load_avg_cfs_rq() {
+             ssh-24099 [003] 76622.819818: funcgraph_entry:        0.227 us   |                                            __accumulate_pelt_segments();
+             ssh-24099 [003] 76622.819818: funcgraph_exit:         0.675 us   |                                          }
+             ssh-24099 [003] 76622.819818: funcgraph_entry:        0.230 us   |                                          update_cfs_group();
+             ssh-24099 [003] 76622.819819: funcgraph_entry:        0.236 us   |                                          account_entity_enqueue();
+             ssh-24099 [003] 76622.819819: funcgraph_entry:        0.221 us   |                                          place_entity();
+             ssh-24099 [003] 76622.819820: funcgraph_entry:        0.229 us   |                                          __enqueue_entity();
+             ssh-24099 [003] 76622.819820: funcgraph_exit:         4.240 us   |                                        }
+             ssh-24099 [003] 76622.819820: funcgraph_entry:                   |                                        enqueue_entity() {
+             ssh-24099 [003] 76622.819821: funcgraph_entry:        0.227 us   |                                          update_curr();
+             ssh-24099 [003] 76622.819821: funcgraph_entry:                   |                                          __update_load_avg_se() {
+             ssh-24099 [003] 76622.819821: funcgraph_entry:        0.237 us   |                                            __accumulate_pelt_segments();
+             ssh-24099 [003] 76622.819822: funcgraph_exit:         0.786 us   |                                          }
+             ssh-24099 [003] 76622.819822: funcgraph_entry:                   |                                          __update_load_avg_cfs_rq() {
+             ssh-24099 [003] 76622.819822: funcgraph_entry:        0.222 us   |                                            __accumulate_pelt_segments();
+             ssh-24099 [003] 76622.819823: funcgraph_exit:         0.665 us   |                                          }
+             ssh-24099 [003] 76622.819823: funcgraph_entry:                   |                                          update_cfs_group() {
+             ssh-24099 [003] 76622.819823: funcgraph_entry:        0.260 us   |                                            reweight_entity();
+             ssh-24099 [003] 76622.819824: funcgraph_exit:         0.725 us   |                                          }
+             ssh-24099 [003] 76622.819824: funcgraph_entry:        0.231 us   |                                          account_entity_enqueue();
+             ssh-24099 [003] 76622.819824: funcgraph_entry:        0.233 us   |                                          place_entity();
+             ssh-24099 [003] 76622.819825: funcgraph_entry:        0.222 us   |                                          __enqueue_entity();
+             ssh-24099 [003] 76622.819825: funcgraph_exit:         4.784 us   |                                        }
+             ssh-24099 [003] 76622.819825: funcgraph_entry:        0.231 us   |                                        hrtick_update();
+             ssh-24099 [003] 76622.819826: funcgraph_exit:       + 10.094 us  |                                      }
+             ssh-24099 [003] 76622.819826: funcgraph_exit:       + 13.193 us  |                                    }
+             ssh-24099 [003] 76622.819826: funcgraph_entry:                   |                                    ttwu_do_wakeup.isra.4() {
+             ssh-24099 [003] 76622.819826: funcgraph_entry:                   |                                      check_preempt_curr() {
+             ssh-24099 [003] 76622.819827: funcgraph_entry:        0.304 us   |                                        resched_curr();
+             ssh-24099 [003] 76622.819855: funcgraph_exit:         0.831 us   |                                  }
+             ssh-24099 [003] 76622.819856: funcgraph_entry:        0.323 us   |                                  ttwu_stat();
+             ssh-24099 [003] 76622.819856: funcgraph_entry:                   |                                  _raw_spin_unlock_irqrestore() {
+             ssh-24099 [003] 76622.819857: funcgraph_entry:        0.371 us   |                                    preempt_count_sub();
+             ssh-24099 [003] 76622.819857: funcgraph_exit:         1.019 us   |                                  }
+             ssh-24099 [003] 76622.819858: funcgraph_exit:       + 26.513 us  |                                }
+             ssh-24099 [003] 76622.819858: funcgraph_exit:       + 27.000 us  |                              }
+             ssh-24099 [003] 76622.819858: funcgraph_exit:       + 27.501 us  |                            }
+             ssh-24099 [003] 76622.819859: funcgraph_exit:       + 85.066 us  |                          }
+             ssh-24099 [003] 76622.819859: funcgraph_entry:                   |                          _raw_spin_unlock_irqrestore() {
+             ssh-24099 [003] 76622.819859: funcgraph_entry:        0.506 us   |                            preempt_count_sub();
+             ssh-24099 [003] 76622.819862: funcgraph_exit:         2.906 us   |                          }
+             ssh-24099 [003] 76622.819862: funcgraph_exit:       + 89.698 us  |                        }
+             ssh-24099 [003] 76622.819863: funcgraph_exit:       + 90.282 us  |                      }
+             ssh-24099 [003] 76622.819863: funcgraph_entry:                   |                      irq_exit() {
+             ssh-24099 [003] 76622.819864: funcgraph_entry:        0.512 us   |                        irqtime_account_irq();
+             ssh-24099 [003] 76622.819865: funcgraph_entry:        0.603 us   |                        preempt_count_sub();
+             ssh-24099 [003] 76622.819866: funcgraph_entry:        0.443 us   |                        idle_cpu();
+             ssh-24099 [003] 76622.819867: funcgraph_entry:        0.598 us   |                        rcu_irq_exit();
+             ssh-24099 [003] 76622.819868: funcgraph_exit:         4.605 us   |                      }
+             ssh-24099 [003] 76622.819868: funcgraph_exit:       ! 101.485 us |                    }
+             ssh-24099 [003] 76622.819869: funcgraph_entry:                   |                    smp_irq_work_interrupt() {
+             ssh-24099 [003] 76622.819870: funcgraph_entry:                   |                      irq_enter() {
+             ssh-24099 [003] 76622.819870: funcgraph_entry:        0.340 us   |                        rcu_irq_enter();
+             ssh-24099 [003] 76622.819871: funcgraph_entry:        0.372 us   |                        irqtime_account_irq();
+             ssh-24099 [003] 76622.819871: funcgraph_entry:        0.390 us   |                        preempt_count_add();
+             ssh-24099 [003] 76622.819872: funcgraph_exit:         2.405 us   |                      }
+             ssh-24099 [003] 76622.819872: funcgraph_entry:                   |                      __wake_up() {
+             ssh-24099 [003] 76622.819873: funcgraph_entry:                   |                        __wake_up_common_lock() {
+             ssh-24099 [003] 76622.819873: funcgraph_entry:                   |                          __lock_text_start() {
+             ssh-24099 [003] 76622.819874: funcgraph_entry:        0.383 us   |                            preempt_count_add();
+             ssh-24099 [003] 76622.819874: funcgraph_exit:         1.014 us   |                          }
+             ssh-24099 [003] 76622.819876: funcgraph_entry:        0.388 us   |                          __wake_up_common();
+             ssh-24099 [003] 76622.819876: funcgraph_entry:                   |                          _raw_spin_unlock_irqrestore() {
+             ssh-24099 [003] 76622.819877: funcgraph_entry:        0.351 us   |                            preempt_count_sub();
+             ssh-24099 [003] 76622.819877: funcgraph_exit:         0.917 us   |                          }
+             ssh-24099 [003] 76622.819877: funcgraph_exit:         4.612 us   |                        }
+             ssh-24099 [003] 76622.819878: funcgraph_exit:         5.213 us   |                      }
+             ssh-24099 [003] 76622.819878: funcgraph_entry:                   |                      __wake_up() {
+             ssh-24099 [003] 76622.819878: funcgraph_entry:                   |                        __wake_up_common_lock() {
+             ssh-24099 [003] 76622.819879: funcgraph_entry:                   |                          __lock_text_start() {
+             ssh-24099 [003] 76622.819879: funcgraph_entry:        0.316 us   |                            preempt_count_add();
+             ssh-24099 [003] 76622.819879: funcgraph_exit:         0.899 us   |                          }
+             ssh-24099 [003] 76622.819880: funcgraph_entry:        0.376 us   |                          __wake_up_common();
+             ssh-24099 [003] 76622.819881: funcgraph_entry:                   |                          _raw_spin_unlock_irqrestore() {
+             ssh-24099 [003] 76622.819881: funcgraph_entry:        0.273 us   |                            preempt_count_sub();
+             ssh-24099 [003] 76622.819881: funcgraph_exit:         1.009 us   |                          }
+             ssh-24099 [003] 76622.819882: funcgraph_exit:         3.413 us   |                        }
+             ssh-24099 [003] 76622.819882: funcgraph_exit:         4.034 us   |                      }
+             ssh-24099 [003] 76622.819882: funcgraph_entry:                   |                      irq_exit() {
+             ssh-24099 [003] 76622.819883: funcgraph_entry:        0.366 us   |                        irqtime_account_irq();
+             ssh-24099 [003] 76622.819883: funcgraph_entry:        0.353 us   |                        preempt_count_sub();
+             ssh-24099 [003] 76622.819884: funcgraph_entry:        0.314 us   |                        idle_cpu();
+             ssh-24099 [003] 76622.819885: funcgraph_entry:        0.280 us   |                        rcu_irq_exit();
+             ssh-24099 [003] 76622.819885: funcgraph_exit:         2.775 us   |                      }
+             ssh-24099 [003] 76622.819885: funcgraph_exit:       + 16.328 us  |                    }
+             ssh-24099 [003] 76622.819886: funcgraph_entry:                   |                    smp_irq_work_interrupt() {
+             ssh-24099 [003] 76622.819886: funcgraph_entry:                   |                      irq_enter() {
+             ssh-24099 [003] 76622.819887: funcgraph_entry:        0.507 us   |                        rcu_irq_enter();
+             ssh-24099 [003] 76622.819887: funcgraph_entry:        0.391 us   |                        irqtime_account_irq();
+             ssh-24099 [003] 76622.819888: funcgraph_entry:        0.267 us   |                        preempt_count_add();
+             ssh-24099 [003] 76622.819888: funcgraph_exit:         2.339 us   |                      }
+             ssh-24099 [003] 76622.819889: funcgraph_entry:                   |                      __wake_up() {
+             ssh-24099 [003] 76622.819889: funcgraph_entry:                   |                        __wake_up_common_lock() {
+             ssh-24099 [003] 76622.819890: funcgraph_entry:                   |                          __lock_text_start() {
+             ssh-24099 [003] 76622.819890: funcgraph_entry:        0.318 us   |                            preempt_count_add();
+             ssh-24099 [003] 76622.819890: funcgraph_exit:         0.916 us   |                          }
+             ssh-24099 [003] 76622.819891: funcgraph_entry:        0.287 us   |                          __wake_up_common();
+             ssh-24099 [003] 76622.819891: funcgraph_entry:                   |                          _raw_spin_unlock_irqrestore() {
+             ssh-24099 [003] 76622.819892: funcgraph_entry:        0.339 us   |                            preempt_count_sub();
+             ssh-24099 [003] 76622.819892: funcgraph_exit:         0.990 us   |                          }
+             ssh-24099 [003] 76622.819893: funcgraph_exit:         3.400 us   |                        }
+             ssh-24099 [003] 76622.819893: funcgraph_exit:         4.017 us   |                      }
+             ssh-24099 [003] 76622.819893: funcgraph_entry:                   |                      irq_exit() {
+             ssh-24099 [003] 76622.819894: funcgraph_entry:        0.364 us   |                        irqtime_account_irq();
+             ssh-24099 [003] 76622.819894: funcgraph_entry:        0.325 us   |                        preempt_count_sub();
+             ssh-24099 [003] 76622.819895: funcgraph_entry:        0.302 us   |                        idle_cpu();
+             ssh-24099 [003] 76622.819895: funcgraph_entry:        0.272 us   |                        rcu_irq_exit();
+             ssh-24099 [003] 76622.819896: funcgraph_exit:         2.693 us   |                      }
+             ssh-24099 [003] 76622.819896: funcgraph_exit:       + 10.272 us  |                    }
+             ssh-24099 [003] 76622.819897: funcgraph_entry:                   |                    __lock_text_start() {
+             ssh-24099 [003] 76622.822534: funcgraph_exit:       + 54.695 us  |    }
+             ssh-24099 [003] 76622.822534: funcgraph_exit:       + 57.810 us  |  }
+             ssh-24099 [003] 76622.822343: funcgraph_exit:         0.343 us   |                                }
+             ssh-24099 [003] 76622.822344: funcgraph_entry:        0.375 us   |                                place_entity();
+             ssh-24099 [003] 76622.822344: funcgraph_entry:        0.279 us   |                                __enqueue_entity();
+             ssh-24099 [003] 76622.822345: funcgraph_exit:         5.917 us   |                              }
+             ssh-24099 [003] 76622.822345: funcgraph_entry:                   |                              enqueue_entity() {
+             ssh-24099 [003] 76622.822345: funcgraph_entry:        0.283 us   |                                update_curr();
+             ssh-24099 [003] 76622.822346: funcgraph_entry:                   |                                __update_load_avg_se() {
+             ssh-24099 [003] 76622.822346: funcgraph_entry:        0.308 us   |                                  __accumulate_pelt_segments();
+             ssh-24099 [003] 76622.822347: funcgraph_exit:         1.121 us   |                                }
+             ssh-24099 [003] 76622.822347: funcgraph_entry:        0.285 us   |                                __update_load_avg_cfs_rq();
+             ssh-24099 [003] 76622.822348: funcgraph_entry:                   |                                update_cfs_group() {
+             ssh-24099 [003] 76622.822349: funcgraph_entry:        0.356 us   |                                  reweight_entity();
+             ssh-24099 [003] 76622.822349: funcgraph_exit:         1.115 us   |                                }
+             ssh-24099 [003] 76622.822349: funcgraph_entry:        0.300 us   |                                account_entity_enqueue();
+             ssh-24099 [003] 76622.822350: funcgraph_entry:        0.266 us   |                                place_entity();
+             ssh-24099 [003] 76622.822350: funcgraph_entry:        0.262 us   |                                __enqueue_entity();
+             ssh-24099 [003] 76622.822351: funcgraph_exit:         5.745 us   |                              }
+             ssh-24099 [003] 76622.822351: funcgraph_entry:        0.328 us   |                              hrtick_update();
+             ssh-24099 [003] 76622.822352: funcgraph_exit:       + 13.269 us  |                            }
+             ssh-24099 [003] 76622.822352: funcgraph_exit:       + 19.115 us  |                          }
+             ssh-24099 [003] 76622.822352: funcgraph_entry:                   |                          ttwu_do_wakeup.isra.4() {
+             ssh-24099 [003] 76622.822353: funcgraph_entry:                   |                            check_preempt_curr() {
+             ssh-24099 [003] 76622.822353: funcgraph_entry:        0.443 us   |                              resched_curr();
+             ssh-24099 [003] 76622.822354: funcgraph_exit:         1.258 us   |                            }
+             ssh-24099 [003] 76622.822355: funcgraph_exit:         2.839 us   |                          }
+             ssh-24099 [003] 76622.822356: funcgraph_exit:       + 23.039 us  |                        }
+             ssh-24099 [003] 76622.822356: funcgraph_entry:                   |                        _raw_spin_unlock() {
+             ssh-24099 [003] 76622.822356: funcgraph_entry:        0.253 us   |                          preempt_count_sub();
+             ssh-24099 [003] 76622.822357: funcgraph_exit:         0.797 us   |                        }
+             ssh-24099 [003] 76622.822357: funcgraph_entry:        0.259 us   |                        ttwu_stat();
+             ssh-24099 [003] 76622.822357: funcgraph_entry:                   |                        _raw_spin_unlock_irqrestore() {
+             ssh-24099 [003] 76622.822358: funcgraph_entry:        0.274 us   |                          preempt_count_sub();
+             ssh-24099 [003] 76622.822358: funcgraph_exit:         0.834 us   |                        }
+             ssh-24099 [003] 76622.822358: funcgraph_exit:       + 49.873 us  |                      }
+             ssh-24099 [003] 76622.822359: funcgraph_exit:       + 50.617 us  |                    }
+             ssh-24099 [003] 76622.822359: funcgraph_exit:       + 51.382 us  |                  }
+             ssh-24099 [003] 76622.822359: funcgraph_entry:                   |                  autoremove_wake_function() {
+             ssh-24099 [003] 76622.822360: funcgraph_entry:                   |                    default_wake_function() {
+             ssh-24099 [003] 76622.822360: funcgraph_entry:                   |                      try_to_wake_up() {
+             ssh-24099 [003] 76622.822360: funcgraph_entry:                   |                        __lock_text_start() {
+             ssh-24099 [003] 76622.822361: funcgraph_entry:        0.292 us   |                          preempt_count_add();
+             ssh-24099 [003] 76622.822361: funcgraph_exit:         1.018 us   |                        }
+             ssh-24099 [003] 76622.822362: funcgraph_entry:                   |                        select_task_rq_fair() {
+             ssh-24099 [003] 76622.822362: funcgraph_entry:        0.301 us   |                          __rcu_read_lock();
+             ssh-24099 [003] 76622.822363: funcgraph_entry:        0.296 us   |                          available_idle_cpu();
+             ssh-24099 [003] 76622.822364: funcgraph_entry:        0.797 us   |                          update_cfs_rq_h_load();
+             ssh-24099 [003] 76622.822365: funcgraph_entry:                   |                          select_idle_sibling() {
+             ssh-24099 [003] 76622.822365: funcgraph_entry:        0.274 us   |                            available_idle_cpu();
+             ssh-24099 [003] 76622.822366: funcgraph_entry:        0.250 us   |                            available_idle_cpu();
+             ssh-24099 [003] 76622.822366: funcgraph_entry:        0.249 us   |                            available_idle_cpu();
+             ssh-24099 [003] 76622.822367: funcgraph_entry:        0.232 us   |                            available_idle_cpu();
+             ssh-24099 [003] 76622.822367: funcgraph_entry:        0.320 us   |                            available_idle_cpu();
+             ssh-24099 [003] 76622.822368: funcgraph_entry:        0.260 us   |                            available_idle_cpu();
+             ssh-24099 [003] 76622.822369: funcgraph_entry:        0.231 us   |                            available_idle_cpu();
+             ssh-24099 [003] 76622.822369: funcgraph_exit:         4.270 us   |                          }
+             ssh-24099 [003] 76622.822369: funcgraph_entry:        0.253 us   |                          __rcu_read_unlock();
+             ssh-24099 [003] 76622.822370: funcgraph_exit:         7.816 us   |                        }
+             ssh-24099 [003] 76622.822370: funcgraph_entry:                   |                        _raw_spin_lock() {
+             ssh-24099 [003] 76622.822370: funcgraph_entry:        0.241 us   |                          preempt_count_add();
+             ssh-24099 [003] 76622.822371: funcgraph_exit:         0.779 us   |                        }
+             ssh-24099 [003] 76622.822371: funcgraph_entry:        0.335 us   |                        update_rq_clock();
+             ssh-24099 [003] 76622.822372: funcgraph_entry:                   |                        ttwu_do_activate() {
+             ssh-24099 [003] 76622.822372: funcgraph_entry:                   |                          activate_task() {
+             ssh-24099 [003] 76622.822373: funcgraph_entry:                   |                            psi_task_change() {
+             ssh-24099 [003] 76622.822373: funcgraph_entry:        0.389 us   |                              record_times();
+             ssh-24099 [003] 76622.822374: funcgraph_entry:        0.281 us   |                              record_times();
+             ssh-24099 [003] 76622.822374: funcgraph_entry:        0.297 us   |                              record_times();
+             ssh-24099 [003] 76622.822375: funcgraph_entry:        0.271 us   |                              record_times();
+             ssh-24099 [003] 76622.822375: funcgraph_exit:         2.954 us   |                            }
+             ssh-24099 [003] 76622.822376: funcgraph_entry:                   |                            enqueue_task_fair() {
+             ssh-24099 [003] 76622.822376: funcgraph_entry:                   |                              enqueue_entity() {
+             ssh-24099 [003] 76622.822377: funcgraph_entry:        0.321 us   |                                update_curr();
+             ssh-24099 [003] 76622.822377: funcgraph_entry:                   |                                __update_load_avg_se() {
+             ssh-24099 [003] 76622.822378: funcgraph_entry:        0.333 us   |                                  __accumulate_pelt_segments();
+             ssh-24099 [003] 76622.822378: funcgraph_exit:         1.050 us   |                                }
+             ssh-24099 [003] 76622.822379: funcgraph_entry:                   |                                __update_load_avg_cfs_rq() {
+             ssh-24099 [003] 76622.822379: funcgraph_entry:        0.349 us   |                                  __accumulate_pelt_segments();
+             ssh-24099 [003] 76622.822380: funcgraph_exit:         1.041 us   |                                }
+             ssh-24099 [003] 76622.822419: funcgraph_exit:         0.313 us   |                                }
+             ssh-24099 [003] 76622.822419: funcgraph_entry:                   |                                __update_load_avg_se() {
+             ssh-24099 [003] 76622.822420: funcgraph_entry:        0.317 us   |                                  __accumulate_pelt_segments();
+             ssh-24099 [003] 76622.822420: funcgraph_exit:         0.914 us   |                                }
+             ssh-24099 [003] 76622.822421: funcgraph_entry:                   |                                __update_load_avg_cfs_rq() {
+             ssh-24099 [003] 76622.822421: funcgraph_entry:        0.282 us   |                                  __accumulate_pelt_segments();
+             ssh-24099 [003] 76622.822422: funcgraph_exit:         0.908 us   |                                }
+             ssh-24099 [003] 76622.822422: funcgraph_entry:        0.280 us   |                                update_cfs_group();
+             ssh-24099 [003] 76622.822423: funcgraph_entry:        0.373 us   |                                account_entity_enqueue();
+             ssh-24099 [003] 76622.822423: funcgraph_entry:        0.348 us   |                                place_entity();
+             ssh-24099 [003] 76622.822424: funcgraph_entry:        0.336 us   |                                __enqueue_entity();
+             ssh-24099 [003] 76622.822425: funcgraph_exit:         6.593 us   |                              }
+             ssh-24099 [003] 76622.822425: funcgraph_entry:                   |                              enqueue_entity() {
+             ssh-24099 [003] 76622.822425: funcgraph_entry:                   |                                update_curr() {
+             ssh-24099 [003] 76622.822426: funcgraph_entry:        0.382 us   |                                  __calc_delta();
+             ssh-24099 [003] 76622.822427: funcgraph_entry:        0.315 us   |                                  update_min_vruntime();
+             ssh-24099 [003] 76622.822427: funcgraph_exit:         1.790 us   |                                }
+             ssh-24099 [003] 76622.822427: funcgraph_entry:                   |                                __update_load_avg_se() {
+             ssh-24099 [003] 76622.822428: funcgraph_entry:        0.326 us   |                                  __accumulate_pelt_segments();
+             ssh-24099 [003] 76622.822428: funcgraph_exit:         0.998 us   |                                }
+             ssh-24099 [003] 76622.822429: funcgraph_entry:                   |                                __update_load_avg_cfs_rq() {
+             ssh-24099 [003] 76622.822429: funcgraph_entry:        0.357 us   |                                  __accumulate_pelt_segments();
+             ssh-24099 [003] 76622.822430: funcgraph_exit:         1.068 us   |                                }
+             ssh-24099 [003] 76622.822430: funcgraph_entry:                   |                                update_cfs_group() {
+             ssh-24099 [003] 76622.822431: funcgraph_entry:        0.398 us   |                                  reweight_entity();
+             ssh-24099 [003] 76622.822431: funcgraph_exit:         1.082 us   |                                }
+             ssh-24099 [003] 76622.822432: funcgraph_entry:        0.256 us   |                                account_entity_enqueue();
+             ssh-24099 [003] 76622.822432: funcgraph_entry:        0.325 us   |                                place_entity();
+             ssh-24099 [003] 76622.822433: funcgraph_entry:        0.331 us   |                                __enqueue_entity();
+             ssh-24099 [003] 76622.822433: funcgraph_exit:         8.193 us   |                              }
+             ssh-24099 [003] 76622.822434: funcgraph_entry:        0.314 us   |                              hrtick_update();
+             ssh-24099 [003] 76622.822434: funcgraph_exit:       + 16.365 us  |                            }
+             ssh-24099 [003] 76622.822434: funcgraph_exit:       + 20.984 us  |                          }
+             ssh-24099 [003] 76622.822435: funcgraph_entry:                   |                          ttwu_do_wakeup.isra.4() {
+             ssh-24099 [003] 76622.822435: funcgraph_entry:                   |                            check_preempt_curr() {
+             ssh-24099 [003] 76622.822435: funcgraph_entry:                   |                              check_preempt_wakeup() {
+             ssh-24099 [003] 76622.822436: funcgraph_entry:        0.337 us   |                                update_curr();
+             ssh-24099 [003] 76622.822436: funcgraph_entry:        0.354 us   |                                wakeup_preempt_entity.isra.7();
+             ssh-24099 [003] 76622.822437: funcgraph_exit:         1.783 us   |                              }
+             ssh-24099 [003] 76622.822437: funcgraph_exit:         2.475 us   |                            }
+             ssh-24099 [003] 76622.822438: funcgraph_exit:         3.279 us   |                          }
+             ssh-24099 [003] 76622.822438: funcgraph_exit:       + 25.130 us  |                        }
+             ssh-24099 [003] 76622.822438: funcgraph_entry:                   |                        _raw_spin_unlock() {
+             ssh-24099 [003] 76622.822439: funcgraph_entry:        0.360 us   |                          preempt_count_sub();
+             ssh-24099 [003] 76622.822439: funcgraph_exit:         1.040 us   |                        }
+             ssh-24099 [003] 76622.822440: funcgraph_entry:        0.319 us   |                        ttwu_stat();
+             ssh-24099 [003] 76622.822440: funcgraph_entry:                   |                        _raw_spin_unlock_irqrestore() {
+             ssh-24099 [003] 76622.822441: funcgraph_entry:        0.342 us   |                          preempt_count_sub();
+             ssh-24099 [003] 76622.822441: funcgraph_exit:         0.958 us   |                        }
+             ssh-24099 [003] 76622.822442: funcgraph_exit:       + 41.311 us  |                      }
+             ssh-24099 [003] 76622.822442: funcgraph_exit:       + 41.912 us  |                    }
+             ssh-24099 [003] 76622.822442: funcgraph_exit:       + 42.522 us  |                  }
+             ssh-24099 [003] 76622.822442: funcgraph_exit:       ! 135.400 us |                }
+             ssh-24099 [003] 76622.822443: funcgraph_entry:                   |                _raw_spin_unlock_irqrestore() {
+             ssh-24099 [003] 76622.822443: funcgraph_entry:        0.278 us   |                  preempt_count_sub();
+             ssh-24099 [003] 76622.822444: funcgraph_exit:         1.003 us   |                }
+             ssh-24099 [003] 76622.822445: funcgraph_exit:       ! 139.804 us |              }
+             ssh-24099 [003] 76622.822445: funcgraph_exit:       ! 140.387 us |            }
+             ssh-24099 [003] 76622.822446: funcgraph_entry:                   |            irq_exit() {
+             ssh-24099 [003] 76622.822446: funcgraph_entry:        0.520 us   |              irqtime_account_irq();
+             ssh-24099 [003] 76622.822447: funcgraph_entry:        0.312 us   |              preempt_count_sub();
+             ssh-24099 [003] 76622.822448: funcgraph_entry:        0.551 us   |              idle_cpu();
+             ssh-24099 [003] 76622.822449: funcgraph_entry:        0.322 us   |              rcu_irq_exit();
+             ssh-24099 [003] 76622.822449: funcgraph_exit:         3.414 us   |            }
+             ssh-24099 [003] 76622.822449: funcgraph_exit:       ! 153.075 us |          }
+             ssh-24099 [003] 76622.822450: funcgraph_entry:                   |          smp_irq_work_interrupt() {
+             ssh-24099 [003] 76622.822451: funcgraph_entry:                   |            irq_enter() {
+             ssh-24099 [003] 76622.822451: funcgraph_entry:        0.316 us   |              rcu_irq_enter();
+             ssh-24099 [003] 76622.822452: funcgraph_entry:        0.414 us   |              irqtime_account_irq();
+             ssh-24099 [003] 76622.822452: funcgraph_entry:        0.355 us   |              preempt_count_add();
+             ssh-24099 [003] 76622.822453: funcgraph_exit:         2.300 us   |            }
+             ssh-24099 [003] 76622.822453: funcgraph_entry:                   |            __wake_up() {
+             ssh-24099 [003] 76622.822454: funcgraph_entry:                   |              __wake_up_common_lock() {
+             ssh-24099 [003] 76622.822454: funcgraph_entry:                   |                __lock_text_start() {
+             ssh-24099 [003] 76622.822454: funcgraph_entry:        0.276 us   |                  preempt_count_add();
+             ssh-24099 [003] 76622.822455: funcgraph_exit:         0.879 us   |                }
+             ssh-24099 [003] 76622.822455: funcgraph_entry:        0.280 us   |                __wake_up_common();
+             ssh-24099 [003] 76622.822456: funcgraph_entry:                   |                _raw_spin_unlock_irqrestore() {
+             ssh-24099 [003] 76622.822456: funcgraph_entry:        0.322 us   |                  preempt_count_sub();
+             ssh-24099 [003] 76622.822457: funcgraph_exit:         0.873 us   |                }
+             ssh-24099 [003] 76622.822457: funcgraph_exit:         3.539 us   |              }
+             ssh-24099 [003] 76622.822458: funcgraph_exit:         4.166 us   |            }
+             ssh-24099 [003] 76622.822458: funcgraph_entry:                   |            __wake_up() {
+             ssh-24099 [003] 76622.822458: funcgraph_entry:                   |              __wake_up_common_lock() {
+             ssh-24099 [003] 76622.822459: funcgraph_entry:                   |                __lock_text_start() {
+             ssh-24099 [003] 76622.822459: funcgraph_entry:        0.299 us   |                  preempt_count_add();
+             ssh-24099 [003] 76622.822459: funcgraph_exit:         0.884 us   |                }
+             ssh-24099 [003] 76622.822460: funcgraph_entry:        0.309 us   |                __wake_up_common();
+             ssh-24099 [003] 76622.822460: funcgraph_entry:                   |                _raw_spin_unlock_irqrestore() {
+             ssh-24099 [003] 76622.822461: funcgraph_entry:        0.255 us   |                  preempt_count_sub();
+             ssh-24099 [003] 76622.822461: funcgraph_exit:         0.846 us   |                }
+             ssh-24099 [003] 76622.822461: funcgraph_exit:         3.077 us   |              }
+             ssh-24099 [003] 76622.822461: funcgraph_exit:         3.618 us   |            }
+             ssh-24099 [003] 76622.822462: funcgraph_entry:                   |            irq_exit() {
+             ssh-24099 [003] 76622.822462: funcgraph_entry:        0.314 us   |              irqtime_account_irq();
+             ssh-24099 [003] 76622.822463: funcgraph_entry:        0.341 us   |              preempt_count_sub();
+             ssh-24099 [003] 76622.822463: funcgraph_entry:        0.323 us   |              idle_cpu();
+             ssh-24099 [003] 76622.822464: funcgraph_entry:        0.298 us   |              rcu_irq_exit();
+             ssh-24099 [003] 76622.822464: funcgraph_exit:         2.559 us   |            }
+             ssh-24099 [003] 76622.822465: funcgraph_exit:       + 14.394 us  |          }
+             ssh-24099 [003] 76622.822465: funcgraph_exit:       ! 172.218 us |        }
+             ssh-24099 [003] 76622.822466: funcgraph_entry:                   |        tty_ldisc_ref_wait() {
+             ssh-24099 [003] 76622.822466: funcgraph_entry:        0.307 us   |          ldsem_down_read();
+             ssh-24099 [003] 76622.822467: funcgraph_exit:         0.945 us   |        }
+             ssh-24099 [003] 76622.822467: funcgraph_entry:                   |        n_tty_ioctl() {
+             ssh-24099 [003] 76622.822467: funcgraph_entry:                   |          n_tty_ioctl_helper() {
+             ssh-24099 [003] 76622.822468: funcgraph_entry:                   |            tty_mode_ioctl() {
+             ssh-24099 [003] 76622.822468: funcgraph_entry:                   |              copy_termios() {
+             ssh-24099 [003] 76622.822469: funcgraph_entry:        0.279 us   |                down_read();
+             ssh-24099 [003] 76622.822469: funcgraph_entry:        0.279 us   |                up_read();
+             ssh-24099 [003] 76622.822470: funcgraph_exit:         1.582 us   |              }
+             ssh-24099 [003] 76622.822470: funcgraph_exit:         2.435 us   |            }
+             ssh-24099 [003] 76622.822470: funcgraph_exit:         3.129 us   |          }
+             ssh-24099 [003] 76622.822471: funcgraph_exit:         3.701 us   |        }
+             ssh-24099 [003] 76622.822471: funcgraph_entry:                   |        tty_ldisc_deref() {
+             ssh-24099 [003] 76622.822471: funcgraph_entry:        0.268 us   |          ldsem_up_read();
+             ssh-24099 [003] 76622.822472: funcgraph_exit:         0.804 us   |        }
+             ssh-24099 [003] 76622.822472: funcgraph_exit:       ! 180.043 us |      }
+             ssh-24099 [003] 76622.822472: funcgraph_exit:       ! 180.865 us |    }
+             ssh-24099 [003] 76622.822473: funcgraph_exit:       ! 185.675 us |  }
+             ssh-24099 [003] 76622.822476: funcgraph_entry:                   |  ksys_ioctl() {
+             ssh-24099 [003] 76622.822477: funcgraph_entry:                   |    __fdget() {
+             ssh-24099 [003] 76622.822477: funcgraph_entry:        0.488 us   |      __fget_light();
+             ssh-24099 [003] 76622.822478: funcgraph_exit:         1.152 us   |    }
+             ssh-24099 [003] 76622.822478: funcgraph_entry:        0.391 us   |    security_file_ioctl();
+             ssh-24099 [003] 76622.822479: funcgraph_entry:                   |    do_vfs_ioctl() {
+             ssh-24099 [003] 76622.822479: funcgraph_entry:                   |      tty_ioctl() {
+             ssh-24099 [003] 76622.822480: funcgraph_entry:        0.307 us   |        tty_paranoia_check.isra.3();
+             ssh-24099 [003] 76622.822480: funcgraph_entry:        0.323 us   |        tty_jobctrl_ioctl();
+             ssh-24099 [003] 76622.822481: funcgraph_entry:                   |        tty_ldisc_ref_wait() {
+             ssh-24099 [003] 76622.822481: funcgraph_entry:        0.296 us   |          ldsem_down_read();
+             ssh-24099 [003] 76622.822482: funcgraph_exit:         0.921 us   |        }
+             ssh-24099 [003] 76622.822482: funcgraph_entry:                   |        n_tty_ioctl() {
+             ssh-24099 [003] 76622.822482: funcgraph_entry:                   |          n_tty_ioctl_helper() {
+             ssh-24099 [003] 76622.822483: funcgraph_entry:                   |            tty_mode_ioctl() {
+             ssh-24099 [003] 76622.822483: funcgraph_entry:                   |              set_termios() {
+             ssh-24099 [003] 76622.822484: funcgraph_entry:                   |                tty_check_change() {
+             ssh-24099 [003] 76622.822484: funcgraph_entry:                   |                  __tty_check_change.part.0() {
+             ssh-24099 [003] 76622.822484: funcgraph_entry:        0.331 us   |                    __rcu_read_lock();
+             ssh-24099 [003] 76622.822485: funcgraph_entry:                   |                    __lock_text_start() {
+             ssh-24099 [003] 76622.822486: funcgraph_entry:        0.364 us   |                      preempt_count_add();
+             ssh-24099 [003] 76622.822486: funcgraph_exit:         0.998 us   |                    }
+             ssh-24099 [003] 76622.822486: funcgraph_entry:                   |                    _raw_spin_unlock_irqrestore() {
+             ssh-24099 [003] 76622.822487: funcgraph_entry:        0.365 us   |                      preempt_count_sub();
+             ssh-24099 [003] 76622.822487: funcgraph_exit:         1.010 us   |                    }
+             ssh-24099 [003] 76622.822488: funcgraph_entry:        0.357 us   |                    __rcu_read_unlock();
+             ssh-24099 [003] 76622.822488: funcgraph_exit:         4.346 us   |                  }
+             ssh-24099 [003] 76622.822489: funcgraph_exit:         5.152 us   |                }
+             ssh-24099 [003] 76622.822489: funcgraph_entry:        0.381 us   |                down_read();
+             ssh-24099 [003] 76622.822490: funcgraph_entry:        0.378 us   |                up_read();
+             ssh-24099 [003] 76622.822491: funcgraph_entry:                   |                tty_termios_input_baud_rate() {
+             ssh-24099 [003] 76622.822491: funcgraph_entry:        0.412 us   |                  tty_termios_baud_rate();
+             ssh-24099 [003] 76622.822492: funcgraph_exit:         1.046 us   |                }
+             ssh-24099 [003] 76622.822492: funcgraph_entry:        0.338 us   |                tty_termios_baud_rate();
+             ssh-24099 [003] 76622.822492: funcgraph_entry:                   |                tty_ldisc_ref() {
+             ssh-24099 [003] 76622.822493: funcgraph_entry:        0.352 us   |                  ldsem_down_read_trylock();
+             ssh-24099 [003] 76622.822493: funcgraph_exit:         0.995 us   |                }
+             ssh-24099 [003] 76622.822494: funcgraph_entry:                   |                n_tty_flush_buffer() {
+             ssh-24099 [003] 76622.822494: funcgraph_entry:        0.379 us   |                  down_write();
+             ssh-24099 [003] 76622.822495: funcgraph_entry:        0.474 us   |                  reset_buffer_flags();
+             ssh-24099 [003] 76622.822496: funcgraph_entry:        0.369 us   |                  n_tty_kick_worker();
+             ssh-24099 [003] 76622.822496: funcgraph_entry:        0.358 us   |                  up_write();
+             ssh-24099 [003] 76622.822497: funcgraph_exit:         3.239 us   |                }
+             ssh-24099 [000] 76622.825041: funcgraph_entry:        0.461 us   |                          __enqueue_entity();
+             ssh-24099 [000] 76622.825042: funcgraph_exit:         9.095 us   |                        }
+             ssh-24099 [000] 76622.825042: funcgraph_entry:        0.334 us   |                        hrtick_update();
+             ssh-24099 [000] 76622.825043: funcgraph_exit:       + 16.388 us  |                      }
+             ssh-24099 [000] 76622.825043: funcgraph_exit:       + 20.109 us  |                    }
+             ssh-24099 [000] 76622.825043: funcgraph_entry:                   |                    ttwu_do_wakeup.isra.4() {
+             ssh-24099 [000] 76622.825044: funcgraph_entry:                   |                      check_preempt_curr() {
+             ssh-24099 [000] 76622.825044: funcgraph_entry:                   |                        check_preempt_wakeup() {
+             ssh-24099 [000] 76622.825045: funcgraph_entry:        0.390 us   |                          update_curr();
+             ssh-24099 [000] 76622.825045: funcgraph_entry:        0.357 us   |                          wakeup_preempt_entity.isra.7();
+             ssh-24099 [000] 76622.825046: funcgraph_exit:         1.724 us   |                        }
+             ssh-24099 [000] 76622.825046: funcgraph_exit:         2.483 us   |                      }
+             ssh-24099 [000] 76622.825047: funcgraph_exit:         3.438 us   |                    }
+             ssh-24099 [000] 76622.825047: funcgraph_exit:       + 24.397 us  |                  }
+             ssh-24099 [000] 76622.825047: funcgraph_entry:                   |                  _raw_spin_unlock() {
+             ssh-24099 [000] 76622.825048: funcgraph_entry:        0.343 us   |                    preempt_count_sub();
+             ssh-24099 [000] 76622.825048: funcgraph_exit:         0.956 us   |                  }
+             ssh-24099 [000] 76622.825049: funcgraph_entry:        0.332 us   |                  ttwu_stat();
+             ssh-24099 [000] 76622.825049: funcgraph_entry:                   |                  _raw_spin_unlock_irqrestore() {
+             ssh-24099 [000] 76622.825050: funcgraph_entry:        0.292 us   |                    preempt_count_sub();
+             ssh-24099 [000] 76622.825050: funcgraph_exit:         0.865 us   |                  }
+             ssh-24099 [000] 76622.825050: funcgraph_exit:       + 39.978 us  |                }
+             ssh-24099 [000] 76622.825051: funcgraph_exit:       + 40.567 us  |              }
+             ssh-24099 [000] 76622.825051: funcgraph_exit:       + 41.233 us  |            }
+             ssh-24099 [000] 76622.825052: funcgraph_entry:                   |            autoremove_wake_function() {
+             ssh-24099 [000] 76622.825052: funcgraph_entry:                   |              default_wake_function() {
+             ssh-24099 [000] 76622.825052: funcgraph_entry:                   |                try_to_wake_up() {
+             ssh-24099 [000] 76622.825053: funcgraph_entry:                   |                  __lock_text_start() {
+             ssh-24099 [000] 76622.825053: funcgraph_entry:        0.377 us   |                    preempt_count_add();
+             ssh-24099 [000] 76622.825054: funcgraph_exit:         1.235 us   |                  }
+             ssh-24099 [000] 76622.825054: funcgraph_entry:                   |                  select_task_rq_fair() {
+             ssh-24099 [000] 76622.825055: funcgraph_entry:        0.341 us   |                    __rcu_read_lock();
+             ssh-24099 [000] 76622.825055: funcgraph_entry:        0.287 us   |                    available_idle_cpu();
+             ssh-24099 [000] 76622.825056: funcgraph_entry:        0.576 us   |                    update_cfs_rq_h_load();
+             ssh-24099 [000] 76622.825057: funcgraph_entry:                   |                    select_idle_sibling() {
+             ssh-24099 [000] 76622.825057: funcgraph_entry:        0.289 us   |                      available_idle_cpu();
+             ssh-24099 [000] 76622.825058: funcgraph_entry:        0.308 us   |                      available_idle_cpu();
+             ssh-24099 [000] 76622.825059: funcgraph_entry:        0.262 us   |                      available_idle_cpu();
+             ssh-24099 [000] 76622.825059: funcgraph_entry:        0.361 us   |                      available_idle_cpu();
+             ssh-24099 [000] 76622.825060: funcgraph_exit:         2.812 us   |                    }
+             ssh-24099 [000] 76622.825060: funcgraph_entry:        0.322 us   |                    __rcu_read_unlock();
+             ssh-24099 [000] 76622.825061: funcgraph_exit:         6.258 us   |                  }
+             ssh-24099 [000] 76622.825061: funcgraph_entry:                   |                  set_task_cpu() {
+             ssh-24099 [000] 76622.825061: funcgraph_entry:                   |                    migrate_task_rq_fair() {
+             ssh-24099 [000] 76622.825062: funcgraph_entry:                   |                      remove_entity_load_avg() {
+             ssh-24099 [000] 76622.825062: funcgraph_entry:        0.431 us   |                        __update_load_avg_blocked_se();
+             ssh-24099 [000] 76622.825063: funcgraph_entry:                   |                        __lock_text_start() {
+             ssh-24099 [000] 76622.825063: funcgraph_entry:        0.350 us   |                          preempt_count_add();
+             ssh-24099 [000] 76622.825064: funcgraph_exit:         0.989 us   |                        }
+             ssh-24099 [000] 76622.825064: funcgraph_entry:                   |                        _raw_spin_unlock_irqrestore() {
+             ssh-24099 [000] 76622.825064: funcgraph_entry:        0.344 us   |                          preempt_count_sub();
+             ssh-24099 [000] 76622.825065: funcgraph_exit:         0.987 us   |                        }
+             ssh-24099 [000] 76622.825065: funcgraph_exit:         3.692 us   |                      }
+             ssh-24099 [000] 76622.825066: funcgraph_exit:         4.331 us   |                    }
+             ssh-24099 [000] 76622.825066: funcgraph_entry:        0.400 us   |                    set_task_rq_fair();
+             ssh-24099 [000] 76622.825067: funcgraph_exit:         5.768 us   |                  }
+             ssh-24099 [000] 76622.825067: funcgraph_entry:                   |                  _raw_spin_lock() {
+             ssh-24099 [000] 76622.825067: funcgraph_entry:        0.343 us   |                    preempt_count_add();
+             ssh-24099 [000] 76622.825068: funcgraph_exit:         1.032 us   |                  }
+             ssh-24099 [000] 76622.825068: funcgraph_entry:        0.391 us   |                  update_rq_clock();
+             ssh-24099 [000] 76622.825069: funcgraph_entry:                   |                  ttwu_do_activate() {
+             ssh-24099 [000] 76622.825069: funcgraph_entry:                   |                    activate_task() {
+             ssh-24099 [000] 76622.825070: funcgraph_entry:                   |                      psi_task_change() {
+             ssh-24099 [000] 76622.825070: funcgraph_entry:        0.386 us   |                        record_times();
+             ssh-24099 [000] 76622.825071: funcgraph_entry:        0.364 us   |                        record_times();
+             ssh-24099 [000] 76622.825072: funcgraph_entry:        0.333 us   |                        record_times();
+             ssh-24099 [000] 76622.825073: funcgraph_entry:        0.330 us   |                        record_times();
+             ssh-24099 [000] 76622.825073: funcgraph_exit:         3.313 us   |                      }
+             ssh-24099 [000] 76622.825074: funcgraph_entry:                   |                      enqueue_task_fair() {
+             ssh-24099 [000] 76622.825074: funcgraph_entry:                   |                        enqueue_entity() {
+             ssh-24099 [000] 76622.825074: funcgraph_entry:        0.369 us   |                          update_curr();
+             ssh-24099 [000] 76622.825075: funcgraph_entry:        0.360 us   |                          __update_load_avg_cfs_rq();
+             ssh-24099 [000] 76622.825076: funcgraph_entry:        0.437 us   |                          attach_entity_load_avg();
+             ssh-24099 [000] 76622.825077: funcgraph_entry:        0.358 us   |                          update_cfs_group();
+             ssh-24099 [000] 76622.825077: funcgraph_entry:        0.355 us   |                          account_entity_enqueue();
+             ssh-24099 [000] 76622.825078: funcgraph_entry:        0.347 us   |                          place_entity();
+             ssh-24099 [000] 76622.825079: funcgraph_entry:        0.373 us   |                          __enqueue_entity();
+             ssh-24099 [000] 76622.825079: funcgraph_exit:         5.377 us   |                        }
+             ssh-24099 [000] 76622.825080: funcgraph_entry:                   |                        enqueue_entity() {
+             ssh-24099 [000] 76622.825080: funcgraph_entry:                   |                          update_curr() {
+             ssh-24099 [000] 76622.825162: funcgraph_exit:         0.257 us   |                    }
+             ssh-24099 [000] 76622.825162: funcgraph_exit:       + 20.363 us  |                  }
+             ssh-24099 [000] 76622.825163: funcgraph_exit:       + 21.055 us  |                }
+             ssh-24099 [000] 76622.825163: funcgraph_entry:        0.276 us   |                down_read();
+             ssh-24099 [000] 76622.825163: funcgraph_entry:        0.279 us   |                up_read();
+             ssh-24099 [000] 76622.825164: funcgraph_entry:                   |                tty_termios_input_baud_rate() {
+             ssh-24099 [000] 76622.825164: funcgraph_entry:        0.343 us   |                  tty_termios_baud_rate();
+             ssh-24099 [000] 76622.825165: funcgraph_exit:         0.842 us   |                }
+             ssh-24099 [000] 76622.825165: funcgraph_entry:        0.247 us   |                tty_termios_baud_rate();
+             ssh-24099 [000] 76622.825165: funcgraph_entry:                   |                tty_ldisc_ref() {
+             ssh-24099 [000] 76622.825166: funcgraph_entry:        0.263 us   |                  ldsem_down_read_trylock();
+             ssh-24099 [000] 76622.825166: funcgraph_exit:         0.753 us   |                }
+             ssh-24099 [000] 76622.825167: funcgraph_entry:                   |                n_tty_flush_buffer() {
+             ssh-24099 [000] 76622.825167: funcgraph_entry:        0.309 us   |                  down_write();
+             ssh-24099 [000] 76622.825167: funcgraph_entry:        0.339 us   |                  reset_buffer_flags();
+             ssh-24099 [000] 76622.825168: funcgraph_entry:        0.273 us   |                  n_tty_kick_worker();
+             ssh-24099 [000] 76622.825168: funcgraph_entry:        0.298 us   |                  up_write();
+             ssh-24099 [000] 76622.825169: funcgraph_exit:         2.480 us   |                }
+             ssh-24099 [000] 76622.825169: funcgraph_entry:                   |                tty_ldisc_deref() {
+             ssh-24099 [000] 76622.825170: funcgraph_entry:        0.277 us   |                  ldsem_up_read();
+             ssh-24099 [000] 76622.825170: funcgraph_exit:         0.743 us   |                }
+             ssh-24099 [000] 76622.825170: funcgraph_entry:                   |                tty_wait_until_sent() {
+             ssh-24099 [000] 76622.825171: funcgraph_entry:        0.275 us   |                  pty_chars_in_buffer();
+             ssh-24099 [000] 76622.825171: funcgraph_exit:         0.838 us   |                }
+             ssh-24099 [000] 76622.825171: funcgraph_entry:                   |                tty_set_termios() {
+             ssh-24099 [000] 76622.825172: funcgraph_entry:        0.261 us   |                  down_write();
+             ssh-24099 [000] 76622.825172: funcgraph_entry:        0.314 us   |                  pty_set_termios();
+             ssh-24099 [000] 76622.825173: funcgraph_entry:                   |                  tty_ldisc_ref() {
+             ssh-24099 [000] 76622.825173: funcgraph_entry:        0.246 us   |                    ldsem_down_read_trylock();
+             ssh-24099 [000] 76622.825173: funcgraph_exit:         0.723 us   |                  }
+             ssh-24099 [000] 76622.825174: funcgraph_entry:                   |                  n_tty_set_termios() {
+             ssh-24099 [000] 76622.825174: funcgraph_entry:                   |                    __wake_up() {
+             ssh-24099 [000] 76622.825174: funcgraph_entry:                   |                      __wake_up_common_lock() {
+             ssh-24099 [000] 76622.825175: funcgraph_entry:                   |                        __lock_text_start() {
+             ssh-24099 [000] 76622.825175: funcgraph_entry:        0.252 us   |                          preempt_count_add();
+             ssh-24099 [000] 76622.825175: funcgraph_exit:         0.763 us   |                        }
+             ssh-24099 [000] 76622.825176: funcgraph_entry:        0.261 us   |                        __wake_up_common();
+             ssh-24099 [000] 76622.825176: funcgraph_entry:                   |                        _raw_spin_unlock_irqrestore() {
+             ssh-24099 [000] 76622.825176: funcgraph_entry:        0.336 us   |                          preempt_count_sub();
+             ssh-24099 [000] 76622.825177: funcgraph_exit:         0.927 us   |                        }
+             ssh-24099 [000] 76622.825177: funcgraph_exit:         2.928 us   |                      }
+             ssh-24099 [000] 76622.825178: funcgraph_exit:         3.481 us   |                    }
+             ssh-24099 [000] 76622.825178: funcgraph_entry:                   |                    __wake_up() {
+             ssh-24099 [000] 76622.825178: funcgraph_entry:                   |                      __wake_up_common_lock() {
+             ssh-24099 [000] 76622.825179: funcgraph_entry:                   |                        __lock_text_start() {
+             ssh-24099 [000] 76622.825179: funcgraph_entry:        0.326 us   |                          preempt_count_add();
+             ssh-24099 [000] 76622.825180: funcgraph_exit:         0.936 us   |                        }
+             ssh-24099 [000] 76622.825180: funcgraph_entry:        0.335 us   |                        __wake_up_common();
+             ssh-24099 [000] 76622.825180: funcgraph_entry:                   |                        _raw_spin_unlock_irqrestore() {
+             ssh-24099 [000] 76622.825181: funcgraph_entry:        0.316 us   |                          preempt_count_sub();
+             ssh-24099 [000] 76622.825181: funcgraph_exit:         0.943 us   |                        }
+             ssh-24099 [000] 76622.825182: funcgraph_exit:         3.334 us   |                      }
+             ssh-24099 [000] 76622.825182: funcgraph_exit:         3.967 us   |                    }
+             ssh-24099 [000] 76622.825182: funcgraph_exit:         8.336 us   |                  }
+             ssh-24099 [000] 76622.825182: funcgraph_entry:                   |                  tty_ldisc_deref() {
+             ssh-24099 [000] 76622.825183: funcgraph_entry:        0.328 us   |                    ldsem_up_read();
+             ssh-24099 [000] 76622.825183: funcgraph_exit:         0.930 us   |                  }
+             ssh-24099 [000] 76622.825184: funcgraph_entry:        0.357 us   |                  up_write();
+             ssh-24099 [000] 76622.825184: funcgraph_exit:       + 12.905 us  |                }
+             ssh-24099 [000] 76622.825185: funcgraph_exit:       + 43.383 us  |              }
+             ssh-24099 [000] 76622.825185: funcgraph_exit:       + 44.073 us  |            }
+             ssh-24099 [000] 76622.825185: funcgraph_exit:       + 44.646 us  |          }
+             ssh-24099 [000] 76622.825185: funcgraph_exit:       + 45.223 us  |        }
+             ssh-24099 [000] 76622.825186: funcgraph_entry:                   |        tty_ldisc_deref() {
+             ssh-24099 [000] 76622.825186: funcgraph_entry:        0.344 us   |          ldsem_up_read();
+             ssh-24099 [000] 76622.825187: funcgraph_exit:         0.974 us   |        }
+             ssh-24099 [000] 76622.825187: funcgraph_exit:       + 49.412 us  |      }
+             ssh-24099 [000] 76622.825187: funcgraph_exit:       + 50.127 us  |    }
+             ssh-24099 [000] 76622.825188: funcgraph_exit:       + 52.940 us  |  }

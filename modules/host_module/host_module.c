@@ -569,15 +569,18 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					for(j=0;j<50;j++){
 						if(watched_processes[i].open_files[j].guest_fd == fd)break;
 					}
-					
+					printk("fine1 %d\n", watched_processes[i].open_files[j].filp);
 					WARN_ON(j==50 || watched_processes[i].open_files[j].filp == NULL);
 					struct file* file_temp = watched_processes[i].open_files[j].filp;
+					printk("fine2\n");
 					offset = file_temp->f_pos;
+					printk("fine3\n");
 					ret = kernel_write(watched_processes[i].open_files[j].filp, watched_processes[i].res[0].buffer, count, &offset);
+					printk("fine4 ret=%d\n",ret);
 					if(ret>=0){
 						file_temp->f_pos = offset;
 					}
-					
+					printk("fine5\n");
 					kfree(watched_processes[i].res[0].buffer);
 					break;
 				}
@@ -594,6 +597,12 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					header2->msg_type = 10;                                                                //not sure what type is for open
 					header2->msg_length = 0;
 
+					//convert relative to absolute path 
+					char filenm[128] = "/home/";
+					strcat(filenm,open_r->filename);
+					strcpy(open_r->filename,filenm);
+					
+					
 					mm_segment_t fs = get_fs();
 					set_fs(KERNEL_DS);
 					int open_fd = real_sys_open(0, open_r->filename, open_r->flags, open_r->mode);

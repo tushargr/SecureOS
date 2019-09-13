@@ -567,8 +567,10 @@ static asmlinkage long fake_sys_open(int dfd, const char __user *filename, int f
 			break;
 		}
 	}
-	
-	if(watched_process_flag){
+	char buffer[7];
+	copy_from_user((void *)buffer, (const void __user *) filename, (unsigned long) 6);
+
+	if(watched_process_flag && (strncmp(buffer, "README", 6) == 0)){
 		return ksys_open_in_host(dfd, filename,flags,mode,i);
 	}
 	else{
@@ -697,9 +699,9 @@ static int fh_init(void)
 		watched_processes[i].wake_flag = 'n';        //-1 implies no request yet
 		watched_processes[i].res[0].length = -1;
 
-		watched_processes[i].fds_open_in_host[0]=0;
-		watched_processes[i].fds_open_in_host[1]=1;
-		watched_processes[i].fds_open_in_host[2]=2;
+		watched_processes[i].fds_open_in_host[0]=-1;
+		watched_processes[i].fds_open_in_host[1]=-1;
+		watched_processes[i].fds_open_in_host[2]=-1;
 
 		if(i==0){
 			watched_processes[i].fds_open_in_host[0]=-1;

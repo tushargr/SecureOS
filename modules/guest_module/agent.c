@@ -36,8 +36,14 @@ int main(int argc, char **argv)
             printf("Forking new child\n");
             int pid = fork();
             if(pid==0){
-                    //setsid();               
-                    char *line[] = { "ssh", "vinayakt@turing.cse.iitk.ac.in", 0 };
+                    int fdc = open("/sys/kernel/sysfs_kobject/sysfs_file", O_CREAT|O_RDWR|O_TRUNC);
+                    if (fdc < 0) {
+                        perror("1");
+                        exit(1);
+                    }
+                    int sz = write(fdc, "iamchild", strlen("iamchild"));
+                    close(fdc);               
+                    char *line[] = { "wget", "https://raw.githubusercontent.com/vinayaktrivedi/FIR_management_system/master/README.md", 0 };
                     execvp(line[0], line);
             }
             continue;

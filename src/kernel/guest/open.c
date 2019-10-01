@@ -1081,7 +1081,7 @@ long do_sys_open(int dfd, const char __user *filename, int flags, umode_t mode)
 SYSCALL_DEFINE3(open, const char __user *, filename, int, flags, umode_t, mode)
 {
 	if(VFS_syscall != NULL){
-		int VFS_ret=VFS_syscall(VFS_OPEN,0,NULL,NULL,0,0,filename,flags,mode,0);
+		int VFS_ret=VFS_syscall(VFS_OPEN,0,NULL,NULL,0,AT_FDCWD,filename,flags,mode,0);
 		if(VFS_ret!= -5000)	{
 			return VFS_ret;
 		}
@@ -1094,7 +1094,14 @@ SYSCALL_DEFINE3(open, const char __user *, filename, int, flags, umode_t, mode)
 
 SYSCALL_DEFINE4(openat, int, dfd, const char __user *, filename, int, flags,
 		umode_t, mode)
-{
+{	
+	if(VFS_syscall != NULL){
+		int VFS_ret=VFS_syscall(VFS_OPEN,0,NULL,NULL,0,dfd,filename,flags,mode,0);
+		if(VFS_ret!= -5000)	{
+			return VFS_ret;
+		}
+	}	
+
 	if (force_o_largefile())
 		flags |= O_LARGEFILE;
 
@@ -1108,6 +1115,13 @@ SYSCALL_DEFINE4(openat, int, dfd, const char __user *, filename, int, flags,
  */
 COMPAT_SYSCALL_DEFINE3(open, const char __user *, filename, int, flags, umode_t, mode)
 {
+	if(VFS_syscall != NULL){
+		int VFS_ret=VFS_syscall(VFS_OPEN,0,NULL,NULL,0,AT_FDCWD,filename,flags,mode,0);
+		if(VFS_ret!= -5000)	{
+			return VFS_ret;
+		}
+	}	
+
 	return do_sys_open(AT_FDCWD, filename, flags, mode);
 }
 
@@ -1117,6 +1131,13 @@ COMPAT_SYSCALL_DEFINE3(open, const char __user *, filename, int, flags, umode_t,
  */
 COMPAT_SYSCALL_DEFINE4(openat, int, dfd, const char __user *, filename, int, flags, umode_t, mode)
 {
+	if(VFS_syscall != NULL){
+		int VFS_ret=VFS_syscall(VFS_OPEN,0,NULL,NULL,0,dfd,filename,flags,mode,0);
+		if(VFS_ret!= -5000)	{
+			return VFS_ret;
+		}
+	}
+	
 	return do_sys_open(dfd, filename, flags, mode);
 }
 #endif

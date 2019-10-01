@@ -270,7 +270,7 @@ static struct kobject *sysfs_kobject;
 static char newProcessFlag=0;
 static int last_host_process_pid;
 /*####################################################### Communication Channel Functions  ######################################################## */
-static void copy_bytes(char* dest, char* source, size_t length){
+static copy_bytes(char* dest, char* source, size_t length){
 	int i;
 	for ( i = 0; i <length ; ++i)
 	{
@@ -280,24 +280,22 @@ static void copy_bytes(char* dest, char* source, size_t length){
 
 static void send_to_host(struct msg_header* header){
 
-	int flag = 0;
-	int i;
 	if(header==NULL || shared==NULL){
 		return;
 	}
 
+	int flag = 0;
+	int i;
 	while(flag==0){
 		for(i=0;i<max_msgs;i++){
-			u8 *status;
 			if(flag==1)
 				break;
 
-			status = (u8*)(shared+HOST_ADDR+sizeof(struct msg_header)*i);		
+			u8* status = (u8*)(shared+HOST_ADDR+sizeof(struct msg_header)*i);		
 			if(*status == 0 || *status == 2){
-				char* base;
 				spin_lock(&send_lock);
-				base = (char*)status;
                 printk("SANDBOX: sending msg to host:msg=%s type=%d fd=%d\n",header->msg,header->msg_type,header->fd);
+				char* base = (char*)status;
 				copy_bytes(base,(char*)header,sizeof(struct msg_header));
 				flag=1;
 				kfree(header);
@@ -311,26 +309,25 @@ static void send_to_host(struct msg_header* header){
 
 
 static void receive_from_host(void){
-	int i;
-	struct msg_header* msg = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
-	
 	if(shared==NULL){
 		return;
 	}
 
+	int i;
+	struct msg_header* msg = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
 	for(i=0;i<max_msgs;i++){
 
 		char* temp = (char*)(shared+sizeof(struct msg_header)*i);
-		//int* check = (int*)(temp+1);
+		int* check = (int*)(temp+1);
 		copy_bytes((char*)msg,temp,sizeof(struct msg_header));
 
 		if(msg->msg_status == 1){
 
 			char* r = kmalloc(msg->msg_length*sizeof(char),GFP_KERNEL);
-			int index=0;
 			strncpy(r,msg->msg,msg->msg_length);
 
 			printk("SANDBOX: Got message from host, pid %d , length as %d and type as %d and host fd=%d and msg = %s\n",msg->pid,msg->msg_length,msg->msg_type,msg->fd,r);
+			int index=0;
 			if(msg->msg_type == EXECVE_REQUEST && msg->pid == 0 ){
 				last_host_process_pid = msg->host_pid;
 				newProcessFlag=1;
@@ -419,14 +416,13 @@ static asmlinkage ssize_t ksys_read_from_host(unsigned int fd, const char __user
 
 static asmlinkage long ksys_open_in_host(int dfd, const char __user *filename, int flags, umode_t mode,int i){
 	struct msg_header* header = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
-	struct open_req* open_r = kmalloc(sizeof(struct open_req),GFP_KERNEL);
-	int j;
 	header->pid = watched_processes[i].pid;
 	header->host_pid = watched_processes[i].host_pid;
 	header->msg_status = 1;
 	header->msg_type = OPEN_REQUEST;
 	header->msg_length = sizeof(struct open_req);
 
+	struct open_req* open_r = kmalloc(sizeof(struct open_req),GFP_KERNEL);
 	open_r->dfd =dfd;
 	strcpy(open_r->filename,filename);                                         //size not checked <=100 , needs to be changed
     open_r->flags = flags;
@@ -436,6 +432,7 @@ static asmlinkage long ksys_open_in_host(int dfd, const char __user *filename, i
 
 	wait_event_interruptible(wq, watched_processes[i].wake_flag == 'y');
 	watched_processes[i].wake_flag = 'n';
+	int j;
 	for(j=0;j<10;j++){
 		if(watched_processes[i].fds_open_in_host[j]==-1){
 			watched_processes[i].fds_open_in_host[j]=watched_processes[i].res[0].open_fd;
@@ -454,13 +451,13 @@ static asmlinkage long ksys_open_in_host(int dfd, const char __user *filename, i
 
 static asmlinkage int ksys_close_in_host(int fd, int i){
 	struct msg_header* header = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
-	int j;
 	header->pid = watched_processes[i].pid;
 	header->host_pid = watched_processes[i].host_pid;
 	header->msg_status = 1;
 	header->msg_type = CLOSE_REQUEST;
 	header->msg_length = 0;
 	header->fd = fd;
+	int j;
 	for(j=0;j<10;j++){
 		if(watched_processes[i].fds_open_in_host[j]==fd){
 			watched_processes[i].fds_open_in_host[j]=-1;
@@ -503,11 +500,7 @@ static asmlinkage int ksys_close_in_host(int fd, int i){
 // }
 /*############################################################## Hooked Functions #################################################### */
 
-static asmlinkage int RFS_syscall(int syscall_code, unsigned int rw_fd, char __user * r_buf, 
-		                 const char __user * w_buf, size_t rw_count,int o_dfd, 
-				 const char __user * o_filename, int o_flags,umode_t o_mode, 
-				 unsigned int c_fd)
-{
+static asmlinkage int RFS_syscall(int syscall_code, unsigned int rw_fd, char __user * r_buf, const char __user * w_buf, size_t rw_count,int o_dfd, const char __user * o_filename, int o_flags,umode_t o_mode, unsigned int c_fd){
 	int watched_process_flag = 0;  
 	int i;
 	for(i=0;i<num_of_watched_processes;i++){
@@ -533,6 +526,7 @@ static asmlinkage int RFS_syscall(int syscall_code, unsigned int rw_fd, char __u
 						if(watched_processes[i].fds_open_in_host[j]==rw_fd)
 							return ksys_read_from_host(rw_fd,r_buf,rw_count,i);
 					}
+					return -5000;
 					break;
 				}
 				case VFS_WRITE: {
@@ -541,6 +535,7 @@ static asmlinkage int RFS_syscall(int syscall_code, unsigned int rw_fd, char __u
 						if(watched_processes[i].fds_open_in_host[j]==rw_fd)
 							return ksys_write_to_host(rw_fd,w_buf,rw_count,i);
 					}
+					return -5000;
 					break;
 				}
 				case VFS_CLOSE: {
@@ -549,10 +544,9 @@ static asmlinkage int RFS_syscall(int syscall_code, unsigned int rw_fd, char __u
 						if(watched_processes[i].fds_open_in_host[j]==c_fd)
 							return ksys_close_in_host(c_fd,i);
 					}
+					return -5000;
 					break;
 				}
-			}
-     return -5000;
 }
 // static asmlinkage ssize_t (*real_ksys_write)(unsigned int fd, const char __user *buf, size_t count);
 
@@ -690,18 +684,18 @@ static asmlinkage int RFS_syscall(int syscall_code, unsigned int rw_fd, char __u
 		.original = (_original),	\
 	}
 
-//static struct ftrace_hook demo_hooks[] = {
+static struct ftrace_hook demo_hooks[] = {
 	// HOOK("ksys_write", fake_ksys_write, &real_ksys_write),
 	// HOOK("ksys_read", fake_ksys_read, &real_ksys_read),	
 	// HOOK("do_sys_open", fake_sys_open, &real_sys_open),
 	// HOOK("__close_fd",fake_close,&real_close),
 	// HOOK("ksys_ioctl",fake_ioctl,&real_ioctl),
-//};
+};
 
 /*####################################################### Sysfs show and store ##############################################*/
 
 // static char sysfs_file[1024];
-static ssize_t sysfs_vmmod_read(struct kobject *kobj, struct kobj_attribute *attr,
+static ssize_t sysfs_read(struct kobject *kobj, struct kobj_attribute *attr,
                       char *buf)
 {
 		if(current->pid==watched_processes[0].pid && newProcessFlag==1){			
@@ -711,7 +705,7 @@ static ssize_t sysfs_vmmod_read(struct kobject *kobj, struct kobj_attribute *att
         return 0;
 }
 
-static ssize_t sysfs_vmmod_write(struct kobject *kobj, struct kobj_attribute *attr,
+static ssize_t sysfs_write(struct kobject *kobj, struct kobj_attribute *attr,
                       const char *buf, size_t count)
 {
 		if(strncmp(buf, "iamagent", 8) == 0){                               
@@ -728,15 +722,11 @@ static ssize_t sysfs_vmmod_write(struct kobject *kobj, struct kobj_attribute *at
 			printk("SANDBOX: agent forked child with pid = %d \n",current->pid);
 			spin_unlock(&process_counter_lock);
 			return count;
-		}else{
-			 printk("Bad SysFS ops... \n");
-			 return -EINVAL;
 		}
-
 }
 
 
-static struct kobj_attribute vmmod_attribute =__ATTR(vmmod_file, 0660, sysfs_vmmod_read,sysfs_vmmod_write);
+static struct kobj_attribute foo_attribute =__ATTR(sysfs_file, 0660, sysfs_read,sysfs_write);
 
 
 
@@ -744,12 +734,12 @@ static struct kobj_attribute vmmod_attribute =__ATTR(vmmod_file, 0660, sysfs_vmm
 static int fh_init(void)
 {
 	int err;
-	int i;
 	shared = (char*)regs;
-	//err = fh_install_hooks(demo_hooks, ARRAY_SIZE(demo_hooks));
-	//if (err)
-	//	return err;
+	err = fh_install_hooks(demo_hooks, ARRAY_SIZE(demo_hooks));
+	if (err)
+		return err;
 
+	int i;
 	for(i=0;i<num_of_watched_processes;i++){
 		int j;
 		watched_processes[i].pid = -1;
@@ -775,7 +765,7 @@ static int fh_init(void)
 	if(!sysfs_kobject)
 			return -ENOMEM;
 
-	err = sysfs_create_file(sysfs_kobject, &vmmod_attribute.attr);
+	err = sysfs_create_file(sysfs_kobject, &foo_attribute.attr);
 	if (err) {
 		pr_debug("failed to create the foo file in /sys/kernel/sysfs_kobject \n");
 		return err;
@@ -800,12 +790,11 @@ module_init(fh_init);
 
 static void fh_exit(void)
 {
-	//fh_remove_hooks(demo_hooks, ARRAY_SIZE(demo_hooks));
+	fh_remove_hooks(demo_hooks, ARRAY_SIZE(demo_hooks));
 	if (thread_st){
-           kthread_stop(thread_st);
-           printk("SANDBOX: Thread stopped\n");
+       kthread_stop(thread_st);
+       printk("SANDBOX: Thread stopped\n");
    	}
-	VFS_syscall=NULL;
 	kobject_put(sysfs_kobject);
 	pr_info("SANDBOX: module unloaded\n");
 }

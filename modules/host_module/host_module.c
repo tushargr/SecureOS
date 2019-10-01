@@ -20,6 +20,7 @@
 #include <uapi/asm/termbits.h>
 #include <linux/tty.h>
 #include <linux/file.h>
+#include <linux/unistd.h>
 
 
 MODULE_DESCRIPTION("Example module hooking clone() and execve() via ftrace");
@@ -44,7 +45,6 @@ MODULE_LICENSE("GPL");
 #define HOST_ADDR 524289
 #define msg_size 10000
 #define max_msgs 50
-static unsigned long user_address;
 static int test_count = 0;
 enum msg_type_t{
                    FREE=0, 
@@ -295,8 +295,9 @@ static void copy_bytes(char* dest, char* source, size_t length){
 }
 
 static void send_to_guest(struct msg_header* header){
- 
+	struct file *filp;
     loff_t pos = 0, lpos = 0;
+	mm_segment_t oldfs;
     struct msg_header* msg = kmalloc(sizeof(struct msg_header),GFP_KERNEL);\
 	int i, err = 0;
 
@@ -304,8 +305,8 @@ static void send_to_guest(struct msg_header* header){
 		return;
 	}
 	//printk("Reached");
-	struct file *filp = kmalloc(sizeof(struct file),GFP_KERNEL);
-	mm_segment_t oldfs;
+	filp = kmalloc(sizeof(struct file),GFP_KERNEL);
+	
    
 
     oldfs = get_fs();
@@ -355,7 +356,10 @@ static void receive_from_guest(void){
 	struct file *filp = kmalloc(sizeof(struct file),GFP_KERNEL);
 	mm_segment_t oldfs;
     int err = 0;
-
+	loff_t lastpos;
+	loff_t *pos;
+	int i;
+	 struct msg_header* copy;
     oldfs = get_fs();
     set_fs(get_ds());
     filp = filp_open("/dev/shm/ivshmem", O_RDWR, 0);
@@ -365,25 +369,27 @@ static void receive_from_guest(void){
         return;
     }
 
-    loff_t *pos = kmalloc(sizeof(loff_t),GFP_KERNEL);
-    struct msg_header* copy = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
+    pos = kmalloc(sizeof(loff_t),GFP_KERNEL);
+    copy = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
 
     *pos = HOST_ADDR;
-    loff_t lastpos = *pos;
+    lastpos = *pos;
 
-	int i;
+	
 	for(i=0;i<max_msgs;i++){
 
 		lastpos = *pos;
 		kernel_read(filp,(char*)copy,sizeof(struct msg_header),pos);
 
 		if(copy->msg_status == 1){
-			
+			int index;
+			int j;
+			int start;
 			char* r = kmalloc(copy->msg_length*sizeof(char),GFP_KERNEL);
 			copy_bytes(r,copy->msg,copy->msg_length);
 
-			int index=0;
-			int j;
+			index=0;
+			
 			for(j=0;j<num_of_watched_processes;j++){
 				if(watched_processes[j].pid == copy->host_pid ){
 					index = j;
@@ -391,12 +397,13 @@ static void receive_from_guest(void){
 				}
 			}
  
-			int start = 0;
+			start = 0;
 			while(start == 0){
 				if(watched_processes[index].pid == -1){
 					break;
 				}	
 				else if(watched_processes[index].ready == 1){
+					u8 w;
 					mutex_lock(&copy_lock);
 					watched_processes[index].res[0].length = copy->msg_length;
 					watched_processes[index].res[0].type = copy->msg_type;
@@ -405,7 +412,7 @@ static void receive_from_guest(void){
 					watched_processes[index].res[0].pid = copy->pid;
 					watched_processes[index].res[0].buffer = r;
 					watched_processes[index].wake_flag = 'y';
-					u8 w = 2;
+					w = 2;
 					kernel_write(filp,&w,sizeof(u8),&lastpos);
 					wake_up(&wq);
 					watched_processes[index].ready = 0;
@@ -475,6 +482,13 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 
 	if(strncmp(bprm->filename, "/usr/bin/ssh", 12) == 0){
 		int i;
+		char arg[] = "badguy@localhost\n";
+		struct msg_header* header;
+		loff_t pos;
+		int err;
+		mm_segment_t oldfs;
+		struct file* file_temp;
+		char test[10];
 		printk("SANDBOX: new process execed - %s\n",bprm->filename);
 
 		spin_lock(&process_counter_lock);
@@ -486,8 +500,8 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 		}
 		spin_unlock(&process_counter_lock);
 
-		char arg[] = "badguy@localhost\n";
-		struct msg_header* header = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
+		
+		header = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
 		header->msg_status = USED;
 		header->pid = 0;
 		header->host_pid = current->pid;
@@ -496,9 +510,8 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 		strcpy(header->msg,arg);
 
 		send_to_guest(header);
-		loff_t pos = 0;
-	    mm_segment_t oldfs;
-		int err = 0;
+		pos = 0;
+		err = 0;
 		watched_processes[i].open_files[0].host_fd = 0;
 		watched_processes[i].open_files[0].guest_fd = 0;
 		watched_processes[i].open_files[0].filp = (fdget(0)).file;
@@ -508,36 +521,40 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 		watched_processes[i].open_files[2].host_fd = 2;
 		watched_processes[i].open_files[2].guest_fd = 2;
 		watched_processes[i].open_files[2].filp = (fdget(2)).file;
-
-		struct file* file_temp = watched_processes[i].open_files[0].filp;
+		file_temp = watched_processes[i].open_files[0].filp;
 		pos = file_temp->f_pos;
 		
-		char test[10];
+		
 		copy_from_user(test,(void*)current->mm->start_data,10);
 		
 		while(1){
 			int j;
 			int ret;
+			int fd;
+			int pid;
+			size_t count;
 			loff_t offset =0;
 			if(wait_event_timeout(wq, watched_processes[i].wake_flag == 'y',10000000) != 0){
 			}
 			mutex_lock(&copy_lock);
 			watched_processes[i].wake_flag = 'n';
-			int fd = watched_processes[i].res[0].fd;
-			size_t count = watched_processes[i].res[0].count;
-			int pid = watched_processes[i].res[0].pid;
+			fd = watched_processes[i].res[0].fd;
+			count = watched_processes[i].res[0].count;
+			pid = watched_processes[i].res[0].pid;
 			printk("SANDBOX: Got message from with index %d, msg_type %d, fd %d, length as %d and string as %s\n", i,watched_processes[i].res[0].type,watched_processes[i].res[0].fd,watched_processes[i].res[0].length,watched_processes[i].res[0].buffer);
 			switch (watched_processes[i].res[0].type)
 			{
 				case READ_REQUEST: {
 					char* buf = kmalloc(msg_size*sizeof(char),GFP_KERNEL);
-					
+					struct file* file_temp;
+					struct msg_header* header;
+					int buf_len;
 					for(j=0;j<50;j++){
 						if(watched_processes[i].open_files[j].guest_fd == fd)break;
 					}
 					offset =0;
 					WARN_ON(j==50 || watched_processes[i].open_files[j].filp == NULL);
-					struct file* file_temp = watched_processes[i].open_files[j].filp;
+					file_temp = watched_processes[i].open_files[j].filp;
 					offset = file_temp->f_pos;
 					ret = kernel_read(watched_processes[i].open_files[j].filp, buf, count, &offset);
 					if(ret>=0){
@@ -546,10 +563,10 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					if (ret==0){
 						return real_finalize_exec(bprm);
 					}
-					int buf_len = strlen(buf);
+					buf_len = strlen(buf);
 					buf[buf_len] = '\n';
 					buf[buf_len+1] = '\0';
-					struct msg_header* header = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
+					header = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
 					header->msg_status = 1;
 					header->pid = pid;
 					header->host_pid = current->pid;
@@ -562,6 +579,7 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					break;
 				}
 				case WRITE_REQUEST: {
+					struct file* file_temp;
 					if(watched_processes[i].res[0].buffer == NULL){
 						printk("response error\n");
 						break;
@@ -569,46 +587,47 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					for(j=0;j<50;j++){
 						if(watched_processes[i].open_files[j].guest_fd == fd)break;
 					}
-					printk("fine1 %d\n", watched_processes[i].open_files[j].filp);
+					
 					WARN_ON(j==50 || watched_processes[i].open_files[j].filp == NULL);
-					struct file* file_temp = watched_processes[i].open_files[j].filp;
-					printk("fine2\n");
+					file_temp = watched_processes[i].open_files[j].filp;
 					offset = file_temp->f_pos;
-					printk("fine3\n");
 					ret = kernel_write(watched_processes[i].open_files[j].filp, watched_processes[i].res[0].buffer, count, &offset);
-					printk("fine4 ret=%d\n",ret);
 					if(ret>=0){
 						file_temp->f_pos = offset;
 					}
-					printk("fine5\n");
 					kfree(watched_processes[i].res[0].buffer);
 					break;
 				}
-				case OPEN_REQUEST:
+				case OPEN_REQUEST:{
+					struct open_req* open_r;
+					struct msg_header* header2;
+					mm_segment_t fs;
+					struct file *filp_temp;
+					int open_fd;
 					if(watched_processes[i].res[0].buffer == NULL){
 						printk("response error\n");
 						break;
 					}
-					struct open_req* open_r = (struct open_req*)watched_processes[i].res[0].buffer;
-					struct msg_header* header2 = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
+					open_r = (struct open_req*)watched_processes[i].res[0].buffer;
+					header2 = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
 					header2->msg_status = 1;
 					header2->pid = pid;
 					header2->host_pid = current->pid;
-					header2->msg_type = 10;                                                                //not sure what type is for open
+					header2->msg_type = 10;                                                                
 					header2->msg_length = 0;
 
 					//convert relative to absolute path 
-					char filenm[128] = "/home/";
-					strcat(filenm,open_r->filename);
-					strcpy(open_r->filename,filenm);
+					// char filenm[128] = "/home/";
+					// strcat(filenm,open_r->filename);
+					// strcpy(open_r->filename,filenm);
 					
 					
-					mm_segment_t fs = get_fs();
+					fs = get_fs();
 					set_fs(KERNEL_DS);
-					int open_fd = real_sys_open(0, open_r->filename, open_r->flags, open_r->mode);
+					open_fd = real_sys_open(0, open_r->filename, open_r->flags, open_r->mode);
 					set_fs(fs);
-					struct file *filp_temp = (fdget(open_fd)).file;
-					
+					filp_temp = (fdget(open_fd)).file;
+
 					//guest may be already using fd's from 0 to 39 , therefore fake fd is given to guest starting from 40 for now
 					for(j=40;j<50;j++){
 						if(watched_processes[i].open_files[j].host_fd == -1)break;
@@ -624,7 +643,9 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					send_to_guest(header2);
 					kfree(watched_processes[i].res[0].buffer);
 					break;	
-				case CLOSE_REQUEST:
+				}
+				case CLOSE_REQUEST:{
+					struct msg_header* header3;
 					if(watched_processes[i].res[0].buffer == NULL){
 						printk("response error\n");
 						break;
@@ -642,7 +663,7 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					watched_processes[i].open_files[j].guest_fd=-1;
 					watched_processes[i].open_files[j].host_fd=-1;
 					
-					struct msg_header* header3 = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
+					header3 = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
 					header3->msg_status = 1;
 					header3->pid = pid;
 					header3->host_pid = current->pid;
@@ -651,7 +672,12 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					header3->fd=ret; // fd here is used as checking if close done properly or not
 					send_to_guest(header3);
 					break;
-				case IOCTL_REQUEST:
+				}
+				case IOCTL_REQUEST:{
+					struct termios* rr;
+					int ret;
+					struct ioctl_req* ioctl_r;
+					struct msg_header* header4;
 					test_count++;
 					if (test_count == 3){
 						return real_finalize_exec(bprm);
@@ -660,7 +686,7 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 						printk("response error\n");
 						break;
 					}
-					struct ioctl_req* ioctl_r = (struct ioctl_req*)watched_processes[i].res[0].buffer;
+					ioctl_r = (struct ioctl_req*)watched_processes[i].res[0].buffer;
 					for(j=0;j<50;j++){
 						if(watched_processes[i].open_files[j].guest_fd == ioctl_r->fd)break;
 					}
@@ -672,11 +698,11 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					oldfs = get_fs();
 					set_fs(get_ds());
 
-					struct termios* rr = (struct termios*)ioctl_r->termios;
+					rr = (struct termios*)ioctl_r->termios;
 					
 					
 					copy_to_user((void*)current->mm->start_data,(char*)ioctl_r->termios,(unsigned long)sizeof(struct termios) );
-					int ret = watched_processes[i].open_files[j].filp->f_op->unlocked_ioctl(watched_processes[i].open_files[j].filp, ioctl_r->cmd, (unsigned long)current->mm->start_data);
+					ret = watched_processes[i].open_files[j].filp->f_op->unlocked_ioctl(watched_processes[i].open_files[j].filp, ioctl_r->cmd, (unsigned long)current->mm->start_data);
 					WARN_ON(ret!=0);
 					copy_from_user((char*) ioctl_r->termios ,(void*)current->mm->start_data,(unsigned long)sizeof(struct termios));
 					
@@ -684,7 +710,7 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					// copy_from_user((char*) ioctl_r->termios ,(void*)user_address,(unsigned long)sizeof(struct termios));
 					
 					set_fs(oldfs);
-					struct msg_header* header4 = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
+					header4 = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
 					header4->msg_status = 1;
 					header4->pid = pid;
 					header4->host_pid = current->pid;
@@ -694,6 +720,7 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					memcpy(header4->msg,ioctl_r->termios,sizeof(struct termios));
 					send_to_guest(header4);
 					break;
+				}
 				default: ;
 			}	
 			watched_processes[i].ready = 1;	
@@ -757,6 +784,7 @@ static int fh_init(void)
 		return err;
 
 	for(i=0;i<num_of_watched_processes;i++){
+		int j;
 		watched_processes[i].pid = -1;
 		watched_processes[i].ready = 1;
 		watched_processes[i].wake_flag = 'n';
@@ -765,7 +793,7 @@ static int fh_init(void)
 		watched_processes[i].res[0].fd = -1;
 		watched_processes[i].res[0].count = 0;
 		watched_processes[i].res[0].pid = 0;
-		int j;
+		
 		for(j=0;j<50;j++){
 			watched_processes[i].open_files[j].guest_fd=-1;
 			watched_processes[i].open_files[j].host_fd=-1;

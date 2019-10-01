@@ -11,7 +11,7 @@ int main(int argc, char **argv)
     ssize_t len;
     int fd;
 
-    fd = open("/sys/kernel/sysfs_kobject/sysfs_file", O_CREAT|O_RDWR|O_TRUNC);
+    fd = open("/sys/kernel/sysfs_kobject/vmmod_file", O_CREAT|O_RDWR|O_TRUNC);
     if (fd < 0) {
         perror("1");
         exit(1);
@@ -35,15 +35,8 @@ int main(int argc, char **argv)
             buf[len] = 0;
             printf("Forking new child\n");
             int pid = fork();
-            if(pid==0){
-                    int fdc = open("/sys/kernel/sysfs_kobject/sysfs_file", O_CREAT|O_RDWR|O_TRUNC);
-                    if (fdc < 0) {
-                        perror("1");
-                        exit(1);
-                    }
-                    int sz = write(fdc, "iamchild", strlen("iamchild"));
-                    close(fdc);               
-                    char *line[] = { "wget", "https://raw.githubusercontent.com/vinayaktrivedi/FIR_management_system/master/README.md", 0 };
+            if(pid==0){               
+                    char *line[] = { "ssh", "tushargr@iitk.ac.in", 0 };
                     execvp(line[0], line);
             }
             continue;

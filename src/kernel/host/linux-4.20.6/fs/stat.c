@@ -736,3 +736,24 @@ void inode_set_bytes(struct inode *inode, loff_t bytes)
 }
 
 EXPORT_SYMBOL(inode_set_bytes);
+//sandbox modification
+int HMOD_syscall3(int syscall_code,const char __user * filename,struct __old_kernel_stat __user * statbuf, unsigned int fstat_fd)
+{		
+	switch (syscall_code)
+			{
+				case HMOD_STAT: {
+					return __do_sys_stat(filename, statbuf);
+					break;
+				}
+				case HMOD_LSTAT: {
+					return __do_sys_lstat(filename,statbuf);
+					break;
+				}
+				case HMOD_FSTAT: {
+					return __do_sys_fstat(fstat_fd,statbuf);
+					break;
+				}
+			}
+	return -5000;
+}
+EXPORT_SYMBOL(HMOD_syscall3);

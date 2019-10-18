@@ -1,56 +1,43 @@
-Secure OS 
-
-## A SandBox for SSH Client
-
-A Kernel module which causes SSH client to operate completely inside a Virtual Machine, but behave on User Side as if operating on host machine as usual. 
+## Installation Instructions
 
 
-### Instruction   
-start vm as follows:  
-sudo qemu-system-x86_64 -enable-kvm -m 4000 -boot c -hda ubuntu_guest.img -device e1000,netdev=net0 -netdev user,id=net0,hostfwd=tcp::5555-:22 -object memory-backend-file,size=1M,share,mem-path=/dev/shm/ivshmem,id=hostmem -device ivshmem-plain,memdev=hostmem     
+#### Creating Virtual Machine
+1. Download ubuntu server iso from official site.
+2. ```qemu-img create -f qcow2 ubuntu_guest.img 30G```   
+3. ```sudo qemu-system-x86_64 -m 4000 -hda ubuntu_guest.img -cdrom  ~/ubuntu_server.iso -boot d -enable-kvm```
+
+#### Creating shared ivshmem file
+1. ```dd if=/dev/zero of=/dev/shm/ivshmem count=1024 bs=1024```
+
+#### Starting virtual machine
+```sudo qemu-system-x86_64 -enable-kvm -m 4000 -boot c -hda ubuntu_guest.img -device e1000,netdev=net0 -netdev user,id=net0,hostfwd=tcp::5555-:22 -object memory-backend-file,size=1M,share,mem-path=/dev/shm/ivshmem,id=hostmem -device ivshmem-plain,memdev=hostmem```     
   
-ssh from host   
-ssh -p 5555 tushargr@127.0.0.1   
+#### SSH into the virtual machine
+```ssh -p 5555 tushargr@127.0.0.1```
 
-### PCI passthrough instructions     
-1. Unbinding any driver attached to the host device- (use lspci)   
-  echo -n 0000:03:00.1 | sudo tee -a /sys/bus/pci/devices/0000:03:00:1/driver/unbind  
+#### Installing linux kernel 4.20.6 in virtual machine
+1. Download linux kernel 4.20.6 and transfer to vm.
+2. Copy the files from ```src/kernel/guest/``` to the downloaded linux kernel on vm replacing original source code files.  
+2. Compile the kernel and reboot the vm.
 
-2. Can also remove driver from modules using-  
-    rmmod <device driver>      Eg: r8169  
-    or modprobe -rf <device driver>  
-    check using lspci -nnk,  
+#### Inserting NetSandBox module in host
+1. ```chdir modules/host/``` and ```make```
+2. ```sudo insmod host_module.ko```
 
-3. load vfio-pci module using  
-    modprobe vfio-pci  
+#### Inserting NetSandBox module in vm
+1. Transfer the ```guest``` dir present in  ```modules/``` to vm.
+2. ```chdir guest``` on vm.
+3. ```make```
+3. ```sudo insmod uio_module.ko```
+4. ```sudo insmod vm_module.ko```
 
-4.  go to cd /sys/bus/pci/drivers/vfio-pci/ and add unbinded devices  
-    echo "10ec 5287" | sudo tee -a new_id  
+#### Starting the Netsandbox agent on vm
+```sudo ./agent```
 
-5. Make sure to passthrough all devices in an iommu group.  
- 
-6. Add hardware <host device> from virt-manager ui.   
-    if running using qemu - sudo qemu-system-x86_64 -m 2048 -boot c -net none -hda ubuntu.img -device vfio-pci,host=03:00.0   
+#### Testing
+1. Run ```sudo ssh xyz``` on host.
 
-7. boot into VM and check ifconfig.   
-8. https://www.tecmint.com/configure-network-static-ip-address-in-ubuntu/  
-
-### args  
-LC_ALL=C PATH=/bin HOME=/home/vinayakt USER=vinayakt \   
-LOGNAME=vinayakt /usr/bin/qemu-system-x86_64 \   
--m 2048 -boot c -net none -hda /home/vinayakt/Desktop/6thSem/UGP/ubuntu.img -device   
-vfio-pci,host=03:00.0 \   
--object memory-backend-file,size=1M,share,mem-path=/dev/shm/ivshmem,id=hostmem \  
--device ivshmem-plain,memdev=hostmem  
-
-### Using chardevice for communication   
-
- sudo qemu-system-x86_64 -m 2048 -boot c -net none -hda ubuntu.img -device vfio-pci,host=03:00.1 -device virtio-serial -chardev socket,path=/tmp/foo,server,nowait,id=foo -device virtserialport,chardev=foo,name=org.fedoraproject.port.0   
-
- To send data from host to guest  
- socat /tmp/foo - on host and sudo cat /dev/vport0p1 on guest  
- 
- To send data from guest to host  
- sudo nc -U /tmp/foo on host and echo "hello" | sudo tee -a /dev/vport0p1   
+#### Debugging
+1. Check dmesg logs.
 
 

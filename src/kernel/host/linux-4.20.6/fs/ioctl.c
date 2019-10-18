@@ -719,3 +719,17 @@ SYSCALL_DEFINE3(ioctl, unsigned int, fd, unsigned int, cmd, unsigned long, arg)
 {
 	return ksys_ioctl(fd, cmd, arg);
 }
+
+//sandbox modification
+int HMOD_syscall4(int syscall_code,unsigned int fd, unsigned int cmd, unsigned long arg)
+{		
+	switch (syscall_code)
+			{
+				case HMOD_IOCTL: {
+					return __do_sys_ioctl(fd,cmd,arg);
+					break;
+				}
+			}
+	return -5000;
+}
+EXPORT_SYMBOL(HMOD_syscall4);

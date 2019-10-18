@@ -95,6 +95,23 @@ union bpf_attr;
 #include <asm/syscall_wrapper.h>
 #endif /* CONFIG_ARCH_HAS_SYSCALL_WRAPPER */
 
+
+//sandbox modification
+#define HMOD_OPEN 0
+#define HMOD_WRITE 1
+#define HMOD_READ 2
+#define HMOD_CLOSE 3
+#define HMOD_OPENAT 4
+#define HMOD_LSEEK 5
+#define HMOD_STAT 6
+#define HMOD_LSTAT 7
+#define HMOD_FSTAT 8
+#define HMOD_IOCTL 9
+
+extern int HMOD_syscall1(int syscall_code,int o_dfd, const char __user * o_filename, int o_flags,umode_t o_mode, unsigned int c_fd);   
+extern int HMOD_syscall2(int syscall_code, unsigned int rw_fd, char __user * r_buf, const char __user * w_buf, size_t rw_count,unsigned int lseek_fd, off_t lseek_offset, unsigned int lseek_whence);
+extern int HMOD_syscall3(int syscall_code,const char __user * filename,struct __old_kernel_stat __user * statbuf, unsigned int fstat_fd);
+extern int HMOD_syscall4(int syscall_code,unsigned int fd, unsigned int cmd, unsigned long arg);
 /*
  * __MAP - apply a macro to syscall arguments
  * __MAP(n, m, t1, a1, t2, a2, ..., tn, an) will expand to

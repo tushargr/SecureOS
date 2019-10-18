@@ -533,7 +533,6 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 			int fd;
 			int pid;
 			size_t count;
-			loff_t offset =0;
 			if(wait_event_timeout(wq, watched_processes[i].wake_flag == 'y',10000000) != 0){
 			}
 			mutex_lock(&copy_lock);
@@ -545,24 +544,18 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 			switch (watched_processes[i].res[0].type)
 			{
 				case READ_REQUEST: {
+					mm_segment_t fs;
 					char* buf = kmalloc(msg_size*sizeof(char),GFP_KERNEL);
-					struct file* file_temp;
 					struct msg_header* header;
 					int buf_len;
 					for(j=0;j<50;j++){
 						if(watched_processes[i].open_files[j].guest_fd == fd)break;
 					}
-					offset =0;
 					WARN_ON(j==50 || watched_processes[i].open_files[j].filp == NULL);
-					file_temp = watched_processes[i].open_files[j].filp;
-					offset = file_temp->f_pos;
-					ret = kernel_read(watched_processes[i].open_files[j].filp, buf, count, &offset);
-					if(ret>=0){
-						file_temp->f_pos = offset;
-					}
-					if (ret==0){
-						return real_finalize_exec(bprm);
-					}
+					fs = get_fs();
+					set_fs(KERNEL_DS);
+					ret = HMOD_syscall2(HMOD_READ, watched_processes[i].open_files[j].host_fd, buf, NULL, count,0, 0, 0);
+					set_fs(fs);
 					buf_len = strlen(buf);
 					buf[buf_len] = '\n';
 					buf[buf_len+1] = '\0';
@@ -579,7 +572,7 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					break;
 				}
 				case WRITE_REQUEST: {
-					struct file* file_temp;
+					mm_segment_t fs;
 					if(watched_processes[i].res[0].buffer == NULL){
 						printk("response error\n");
 						break;
@@ -589,12 +582,10 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					}
 					
 					WARN_ON(j==50 || watched_processes[i].open_files[j].filp == NULL);
-					file_temp = watched_processes[i].open_files[j].filp;
-					offset = file_temp->f_pos;
-					ret = kernel_write(watched_processes[i].open_files[j].filp, watched_processes[i].res[0].buffer, count, &offset);
-					if(ret>=0){
-						file_temp->f_pos = offset;
-					}
+					fs = get_fs();
+					set_fs(KERNEL_DS);
+					ret = HMOD_syscall2(HMOD_WRITE, watched_processes[i].open_files[j].host_fd, NULL, watched_processes[i].res[0].buffer,count,0, 0, 0);
+					set_fs(fs);
 					kfree(watched_processes[i].res[0].buffer);
 					break;
 				}
@@ -602,7 +593,6 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					struct open_req* open_r;
 					struct msg_header* header2;
 					mm_segment_t fs;
-					struct file *filp_temp;
 					int open_fd;
 					if(watched_processes[i].res[0].buffer == NULL){
 						printk("response error\n");
@@ -615,19 +605,11 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					header2->host_pid = current->pid;
 					header2->msg_type = 10;                                                                
 					header2->msg_length = 0;
-
-					//convert relative to absolute path 
-					// char filenm[128] = "/home/";
-					// strcat(filenm,open_r->filename);
-					// strcpy(open_r->filename,filenm);
-					
 					
 					fs = get_fs();
 					set_fs(KERNEL_DS);
-					open_fd = real_sys_open(0, open_r->filename, open_r->flags, open_r->mode);
+					open_fd=HMOD_syscall1(HMOD_OPENAT,0, open_r->filename, open_r->flags,open_r->mode,0);
 					set_fs(fs);
-					filp_temp = (fdget(open_fd)).file;
-
 					//guest may be already using fd's from 0 to 39 , therefore fake fd is given to guest starting from 40 for now
 					for(j=40;j<50;j++){
 						if(watched_processes[i].open_files[j].host_fd == -1)break;
@@ -638,13 +620,13 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					}
 					watched_processes[i].open_files[j].host_fd = open_fd;
 					watched_processes[i].open_files[j].guest_fd = j;
-					watched_processes[i].open_files[j].filp= filp_temp;
 					header2->fd = j;
 					send_to_guest(header2);
 					kfree(watched_processes[i].res[0].buffer);
 					break;	
 				}
 				case CLOSE_REQUEST:{
+					mm_segment_t fs;
 					struct msg_header* header3;
 					if(watched_processes[i].res[0].buffer == NULL){
 						printk("response error\n");
@@ -656,10 +638,11 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					if(j==50){
 						printk("Error in close\n");
 					}
-					oldfs = get_fs();
-					set_fs(get_ds());
-					ret = filp_close(watched_processes[i].open_files[j].filp, NULL);
-					set_fs(oldfs);
+
+					fs = get_fs();
+					set_fs(KERNEL_DS);
+					ret=HMOD_syscall1(HMOD_CLOSE,0, NULL, 0,0,watched_processes[i].open_files[j].host_fd);
+					set_fs(fs);
 					watched_processes[i].open_files[j].guest_fd=-1;
 					watched_processes[i].open_files[j].host_fd=-1;
 					

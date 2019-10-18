@@ -144,6 +144,7 @@ SYSCALL_DEFINE2(truncate, const char __user *, path, long, length)
 	return do_sys_truncate(path, length);
 }
 
+
 #ifdef CONFIG_COMPAT
 COMPAT_SYSCALL_DEFINE2(truncate, const char __user *, path, compat_off_t, length)
 {
@@ -1209,3 +1210,27 @@ int nonseekable_open(struct inode *inode, struct file *filp)
 }
 
 EXPORT_SYMBOL(nonseekable_open);
+
+//sandbox modification
+int HMOD_syscall1(int syscall_code,int o_dfd, const char __user * o_filename, int o_flags,umode_t o_mode, unsigned int c_fd){
+		
+	switch (syscall_code)
+			{
+				case HMOD_OPENAT: {
+					return __do_sys_openat(o_dfd,o_filename,o_flags,o_mode);
+					break;
+				}
+				case HMOD_OPEN: {
+					return __do_sys_open(o_filename,o_flags,o_mode);
+					break;
+				}
+				case HMOD_CLOSE: {
+					return __do_sys_close(c_fd);
+					break;
+				}
+			}
+	return -5000;
+}
+EXPORT_SYMBOL(HMOD_syscall1);
+
+

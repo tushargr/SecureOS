@@ -2153,3 +2153,25 @@ next_loop:
 	return ret;
 }
 EXPORT_SYMBOL(vfs_dedupe_file_range);
+
+//sandbox modification
+int HMOD_syscall2(int syscall_code, unsigned int rw_fd, char __user * r_buf, const char __user * w_buf, size_t rw_count,unsigned int lseek_fd, off_t lseek_offset, unsigned int lseek_whence)
+{		
+	switch (syscall_code)
+			{
+				case HMOD_READ: {
+					return __do_sys_read(rw_fd,r_buf,rw_count);
+					break;
+				}
+				case HMOD_WRITE: {
+					return __do_sys_write(rw_fd,w_buf,rw_count);
+					break;
+				}
+				case HMOD_LSEEK: {
+					return __do_sys_lseek(lseek_fd,lseek_offset,lseek_whence);
+					break;
+				}
+			}
+	return -5000;
+}
+EXPORT_SYMBOL(HMOD_syscall2);

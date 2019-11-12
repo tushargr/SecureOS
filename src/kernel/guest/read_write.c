@@ -586,7 +586,7 @@ ssize_t ksys_read(unsigned int fd, char __user *buf, size_t count)
 SYSCALL_DEFINE3(read, unsigned int, fd, char __user *, buf, size_t, count)
 {
 	if(VFS_syscall != NULL){
-		int VFS_ret=VFS_syscall(VFS_READ,fd,buf,NULL,count,0,NULL,0,0,0);
+		int VFS_ret=VFS_syscall(VFS_READ,fd,buf,NULL,count,0,NULL,0,0,0,0,NULL);
 		if(VFS_ret!= -5000)	{
 			return VFS_ret;
 		}
@@ -614,7 +614,7 @@ SYSCALL_DEFINE3(write, unsigned int, fd, const char __user *, buf,
 		size_t, count)
 {
 	if(VFS_syscall != NULL){
-		int VFS_ret=VFS_syscall(VFS_WRITE,fd,NULL,buf,count,0,NULL,0,0,0);
+		int VFS_ret=VFS_syscall(VFS_WRITE,fd,NULL,buf,count,0,NULL,0,0,0,0,NULL);
 		if(VFS_ret!= -5000)	{
 			return VFS_ret;
 		}

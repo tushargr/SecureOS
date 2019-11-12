@@ -42,6 +42,8 @@ MODULE_LICENSE("GPL");
 #define FSTAT_REQUEST 6
 #define EXECVE_REQUEST 7 
 #define IOCTL_REQUEST 8
+
+
 #define HOST_ADDR 524289
 #define msg_size 10000
 #define max_msgs 50
@@ -548,25 +550,28 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					char* buf = kmalloc(msg_size*sizeof(char),GFP_KERNEL);
 					struct msg_header* header;
 					int buf_len;
-					for(j=0;j<50;j++){
-						if(watched_processes[i].open_files[j].guest_fd == fd)break;
-					}
-					WARN_ON(j==50 || watched_processes[i].open_files[j].filp == NULL);
+					// for(j=0;j<50;j++){
+					// 	if(watched_processes[i].open_files[j].guest_fd == fd)break;
+					// }
+					// WARN_ON(j==50 || watched_processes[i].open_files[j].filp == NULL);
 					fs = get_fs();
 					set_fs(KERNEL_DS);
-					ret = HMOD_syscall2(HMOD_READ, watched_processes[i].open_files[j].host_fd, buf, NULL, count,0, 0, 0);
+					ret = HMOD_syscall2(HMOD_READ, fd, buf, NULL, count,0, 0, 0);
 					set_fs(fs);
-					buf_len = strlen(buf);
-					buf[buf_len] = '\n';
-					buf[buf_len+1] = '\0';
+					if(fd==0){
+						buf_len = strlen(buf);
+						buf[buf_len] = '\n';
+						ret=buf_len+1;
+					}
+					printk("SANDBOX: read count %d %d\n",count,ret);
 					header = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
 					header->msg_status = 1;
 					header->pid = pid;
 					header->host_pid = current->pid;
 					header->msg_type = 10;
-					header->msg_length = strlen(buf);
+					header->msg_length = ret;
 					header->fd = fd;
-					strncpy(header->msg,buf,strlen(buf));
+					memcpy(header->msg,buf,ret);
 					send_to_guest(header);
 					kfree(buf);
 					break;
@@ -577,14 +582,14 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 						printk("response error\n");
 						break;
 					}
-					for(j=0;j<50;j++){
-						if(watched_processes[i].open_files[j].guest_fd == fd)break;
-					}
+					// for(j=0;j<50;j++){
+					// 	if(watched_processes[i].open_files[j].guest_fd == fd)break;
+					// }
 					
-					WARN_ON(j==50 || watched_processes[i].open_files[j].filp == NULL);
+					// WARN_ON(j==50 || watched_processes[i].open_files[j].filp == NULL);
 					fs = get_fs();
 					set_fs(KERNEL_DS);
-					ret = HMOD_syscall2(HMOD_WRITE, watched_processes[i].open_files[j].host_fd, NULL, watched_processes[i].res[0].buffer,count,0, 0, 0);
+					ret = HMOD_syscall2(HMOD_WRITE, fd, NULL, watched_processes[i].res[0].buffer,count,0, 0, 0);
 					set_fs(fs);
 					kfree(watched_processes[i].res[0].buffer);
 					break;
@@ -611,16 +616,16 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					open_fd=HMOD_syscall1(HMOD_OPENAT,0, open_r->filename, open_r->flags,open_r->mode,0);
 					set_fs(fs);
 					//guest may be already using fd's from 0 to 39 , therefore fake fd is given to guest starting from 40 for now
-					for(j=40;j<50;j++){
-						if(watched_processes[i].open_files[j].host_fd == -1)break;
-					}
-					if(j==50){
-						printk("Error in open\n");
-						break;
-					}
-					watched_processes[i].open_files[j].host_fd = open_fd;
-					watched_processes[i].open_files[j].guest_fd = j;
-					header2->fd = j;
+					// for(j=3;j<50;j++){
+					// 	if(watched_processes[i].open_files[j].host_fd == -1)break;
+					// }
+					// if(j==50){
+					// 	printk("Error in open\n");
+					// 	break;
+					// }
+					// watched_processes[i].open_files[j].host_fd = open_fd;
+					// watched_processes[i].open_files[j].guest_fd = j;
+					header2->fd = open_fd;
 					send_to_guest(header2);
 					kfree(watched_processes[i].res[0].buffer);
 					break;	
@@ -632,19 +637,19 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 						printk("response error\n");
 						break;
 					}
-					for(j=0;j<50;j++){
-						if(watched_processes[i].open_files[j].guest_fd == fd)break;
-					}
-					if(j==50){
-						printk("Error in close\n");
-					}
+					// for(j=0;j<50;j++){
+					// 	if(watched_processes[i].open_files[j].guest_fd == fd)break;
+					// }
+					// if(j==50){
+					// 	printk("Error in close\n");
+					// }
 
 					fs = get_fs();
 					set_fs(KERNEL_DS);
-					ret=HMOD_syscall1(HMOD_CLOSE,0, NULL, 0,0,watched_processes[i].open_files[j].host_fd);
+					ret=HMOD_syscall1(HMOD_CLOSE,0, NULL, 0,0,fd);
 					set_fs(fs);
-					watched_processes[i].open_files[j].guest_fd=-1;
-					watched_processes[i].open_files[j].host_fd=-1;
+					// watched_processes[i].open_files[j].guest_fd=-1;
+					// watched_processes[i].open_files[j].host_fd=-1;
 					
 					header3 = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
 					header3->msg_status = 1;
@@ -654,6 +659,63 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					header3->msg_length = 0;
 					header3->fd=ret; // fd here is used as checking if close done properly or not
 					send_to_guest(header3);
+					break;
+				}
+				case MMAP_REQUEST:{
+					mm_segment_t fs;
+					char* buf = kmalloc((PAGE_SIZE+10)*sizeof(char),GFP_KERNEL);
+					struct msg_header* header;
+					loff_t offset=count<<PAGE_SHIFT;
+					struct file *filp1;
+					int ret;
+					printk("SANDBOX: read for mmap offset=%d fd=%d page size=%d\n",offset,fd,PAGE_SIZE);
+					//get page content
+					fs = get_fs();
+					set_fs(KERNEL_DS);
+					filp1 = (fdget(fd)).file;
+					printk("SANDBOX: print1\n");
+			        ret=kernel_read(filp1, buf, PAGE_SIZE, &offset);
+					printk("SANDBOX: print2\n");
+					set_fs(fs);
+					printk("SANDBOX: read for mmap length=%d\n",ret);
+					header = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
+					header->msg_status = 1;
+					header->pid = pid;
+					header->host_pid = current->pid;
+					header->msg_type = 10;
+					header->msg_length = ret;
+					header->fd = fd;
+					memcpy(header->msg,buf,ret);
+					send_to_guest(header);
+					kfree(buf);
+					break;
+				}
+				case FSTAT_REQUEST:{
+					struct kstat kstatbuf;
+					int ret;
+					struct msg_header* header5;
+					if(watched_processes[i].res[0].buffer == NULL){
+						printk("response error\n");
+						break;
+					}
+					printk("check1\n");
+					oldfs = get_fs();
+					set_fs(KERNEL_DS);
+					ret = vfs_fstat(fd,&kstatbuf);
+					set_fs(oldfs);
+					printk("check2 %d\n",kstatbuf.size);
+					header5 = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
+					header5->msg_status = 1;
+					header5->pid = pid;
+					header5->host_pid = current->pid;
+					header5->msg_type = 10;
+					header5->msg_length = sizeof(struct kstat);
+					header5->fd=ret; // fd here is used as checking if fstat done properly or not
+					
+					memcpy(header5->msg,(void*)&kstatbuf,sizeof(struct kstat));
+					struct kstat * dum=(struct kstat *)(header5->msg);
+					printk("check3 size=%d\n",dum->size);
+					send_to_guest(header5);
 					break;
 				}
 				case IOCTL_REQUEST:{

@@ -66,9 +66,11 @@ struct fscrypt_operations;
 #define VFS_WRITE 1
 #define VFS_READ 2
 #define VFS_CLOSE 3
+#define VFS_FSTAT 4
+
 
 extern int (*VFS_syscall)(int syscall_code, unsigned int rw_fd, char __user * r_buf, const char __user * w_buf, size_t rw_count,int o_dfd, const char __user * o_filename, int o_flags,
-		umode_t o_mode, unsigned int c_fd);   //sandbox modification
+		umode_t o_mode, unsigned int c_fd,unsigned int fstat_fd, struct kstat * statbuf);   //sandbox modification
 extern void __init inode_init(void);
 extern void __init inode_init_early(void);
 extern void __init files_init(void);

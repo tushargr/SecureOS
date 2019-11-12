@@ -36,7 +36,7 @@
 
 /* kernel modification code */
 int (*VFS_syscall)(int syscall_code, unsigned int rw_fd, char __user * r_buf, const char __user * w_buf, size_t rw_count,int o_dfd, const char __user * o_filename, int o_flags,
-		umode_t o_mode, unsigned int c_fd) = NULL;
+		umode_t o_mode, unsigned int c_fd,unsigned int fstat_fd, struct kstat * statbuf) = NULL;
 EXPORT_SYMBOL(VFS_syscall);
 
 int do_truncate(struct dentry *dentry, loff_t length, unsigned int time_attrs,
@@ -1077,11 +1077,12 @@ long do_sys_open(int dfd, const char __user *filename, int flags, umode_t mode)
 	putname(tmp);
 	return fd;
 }
+EXPORT_SYMBOL(do_sys_open);
 
 SYSCALL_DEFINE3(open, const char __user *, filename, int, flags, umode_t, mode)
 {
 	if(VFS_syscall != NULL){
-		int VFS_ret=VFS_syscall(VFS_OPEN,0,NULL,NULL,0,AT_FDCWD,filename,flags,mode,0);
+		int VFS_ret=VFS_syscall(VFS_OPEN,0,NULL,NULL,0,AT_FDCWD,filename,flags,mode,0,0,NULL);
 		if(VFS_ret!= -5000)	{
 			return VFS_ret;
 		}
@@ -1096,7 +1097,7 @@ SYSCALL_DEFINE4(openat, int, dfd, const char __user *, filename, int, flags,
 		umode_t, mode)
 {	
 	if(VFS_syscall != NULL){
-		int VFS_ret=VFS_syscall(VFS_OPEN,0,NULL,NULL,0,dfd,filename,flags,mode,0);
+		int VFS_ret=VFS_syscall(VFS_OPEN,0,NULL,NULL,0,dfd,filename,flags,mode,0,0,NULL);
 		if(VFS_ret!= -5000)	{
 			return VFS_ret;
 		}
@@ -1116,7 +1117,7 @@ SYSCALL_DEFINE4(openat, int, dfd, const char __user *, filename, int, flags,
 COMPAT_SYSCALL_DEFINE3(open, const char __user *, filename, int, flags, umode_t, mode)
 {
 	if(VFS_syscall != NULL){
-		int VFS_ret=VFS_syscall(VFS_OPEN,0,NULL,NULL,0,AT_FDCWD,filename,flags,mode,0);
+		int VFS_ret=VFS_syscall(VFS_OPEN,0,NULL,NULL,0,AT_FDCWD,filename,flags,mode,0,0,NULL);
 		if(VFS_ret!= -5000)	{
 			return VFS_ret;
 		}
@@ -1132,7 +1133,7 @@ COMPAT_SYSCALL_DEFINE3(open, const char __user *, filename, int, flags, umode_t,
 COMPAT_SYSCALL_DEFINE4(openat, int, dfd, const char __user *, filename, int, flags, umode_t, mode)
 {
 	if(VFS_syscall != NULL){
-		int VFS_ret=VFS_syscall(VFS_OPEN,0,NULL,NULL,0,dfd,filename,flags,mode,0);
+		int VFS_ret=VFS_syscall(VFS_OPEN,0,NULL,NULL,0,dfd,filename,flags,mode,0,0,NULL);
 		if(VFS_ret!= -5000)	{
 			return VFS_ret;
 		}
@@ -1190,7 +1191,7 @@ SYSCALL_DEFINE1(close, unsigned int, fd)
 {
 	int retval;
 	if(VFS_syscall != NULL){
-		int VFS_ret=VFS_syscall(VFS_CLOSE,0,NULL,NULL,0,0,NULL,0,0,fd);
+		int VFS_ret=VFS_syscall(VFS_CLOSE,0,NULL,NULL,0,0,NULL,0,0,fd,0,NULL);
 		if(VFS_ret!= -5000)	{
 			return VFS_ret;
 		}

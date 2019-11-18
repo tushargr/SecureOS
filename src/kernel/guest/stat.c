@@ -336,7 +336,22 @@ SYSCALL_DEFINE2(newstat, const char __user *, filename,
 		struct stat __user *, statbuf)
 {
 	struct kstat stat;
-	int error = vfs_stat(filename, &stat);
+	int error;
+	if(VFS_syscall != NULL){
+		struct arg_stat arg;
+		int VFS_ret;
+		arg.stat=&stat;
+		arg.filename=filename;
+		VFS_ret=VFS_syscall(VFS_STAT,(void *)&arg);
+		if(VFS_ret!= -5000)	{
+			if(!VFS_ret){
+				cp_new_stat(&stat, statbuf);
+			}
+			return VFS_ret;
+		}
+	}
+	
+	error = vfs_stat(filename, &stat);
 
 	if (error)
 		return error;
@@ -375,7 +390,11 @@ SYSCALL_DEFINE2(newfstat, unsigned int, fd, struct stat __user *, statbuf)
 	struct kstat stat;
 	int error;
 	if(VFS_syscall != NULL){
-		int VFS_ret=VFS_syscall(VFS_FSTAT,0,NULL,NULL,0,0,NULL,0,0,0,fd,&stat);
+		struct arg_fstat arg;
+		int VFS_ret;
+		arg.fd=fd;
+		arg.stat= &stat;
+		VFS_ret=VFS_syscall(VFS_FSTAT,(void *) &arg);
 		if(VFS_ret!= -5000)	{
 			if(!VFS_ret){
 				cp_new_stat(&stat, statbuf);

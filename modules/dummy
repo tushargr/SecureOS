@@ -1,0 +1,1028 @@
+execve("/usr/bin/wget", ["wget", "https://nptel.ac.in/course.html"], 0x7ffdf1c303e8 /* 78 vars */) = 0
+brk(NULL)                               = 0x55bf9b992000
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/haswell/x86_64/libpcre.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/haswell/libpcre.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/x86_64/libpcre.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/libpcre.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/x86_64/libpcre.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/libpcre.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "x86_64/libpcre.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "libpcre.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/cuda-8.0/lib64/tls/haswell/x86_64/libpcre.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat("/usr/local/cuda-8.0/lib64/tls/haswell/x86_64", 0x7ffefc971210) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/cuda-8.0/lib64/tls/haswell/libpcre.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat("/usr/local/cuda-8.0/lib64/tls/haswell", 0x7ffefc971210) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/cuda-8.0/lib64/tls/x86_64/libpcre.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat("/usr/local/cuda-8.0/lib64/tls/x86_64", 0x7ffefc971210) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/cuda-8.0/lib64/tls/libpcre.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat("/usr/local/cuda-8.0/lib64/tls", 0x7ffefc971210) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/cuda-8.0/lib64/haswell/x86_64/libpcre.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat("/usr/local/cuda-8.0/lib64/haswell/x86_64", 0x7ffefc971210) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/cuda-8.0/lib64/haswell/libpcre.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat("/usr/local/cuda-8.0/lib64/haswell", 0x7ffefc971210) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/cuda-8.0/lib64/x86_64/libpcre.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat("/usr/local/cuda-8.0/lib64/x86_64", 0x7ffefc971210) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/cuda-8.0/lib64/libpcre.so.3", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat("/usr/local/cuda-8.0/lib64", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=256841, ...}) = 0
+mmap(NULL, 256841, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f4f4e225000
+close(3)                                = 0
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpcre.so.3", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0 \25\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=464824, ...}) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f4f4e223000
+mmap(NULL, 2560264, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4f4ddcb000
+mprotect(0x7f4f4de3b000, 2097152, PROT_NONE) = 0
+mmap(0x7f4f4e03b000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x70000) = 0x7f4f4e03b000
+close(3)                                = 0
+openat(AT_FDCWD, "tls/haswell/x86_64/libuuid.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/haswell/libuuid.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/x86_64/libuuid.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/libuuid.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/x86_64/libuuid.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/libuuid.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "x86_64/libuuid.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "libuuid.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/cuda-8.0/lib64/libuuid.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libuuid.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0@\26\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=27112, ...}) = 0
+mmap(NULL, 2122112, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4f4dbc4000
+mprotect(0x7f4f4dbca000, 2093056, PROT_NONE) = 0
+mmap(0x7f4f4ddc9000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x5000) = 0x7f4f4ddc9000
+close(3)                                = 0
+openat(AT_FDCWD, "tls/haswell/x86_64/libidn2.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/haswell/libidn2.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/x86_64/libidn2.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/libidn2.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/x86_64/libidn2.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/libidn2.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "x86_64/libidn2.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "libidn2.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/cuda-8.0/lib64/libidn2.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libidn2.so.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0@\25\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=116656, ...}) = 0
+mmap(NULL, 2211864, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4f4d9a7000
+mprotect(0x7f4f4d9c3000, 2093056, PROT_NONE) = 0
+mmap(0x7f4f4dbc2000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1b000) = 0x7f4f4dbc2000
+close(3)                                = 0
+openat(AT_FDCWD, "tls/haswell/x86_64/libssl.so.1.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/haswell/libssl.so.1.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/x86_64/libssl.so.1.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/libssl.so.1.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/x86_64/libssl.so.1.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/libssl.so.1.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "x86_64/libssl.so.1.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "libssl.so.1.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/cuda-8.0/lib64/libssl.so.1.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libssl.so.1.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\240w\1\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=433760, ...}) = 0
+mmap(NULL, 2529304, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4f4d73d000
+mprotect(0x7f4f4d79d000, 2097152, PROT_NONE) = 0
+mmap(0x7f4f4d99d000, 40960, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x60000) = 0x7f4f4d99d000
+close(3)                                = 0
+openat(AT_FDCWD, "tls/haswell/x86_64/libcrypto.so.1.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/haswell/libcrypto.so.1.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/x86_64/libcrypto.so.1.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/libcrypto.so.1.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/x86_64/libcrypto.so.1.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/libcrypto.so.1.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "x86_64/libcrypto.so.1.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "libcrypto.so.1.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/cuda-8.0/lib64/libcrypto.so.1.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libcrypto.so.1.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\0\220\6\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=2575848, ...}) = 0
+mmap(NULL, 4685184, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4f4d2c5000
+mprotect(0x7f4f4d512000, 2097152, PROT_NONE) = 0
+mmap(0x7f4f4d712000, 163840, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x24d000) = 0x7f4f4d712000
+mmap(0x7f4f4d73a000, 11648, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f4f4d73a000
+close(3)                                = 0
+openat(AT_FDCWD, "tls/haswell/x86_64/libpsl.so.5", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/haswell/libpsl.so.5", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/x86_64/libpsl.so.5", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/libpsl.so.5", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/x86_64/libpsl.so.5", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/libpsl.so.5", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "x86_64/libpsl.so.5", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "libpsl.so.5", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/cuda-8.0/lib64/libpsl.so.5", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libpsl.so.5", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0P\22\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=55136, ...}) = 0
+mmap(NULL, 2150504, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4f4d0b7000
+mprotect(0x7f4f4d0c4000, 2093056, PROT_NONE) = 0
+mmap(0x7f4f4d2c3000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xc000) = 0x7f4f4d2c3000
+close(3)                                = 0
+openat(AT_FDCWD, "tls/haswell/x86_64/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/haswell/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/x86_64/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/x86_64/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "x86_64/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/cuda-8.0/lib64/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\260\34\2\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=2030544, ...}) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f4f4e221000
+mmap(NULL, 4131552, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4f4ccc6000
+mprotect(0x7f4f4cead000, 2097152, PROT_NONE) = 0
+mmap(0x7f4f4d0ad000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f4f4d0ad000
+mmap(0x7f4f4d0b3000, 15072, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f4f4d0b3000
+close(3)                                = 0
+openat(AT_FDCWD, "tls/haswell/x86_64/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/haswell/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/x86_64/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/x86_64/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "x86_64/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/cuda-8.0/lib64/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpthread.so.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0000b\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=144976, ...}) = 0
+mmap(NULL, 2221184, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4f4caa7000
+mprotect(0x7f4f4cac1000, 2093056, PROT_NONE) = 0
+mmap(0x7f4f4ccc0000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19000) = 0x7f4f4ccc0000
+mmap(0x7f4f4ccc2000, 13440, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f4f4ccc2000
+close(3)                                = 0
+openat(AT_FDCWD, "tls/haswell/x86_64/libunistring.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/haswell/libunistring.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/x86_64/libunistring.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/libunistring.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/x86_64/libunistring.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/libunistring.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "x86_64/libunistring.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "libunistring.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/cuda-8.0/lib64/libunistring.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libunistring.so.2", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\200\365\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=1562664, ...}) = 0
+mmap(NULL, 3660040, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4f4c729000
+mprotect(0x7f4f4c8a3000, 2097152, PROT_NONE) = 0
+mmap(0x7f4f4caa3000, 16384, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x17a000) = 0x7f4f4caa3000
+close(3)                                = 0
+openat(AT_FDCWD, "tls/haswell/x86_64/libdl.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/haswell/libdl.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/x86_64/libdl.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/libdl.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/x86_64/libdl.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/libdl.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "x86_64/libdl.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "libdl.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/cuda-8.0/lib64/libdl.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdl.so.2", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0P\16\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=14560, ...}) = 0
+mmap(NULL, 2109712, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4f4c525000
+mprotect(0x7f4f4c528000, 2093056, PROT_NONE) = 0
+mmap(0x7f4f4c727000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7f4f4c727000
+close(3)                                = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f4f4e21f000
+arch_prctl(ARCH_SET_FS, 0x7f4f4e2202c0) = 0
+mprotect(0x7f4f4d0ad000, 16384, PROT_READ) = 0
+mprotect(0x7f4f4c727000, 4096, PROT_READ) = 0
+mprotect(0x7f4f4caa3000, 12288, PROT_READ) = 0
+mprotect(0x7f4f4ccc0000, 4096, PROT_READ) = 0
+mprotect(0x7f4f4dbc2000, 4096, PROT_READ) = 0
+mprotect(0x7f4f4d2c3000, 4096, PROT_READ) = 0
+mprotect(0x7f4f4d712000, 122880, PROT_READ) = 0
+mprotect(0x7f4f4d99d000, 16384, PROT_READ) = 0
+mprotect(0x7f4f4ddc9000, 4096, PROT_READ) = 0
+mprotect(0x7f4f4e03b000, 4096, PROT_READ) = 0
+mprotect(0x55bf9b63a000, 16384, PROT_READ) = 0
+mprotect(0x7f4f4e264000, 4096, PROT_READ) = 0
+munmap(0x7f4f4e225000, 256841)          = 0
+set_tid_address(0x7f4f4e220590)         = 28496
+set_robust_list(0x7f4f4e2205a0, 24)     = 0
+rt_sigaction(SIGRTMIN, {sa_handler=0x7f4f4caaccb0, sa_mask=[], sa_flags=SA_RESTORER|SA_SIGINFO, sa_restorer=0x7f4f4cab9890}, NULL, 8) = 0
+rt_sigaction(SIGRT_1, {sa_handler=0x7f4f4caacd50, sa_mask=[], sa_flags=SA_RESTORER|SA_RESTART|SA_SIGINFO, sa_restorer=0x7f4f4cab9890}, NULL, 8) = 0
+rt_sigprocmask(SIG_UNBLOCK, [RTMIN RT_1], NULL, 8) = 0
+prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
+brk(NULL)                               = 0x55bf9b992000
+brk(0x55bf9b9b3000)                     = 0x55bf9b9b3000
+clock_getres(CLOCK_MONOTONIC, {tv_sec=0, tv_nsec=1}) = 0
+clock_getres(CLOCK_MONOTONIC, {tv_sec=0, tv_nsec=1}) = 0
+openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=3004096, ...}) = 0
+mmap(NULL, 3004096, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f4f4c247000
+close(3)                                = 0
+stat("/etc/wgetrc", {st_mode=S_IFREG|0644, st_size=4942, ...}) = 0
+getuid()                                = 1000
+getgroups(65536, [4, 24, 27, 30, 46, 113, 128, 133, 133, 1000]) = 10
+openat(AT_FDCWD, "/etc/wgetrc", O_RDONLY) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=4942, ...}) = 0
+fstat(3, {st_mode=S_IFREG|0644, st_size=4942, ...}) = 0
+read(3, "###\n### Sample Wget initializati"..., 4096) = 4096
+read(3, "ruct = off\n\n# You can turn on re"..., 4096) = 846
+read(3, "", 4096)                       = 0
+close(3)                                = 0
+stat("/home/tushar/.wgetrc", 0x7ffefc971910) = -1 ENOENT (No such file or directory)
+ioctl(2, TCGETS, {B38400 opost isig icanon echo ...}) = 0
+ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0
+ioctl(2, TCGETS, {B38400 opost isig icanon echo ...}) = 0
+rt_sigaction(SIGHUP, {sa_handler=SIG_IGN, sa_mask=[HUP], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+rt_sigaction(SIGHUP, {sa_handler=0x55bf9b3f55d0, sa_mask=[HUP], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_IGN, sa_mask=[HUP], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+rt_sigaction(SIGUSR1, {sa_handler=0x55bf9b3f55d0, sa_mask=[USR1], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+rt_sigaction(SIGPIPE, {sa_handler=SIG_IGN, sa_mask=[PIPE], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+rt_sigaction(SIGWINCH, {sa_handler=0x55bf9b3f7300, sa_mask=[WINCH], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+stat("/home/tushar/.wget-hsts", {st_mode=S_IFREG|0664, st_size=543, ...}) = 0
+getuid()                                = 1000
+stat("/home/tushar/.wget-hsts", {st_mode=S_IFREG|0664, st_size=543, ...}) = 0
+openat(AT_FDCWD, "/home/tushar/.wget-hsts", O_RDONLY) = 3
+fstat(3, {st_mode=S_IFREG|0664, st_size=543, ...}) = 0
+fstat(3, {st_mode=S_IFREG|0664, st_size=543, ...}) = 0
+read(3, "# HSTS 1.0 Known Hosts database "..., 4096) = 543
+read(3, "", 4096)                       = 0
+fstat(3, {st_mode=S_IFREG|0664, st_size=543, ...}) = 0
+close(3)                                = 0
+openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache", O_RDONLY) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=26376, ...}) = 0
+mmap(NULL, 26376, PROT_READ, MAP_SHARED, 3, 0) = 0x7f4f4e25d000
+close(3)                                = 0
+futex(0x7f4f4d0b2a08, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+statfs(".", {f_type=EXT2_SUPER_MAGIC, f_bsize=4096, f_blocks=73797356, f_bfree=50488730, f_bavail=46734260, f_files=18759680, f_ffree=17847718, f_fsid={val=[3891751282, 3190609134]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_RELATIME}) = 0
+stat("course.html", 0x7ffefc971440)     = -1 ENOENT (No such file or directory)
+stat("course.html", 0x7ffefc971550)     = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/localtime", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=312, ...}) = 0
+fstat(3, {st_mode=S_IFREG|0644, st_size=312, ...}) = 0
+read(3, "TZif2\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\4\0\0\0\4\0\0\0\0"..., 4096) = 312
+lseek(3, -188, SEEK_CUR)                = 124
+read(3, "TZif2\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\5\0\0\0\5\0\0\0\0"..., 4096) = 188
+close(3)                                = 0
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+write(2, "--2019-11-18 14:37:12--  https:/"..., 57--2019-11-18 14:37:12--  https://nptel.ac.in/course.html
+) = 57
+futex(0x7f4f4d73b278, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+futex(0x7f4f4d7396ec, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+futex(0x7f4f4d73b124, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+futex(0x7f4f4d73b0bc, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+futex(0x7f4f4d73b0b0, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=2995, ...}) = 0
+read(3, "# Locale name alias data base.\n#"..., 4096) = 2995
+read(3, "", 4096)                       = 0
+close(3)                                = 0
+openat(AT_FDCWD, "/usr/share/locale/en_IN/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/share/locale-langpack/en_IN/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+futex(0x7f4f4d73b26c, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+futex(0x7f4f4d73b21c, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+futex(0x7f4f4d73b214, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+openat(AT_FDCWD, "/usr/lib/ssl/openssl.cnf", O_RDONLY) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=10771, ...}) = 0
+read(3, "#\n# OpenSSL example configuratio"..., 4096) = 4096
+read(3, "ape crash on BMPStrings or UTF8S"..., 4096) = 4096
+read(3, " is omitted\n# the certificate ca"..., 4096) = 2579
+read(3, "", 4096)                       = 0
+close(3)                                = 0
+futex(0x7f4f4d73b248, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+futex(0x7f4f4d73b82c, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+futex(0x7f4f4d73b394, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+futex(0x7f4f4d73b230, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+getpid()                                = 28496
+openat(AT_FDCWD, "/dev/urandom", O_RDONLY|O_NOCTTY|O_NONBLOCK) = 3
+fstat(3, {st_mode=S_IFCHR|0666, st_rdev=makedev(1, 9), ...}) = 0
+poll([{fd=3, events=POLLIN}], 1, 10)    = 1 ([{fd=3, revents=POLLIN}])
+read(3, "\nB\321\363[\364\37\240\7\232\366\262\330xc\247\213\337\357\201(#Rd|{\273\314\337O\317m", 32) = 32
+close(3)                                = 0
+getuid()                                = 1000
+openat(AT_FDCWD, "/usr/lib/ssl/openssl.cnf", O_RDONLY) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=10771, ...}) = 0
+read(3, "#\n# OpenSSL example configuratio"..., 4096) = 4096
+read(3, "ape crash on BMPStrings or UTF8S"..., 4096) = 4096
+read(3, " is omitted\n# the certificate ca"..., 4096) = 2579
+read(3, "", 4096)                       = 0
+close(3)                                = 0
+futex(0x7f4f4d73b340, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+futex(0x7f4f4d73b25c, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+futex(0x7f4f4d73b254, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+futex(0x7f4f4d9a6720, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+sysinfo({uptime=236859, loads=[123968, 65696, 72832], totalram=8316321792, freeram=347652096, sharedram=592355328, bufferram=134995968, totalswap=16000217088, freeswap=15644016640, procs=1259, totalhigh=0, freehigh=0, mem_unit=1}) = 0
+futex(0x7f4f4d9a67fc, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+brk(0x55bf9b9d4000)                     = 0x55bf9b9d4000
+futex(0x7f4f4d9a67f0, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+futex(0x7f4f4d9a6648, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+getpid()                                = 28496
+getpid()                                = 28496
+getpid()                                = 28496
+openat(AT_FDCWD, "/usr/lib/ssl/cert.pem", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/home/tushar/.netrc", {st_mode=S_IFREG|0600, st_size=1, ...}) = 0
+openat(AT_FDCWD, "/home/tushar/.netrc", O_RDONLY) = 3
+fstat(3, {st_mode=S_IFREG|0600, st_size=1, ...}) = 0
+read(3, "\n", 4096)                     = 1
+read(3, "", 4096)                       = 0
+close(3)                                = 0
+openat(AT_FDCWD, "/usr/share/locale/en_IN/LC_MESSAGES/wget.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/wget.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/share/locale-langpack/en_IN/LC_MESSAGES/wget.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/wget.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+write(2, "Resolving nptel.ac.in (nptel.ac."..., 39Resolving nptel.ac.in (nptel.ac.in)... ) = 39
+socket(AF_UNIX, SOCK_STREAM|SOCK_CLOEXEC|SOCK_NONBLOCK, 0) = 3
+connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+close(3)                                = 0
+socket(AF_UNIX, SOCK_STREAM|SOCK_CLOEXEC|SOCK_NONBLOCK, 0) = 3
+connect(3, {sa_family=AF_UNIX, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+close(3)                                = 0
+openat(AT_FDCWD, "/etc/nsswitch.conf", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=556, ...}) = 0
+read(3, "# /etc/nsswitch.conf\n#\n# Example"..., 4096) = 556
+read(3, "", 4096)                       = 0
+close(3)                                = 0
+stat("/etc/resolv.conf", {st_mode=S_IFREG|0644, st_size=304, ...}) = 0
+openat(AT_FDCWD, "/etc/host.conf", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=92, ...}) = 0
+read(3, "# The \"order\" line is only used "..., 4096) = 92
+read(3, "", 4096)                       = 0
+close(3)                                = 0
+futex(0x7f4f4d0b5ba4, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+openat(AT_FDCWD, "/etc/resolv.conf", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=304, ...}) = 0
+read(3, "# Dynamic resolv.conf(5) file fo"..., 4096) = 304
+read(3, "", 4096)                       = 0
+close(3)                                = 0
+uname({sysname="Linux", nodename="tushar-GL552VX", ...}) = 0
+openat(AT_FDCWD, "tls/haswell/x86_64/libnss_files.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/haswell/libnss_files.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/x86_64/libnss_files.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/libnss_files.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/x86_64/libnss_files.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/libnss_files.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "x86_64/libnss_files.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "libnss_files.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/cuda-8.0/lib64/libnss_files.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=256841, ...}) = 0
+mmap(NULL, 256841, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f4f4e1e0000
+close(3)                                = 0
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libnss_files.so.2", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0P#\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=47568, ...}) = 0
+mmap(NULL, 2168632, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4f4c035000
+mprotect(0x7f4f4c040000, 2093056, PROT_NONE) = 0
+mmap(0x7f4f4c23f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xa000) = 0x7f4f4c23f000
+mmap(0x7f4f4c241000, 22328, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f4f4c241000
+close(3)                                = 0
+mprotect(0x7f4f4c23f000, 4096, PROT_READ) = 0
+munmap(0x7f4f4e1e0000, 256841)          = 0
+openat(AT_FDCWD, "/etc/hosts", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=229, ...}) = 0
+read(3, "127.0.0.1\tlocalhost\n127.0.1.1\ttu"..., 4096) = 229
+read(3, "", 4096)                       = 0
+close(3)                                = 0
+openat(AT_FDCWD, "tls/haswell/x86_64/libnss_mdns4_minimal.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/haswell/libnss_mdns4_minimal.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/x86_64/libnss_mdns4_minimal.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/libnss_mdns4_minimal.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/x86_64/libnss_mdns4_minimal.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/libnss_mdns4_minimal.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "x86_64/libnss_mdns4_minimal.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "libnss_mdns4_minimal.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/cuda-8.0/lib64/libnss_mdns4_minimal.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=256841, ...}) = 0
+mmap(NULL, 256841, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f4f4e1e0000
+close(3)                                = 0
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libnss_mdns4_minimal.so.2", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0P\v\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=10160, ...}) = 0
+mmap(NULL, 2105360, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4f4be32000
+mprotect(0x7f4f4be34000, 2093056, PROT_NONE) = 0
+mmap(0x7f4f4c033000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1000) = 0x7f4f4c033000
+close(3)                                = 0
+mprotect(0x7f4f4c033000, 4096, PROT_READ) = 0
+munmap(0x7f4f4e1e0000, 256841)          = 0
+openat(AT_FDCWD, "tls/haswell/x86_64/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/haswell/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/x86_64/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/x86_64/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "x86_64/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/cuda-8.0/lib64/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=256841, ...}) = 0
+mmap(NULL, 256841, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f4f4e1e0000
+close(3)                                = 0
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libnss_dns.so.2", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\200\17\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=26936, ...}) = 0
+mmap(NULL, 2121952, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4f4bc2b000
+mprotect(0x7f4f4bc30000, 2097152, PROT_NONE) = 0
+mmap(0x7f4f4be30000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x5000) = 0x7f4f4be30000
+close(3)                                = 0
+openat(AT_FDCWD, "tls/haswell/x86_64/libresolv.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/haswell/libresolv.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/x86_64/libresolv.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "tls/libresolv.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/x86_64/libresolv.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "haswell/libresolv.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "x86_64/libresolv.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "libresolv.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/cuda-8.0/lib64/libresolv.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libresolv.so.2", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\00008\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=101168, ...}) = 0
+mmap(NULL, 2206336, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f4f4ba10000
+mprotect(0x7f4f4ba27000, 2097152, PROT_NONE) = 0
+mmap(0x7f4f4bc27000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x17000) = 0x7f4f4bc27000
+mmap(0x7f4f4bc29000, 6784, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f4f4bc29000
+close(3)                                = 0
+mprotect(0x7f4f4bc27000, 4096, PROT_READ) = 0
+mprotect(0x7f4f4be30000, 4096, PROT_READ) = 0
+munmap(0x7f4f4e1e0000, 256841)          = 0
+socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3
+connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr("127.0.0.53")}, 16) = 0
+poll([{fd=3, events=POLLOUT}], 1, 0)    = 1 ([{fd=3, revents=POLLOUT}])
+sendmmsg(3, [{msg_hdr={msg_name=NULL, msg_namelen=0, msg_iov=[{iov_base="\36\304\1\0\0\1\0\0\0\0\0\0\5nptel\2ac\2in\0\0\1\0\1", iov_len=29}], msg_iovlen=1, msg_controllen=0, msg_flags=MSG_EOR|MSG_FIN|MSG_SYN|MSG_RST|MSG_ERRQUEUE|MSG_NOSIGNAL|MSG_MORE|MSG_BATCH|MSG_ZEROCOPY|MSG_FASTOPEN|MSG_CMSG_CLOEXEC|0x98920000}, msg_len=29}, {msg_hdr={msg_name=NULL, msg_namelen=0, msg_iov=[{iov_base="\34\315\1\0\0\1\0\0\0\0\0\0\5nptel\2ac\2in\0\0\34\0\1", iov_len=29}], msg_iovlen=1, msg_controllen=0, msg_flags=MSG_CONFIRM}, msg_len=29}], 2, MSG_NOSIGNAL) = 2
+poll([{fd=3, events=POLLIN}], 1, 5000)  = 1 ([{fd=3, revents=POLLIN}])
+ioctl(3, FIONREAD, [45])                = 0
+recvfrom(3, "\36\304\201\200\0\1\0\1\0\0\0\0\5nptel\2ac\2in\0\0\1\0\1\300\f\0"..., 2048, 0, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr("127.0.0.53")}, [28->16]) = 45
+poll([{fd=3, events=POLLIN}], 1, 4999)  = 1 ([{fd=3, revents=POLLIN}])
+ioctl(3, FIONREAD, [29])                = 0
+recvfrom(3, "\34\315\201\200\0\1\0\0\0\0\0\0\5nptel\2ac\2in\0\0\34\0\1", 65536, 0, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr("127.0.0.53")}, [28->16]) = 29
+close(3)                                = 0
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+write(2, "14.139.160.71", 1314.139.160.71)           = 13
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+write(2, "\n", 1
+)                       = 1
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+write(2, "Connecting to nptel.ac.in (nptel"..., 62Connecting to nptel.ac.in (nptel.ac.in)|14.139.160.71|:443... ) = 62
+socket(AF_INET, SOCK_STREAM, IPPROTO_IP) = 3
+connect(3, {sa_family=AF_INET, sin_port=htons(443), sin_addr=inet_addr("14.139.160.71")}, 16) = 0
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+write(2, "connected.\n", 11connected.
+)            = 11
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=0}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+getpid()                                = 28496
+write(3, "\26\3\1\0\277\1\0\0\273\3\3\374(\351\241\206\300\237\375W\245\360\277\316|\201\217\rm\31*\303"..., 196) = 196
+read(3, "\26\3\3\0E", 5)                = 5
+read(3, "\2\0\0A\3\3e+\365\221\376!/\277\255v\32B4\20\246\373\253\370\373\266wo\213\33m\335"..., 69) = 69
+read(3, "\26\3\3\24\35", 5)             = 5
+read(3, "\v\0\24\31\0\24\26\0\6\2610\202\6\2550\202\5\225\240\3\2\1\2\2\t\0\221\2\340A)\16"..., 5149) = 4017
+read(3, "\256\0342\216(p\r\342\376\246\27\236\204\17\275Wp\263Z\351\37\240\206S\273\357|\377i\v\340H"..., 1132) = 1132
+stat("/usr/lib/ssl/certs/27eb7704.0", 0x7ffefc970c30) = -1 ENOENT (No such file or directory)
+stat("/usr/lib/ssl/certs/cbf06781.0", {st_mode=S_IFREG|0644, st_size=1367, ...}) = 0
+openat(AT_FDCWD, "/usr/lib/ssl/certs/cbf06781.0", O_RDONLY) = 4
+fstat(4, {st_mode=S_IFREG|0644, st_size=1367, ...}) = 0
+read(4, "-----BEGIN CERTIFICATE-----\nMIID"..., 4096) = 1367
+read(4, "", 4096)                       = 0
+close(4)                                = 0
+stat("/usr/lib/ssl/certs/cbf06781.1", 0x7ffefc970c30) = -1 ENOENT (No such file or directory)
+read(3, "\26\3\3\1,", 5)                = 5
+read(3, "\f\0\1(\3\0\35 \330\21+\315\36ocIdG@I\271\27D\357\322\7\33\37\3\203d\236"..., 300) = 300
+read(3, "\26\3\3\0\4", 5)               = 5
+read(3, "\16\0\0\0", 4)                 = 4
+getpid()                                = 28496
+brk(0x55bf9b9f5000)                     = 0x55bf9b9f5000
+getpid()                                = 28496
+write(3, "\26\3\3\0%\20\0\0! \232\307@k\362\217\323Xf\356O\t\310\202G4)\24\247D\"\22"..., 93) = 93
+read(3, "\26\3\3\0\332", 5)             = 5
+read(3, "\4\0\0\326\0\0\1,\0\320\204\334\350\37\363M2#)\257K@W\34U\304w\200@\247Q\377"..., 218) = 218
+read(3, "\24\3\3\0\1", 5)               = 5
+read(3, "\1", 1)                        = 1
+read(3, "\26\3\3\0(", 5)                = 5
+read(3, "\204\360\260#I\315\307\201\346j\331J2\177\373\240_a?_\3\3\344\367R}\364\302-\277w\267"..., 40) = 40
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+select(4, NULL, [3], NULL, {tv_sec=900, tv_usec=0}) = 1 (out [3], left {tv_sec=899, tv_usec=999995})
+write(3, "\27\3\3\0\255\266\325\364\301!oa\34=\226\340\334\206\373#d\"\24i\313GmA\371\234\240\0"..., 178) = 178
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+write(2, "HTTP request sent, awaiting resp"..., 40HTTP request sent, awaiting response... ) = 40
+select(4, [3], NULL, NULL, {tv_sec=900, tv_usec=0}) = 1 (in [3], left {tv_sec=899, tv_usec=558265})
+read(3, "\27\3\3\1\177", 5)             = 5
+read(3, "\204\360\260#I\315\307\202\270\346M\342L\376\311\341\206 \270\356\tY\302!B\306\326\317\205\255\201\256"..., 383) = 383
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+write(2, "200 OK\n", 7200 OK
+)                 = 7
+stat("course.html", 0x7ffefc971150)     = -1 ENOENT (No such file or directory)
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+write(2, "Length: ", 8Length: )                 = 8
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+write(2, "399165", 6399165)                   = 6
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+write(2, " (390K)", 7 (390K))                  = 7
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+write(2, " [text/html]\n", 13 [text/html]
+)          = 13
+openat(AT_FDCWD, "course.html", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 4
+openat(AT_FDCWD, "/usr/lib/charset.alias", O_RDONLY|O_NOFOLLOW) = -1 ENOENT (No such file or directory)
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+write(2, "Saving to: \342\200\230course.html\342\200\231\n", 29Saving to: ‘course.html’
+) = 29
+fsetxattr(4, "user.xdg.origin.url", "https://nptel.ac.in/course.html", 31, 0) = 0
+ioctl(2, TIOCGWINSZ, {ws_row=43, ws_col=173, ws_xpixel=0, ws_ypixel=0}) = 0
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+write(2, "\n", 1
+)                       = 1
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+)                       = 1
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+write(2, "course.html                     "..., 172course.html                                   0%[                                                                                         ]       0  --.-KB/s               ) = 172
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949994})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\203\21\333s!\31[\351\374^'\2149C\3016\254\326\307\2757\256\226\3\352"..., 16408) = 14087
+read(3, "\10\235Z3twb\204\364\260k6L\226\"*\366s\305\350\266{\371\v\ni\211\360'\v\367\206"..., 2321) = 2321
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+fstat(4, {st_mode=S_IFREG|0644, st_size=0, ...}) = 0
+write(4, "\r\n<!DOCTYPE html>\r\n<html>\r\n<head"..., 8192) = 8192
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "li class=\"list-group-item\">\r\n\t\t\t"..., 4096) = 4096
+write(4, "-group-item\"><input type=\"checkb"..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949992})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\204\7\267\377\302\245\32*{\351\177+L\337\336`8\0214;5n\367\354 "..., 16408) = 16408
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "ideo</td><tr><td><a href='course"..., 4096) = 4096
+write(4, "emical Engineering</td><td>Prof."..., 4096) = 4096
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "'>NOC:Aircraft Propulsion</a></t"..., 4096) = 4096
+write(4, "eo</td><tr><td><a href='courses/"..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949996})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\205\371\344\\\256FK|\341}e/\340E\303o\37\225\n\211\273\221\2\275o"..., 16408) = 10221
+read(3, "\25aIK\37\277\313YI\236\342\314\267\342\301\366\336\252\237\244f1'\330e\7\306\251\313\226\306\t"..., 6187) = 6187
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "</a></td><td>Mathematics</td><td"..., 4096) = 4096
+write(4, "courses/106/101/106101209/' targ"..., 4096) = 4096
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "107/101/107101086/' target='_bla"..., 4096) = 4096
+write(4, "0107130/' target='_blank'>NOC:To"..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949994})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\206\232V\26\177\2101\1\325]e\261\376\232\307\203\344c)Y\336\25\307Z\207"..., 16408) = 16408
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "/td><td>IIT Kharagpur</td><td>Vi"..., 4096) = 4096
+write(4, "/td><tr><td><a href='courses/108"..., 4096) = 4096
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "tics of Mechanisms and Machines<"..., 4096) = 4096
+write(4, "td><a href='courses/101/105/1011"..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949997})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\207\235\345G\361\2o?\16\10\214\276\242\331\0\35\\P\265\360\357\310\26525"..., 16408) = 16408
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "td><td>Video</td><tr><td><a href"..., 4096) = 4096
+write(4, "anical Measurement</a></td><td>M"..., 4096) = 4096
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "'>NOC:Commutative Algebra</a></t"..., 4096) = 4096
+write(4, "lectromagnetics</a></td><td>Elec"..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949997})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\2104oh\312\315&[\362\341\20I\257\303~\246\244I[\247_&\23O\336"..., 16408) = 16408
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "g and Simulink</a></td><td>Elect"..., 4096) = 4096
+write(4, " groups for physics applications"..., 4096) = 4096
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "nce for Civil Engineers</a></td>"..., 4096) = 4096
+write(4, "<tr><td><a href='courses/103/103"..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949997})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\211T\246=\205\203x\3403\204G\250\220\226\10\303W\377U\23\366>i\304h"..., 16408) = 1041
+read(3, "=\22\374\210<\242\311]\274K\301br\247q\224v\22\320\366?\252\353~.\345\231\333\270\353\v\317"..., 15367) = 2896
+read(3, ")\202/g\303:f\263\373a\2313\t/]a;U\361\3345\276\353\221I\314\206\316}\354S\333"..., 12471) = 12471
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "es/112/105/112105248/' target='_"..., 4096) = 4096
+write(4, "td><tr><td><a href='courses/126/"..., 4096) = 4096
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, " target='_blank'>NOC:Groups : Mo"..., 4096) = 4096
+write(4, "al Energy Resources</a></td><td>"..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949994})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\212^fT\32\241\370u\25\251\277g2\243\270i2+\373\371(\6u\240P"..., 16408) = 16408
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "rmal Issues</a></td><td>Electric"..., 4096) = 4096
+write(4, "d><a href='courses/103/103/10310"..., 4096) = 4096
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "ideo</td><tr><td><a href='course"..., 4096) = 4096
+write(4, "='courses/105/105/105105171/' ta"..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949995})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\213\221C\300|\320\211\220\202H\201\365\21Z*Q\352\34\211\337\4\370\303&]"..., 16408) = 16408
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "r><td><a href='courses/110/105/1"..., 4096) = 4096
+write(4, "nce and  Engineering</td><td>Pro"..., 4096) = 4096
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "href='courses/111/107/111107105/"..., 4096) = 4096
+write(4, "6105165/' target='_blank'>NOC:Ha"..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949997})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\214\311\335%\207]@\300.\350\350\305[\204\220K\233;V\274\233D\23u\327"..., 16408) = 16408
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, ":Measure theory</a></td><td>Math"..., 4096) = 4096
+write(4, "dership</a></td><td>Humanities a"..., 4096) = 4096
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "</td><td>Prof. Mainak Das</td><t"..., 4096) = 4096
+write(4, "Engineering</td><td>Prof. Indran"..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949997})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\215\31\200{\257@B\r/\320\205\314B%\23\204\322v^\207\27\314\6M2"..., 16408) = 16408
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "f Vibration Control</a></td><td>"..., 4096) = 4096
+write(4, "</td><td>Dr. Srinivasan Chandras"..., 4096) = 4096
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "IT Roorkee</td><td>Video</td><tr"..., 4096) = 4096
+write(4, "ISc Bangalore</td><td>Video</td>"..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949996})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\216W\26\372\333g\207J\334\3045j\274\206&\250\353K|J/A\3603\322"..., 16408) = 16408
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "td><a href='courses/117/104/1171"..., 4096) = 4096
+write(4, "tr><td><a href='courses/101/104/"..., 4096) = 4096
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "eo</td><tr><td><a href='courses/"..., 4096) = 4096
+write(4, "nding Design Thinking & People C"..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949996})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\217s`\3214[\235\246A\245\3\200s\5\2!\230#9\334\t\204\233\4\364"..., 16408) = 15507
+read(3, "\267\372@\305\23\335\336dD\316\nl\fXa\321~\316u\375\345\337\240\246V\225s<W\f\233>"..., 901) = 901
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "r<br>Dr. D. B. Karunakar</td><td"..., 4096) = 4096
+write(4, "Separation Process</a></td><td>C"..., 4096) = 4096
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+)                       = 1
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+write(2, "course.html                     "..., 172course.html                                  51%[============================================>                                            ] 200.00K   973KB/s               ) = 172
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "a href='courses/114/106/11410604"..., 4096) = 4096
+write(4, "ess Communications - MIMO/ OFDM "..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949992})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\220\227Q\17(*q\247\336\207\343\10\237\354\16gY,\274nk\320\365@]"..., 16408) = 4886
+read(3, "\355\303\364\242o\27$\\\337\254:\315\321 \262mZUg\306\325\377\241\234\17\376\255\337\7\376\266v"..., 11522) = 11522
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "d>Dr. B.V.S. Viswanadham</td><td"..., 4096) = 4096
+write(4, "d>Biotechnology</td><td>Prof. Sa"..., 4096) = 4096
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "6/117106116/' target='_blank'>NO"..., 4096) = 4096
+write(4, "hyay</td><td>IIT Roorkee</td><td"..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949995})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\221\305\352\t\26e\34\354T\10m\350s[\35\34\361]\314\206\320E\357\245\334"..., 16408) = 14537
+read(3, "\3371\2\375\256\265\177|\266)U\367n\204w\374j1k\313\375\345cH#\33\335\230(\26\332\2"..., 1871) = 1871
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, " Swain</td><td>IIT Guwahati</td>"..., 4096) = 4096
+write(4, "<td>Dr. T. Ravichandran</td><td>"..., 4096) = 4096
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "ndom Matrix Theory and Applicati"..., 4096) = 4096
+write(4, "f Electric Machines</a></td><td>"..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949997})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\222\255\17\315G]\244k\224\340^\220u\21\305\261\300Q\3113L\360dj\342"..., 16408) = 16408
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "<td>Prof. Kuruvilla Varghese</td"..., 4096) = 4096
+write(4, "umanities and Social Sciences</t"..., 4096) = 4096
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, ">Mathematics for Chemistry</a></"..., 4096) = 4096
+write(4, "0106043/' target='_blank'>Infras"..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949997})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\223\\z\366/\333\37\340\247\37\\(\227\311\233\\1N_\247y\363\3729\220"..., 16408) = 16408
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "nha</td><td>IIT Roorkee</td><td>"..., 4096) = 4096
+write(4, "cessing of non metals</a></td><t"..., 4096) = 4096
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "d>Computer Science and  Engineer"..., 4096) = 4096
+write(4, "105102015/' target='_blank'>G.I."..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949997})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\224ol\221\202#\315\324\312\267\262s%\241;6\233\300'\22\235\362Xt1"..., 16408) = 16408
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "gpur</td><td>Video</td><tr><td><"..., 4096) = 4096
+write(4, "d><td>Dr. Sangeeta Sahney</td><t"..., 4096) = 4096
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "td>Dr. V. Shankar</td><td>IIT Ka"..., 4096) = 4096
+write(4, "iety - Issues and Problems</a></"..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949997})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\225-\363O\232\235\313\274\5\20#\312\242n\221\203Yme&x\21\177g\237"..., 16408) = 16408
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "><tr><td><a href='courses/105/10"..., 4096) = 4096
+write(4, "02015/' target='_blank'>Fuel Cel"..., 4096) = 4096
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, " Organic Synthesis</a></td><td>C"..., 4096) = 4096
+write(4, "ref='courses/103/107/103107094/'"..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949996})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\226;\235\244\207\325D\346wK\266\21\34\260+\367B\37\304\312Ees\2419"..., 16408) = 16408
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "try and Biochemistry</td><td>Pro"..., 4096) = 4096
+write(4, "<td>Computer Science and  Engine"..., 4096) = 4096
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "td>Web</td><tr><td><a href='cour"..., 4096) = 4096
+write(4, "d><td>Web</td><tr><td><a href='c"..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949996})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\227\362\276S=.\4Q\27\266c\\\324s\363N\357(\16rT\371\307\310\f"..., 16408) = 16408
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "IIT Kharagpur</td><td>Video</td>"..., 4096) = 4096
+write(4, " Kharagpur</td><td>Video</td><tr"..., 4096) = 4096
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "ourses/113/104/113104010/' targe"..., 4096) = 4096
+write(4, "ourses/115/101/115101010/' targe"..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949994})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\230\347\365\30r\254\350D5\335\305\366_\226K\213\34\203\307\177\360\3\7\367\\"..., 16408) = 16408
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "td>IISc Bangalore</td><td>Video<"..., 4096) = 4096
+write(4, "/' target='_blank'>Computer Orga"..., 4096) = 4096
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "106068/' target='_blank'>Analog "..., 4096) = 4096
+write(4, "d><td>Electrical Engineering</td"..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949995})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\231.\212\221\20r\266\225\35\231\305\230X\261\227\307\7\5*L\22\245c\233d"..., 16408) = 16408
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "ring</td><td>Dr. Pramod Agarwal<"..., 4096) = 4096
+write(4, "105/113105057/' target='_blank'>"..., 4096) = 4096
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "of. K.M. Muraleedharan<br>Prof. "..., 4096) = 4096
+write(4, "a></td><td>Electronics & Communi"..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949989})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3@\30", 5)               = 5
+read(3, "\204\360\260#I\315\307\232\222\200\370\231\250\336&\274\v\200y\351\245\26\304{\335\211\1Ae\16\333\302"..., 16408) = 16408
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "ty<br>Dr. B.S. Thandaveswara</td"..., 4096) = 4096
+write(4, "td><td>Dr. S.P. Das</td><td>IIT "..., 4096) = 4096
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "Dr. Ratnajit Bhattacharjee</td><"..., 4096) = 4096
+write(4, "eth<br>Prof. C. Amarnath<br>Prof"..., 4096) = 4096
+select(4, [3], NULL, NULL, {tv_sec=0, tv_usec=950000}) = 1 (in [3], left {tv_sec=0, tv_usec=949996})
+rt_sigprocmask(SIG_BLOCK, NULL, [], 8)  = 0
+rt_sigaction(SIGALRM, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=900, tv_usec=0}}, NULL) = 0
+read(3, "\27\3\3\27U", 5)               = 5
+read(3, "\204\360\260#I\315\307\233\31\273H\242\3304\216\253\360\32\16k!\0265\177\353\330\223f\230\327\"\332"..., 5973) = 5973
+setitimer(ITIMER_REAL, {it_interval={tv_sec=0, tv_usec=0}, it_value={tv_sec=0, tv_usec=0}}, NULL) = 0
+rt_sigaction(SIGALRM, {sa_handler=SIG_DFL, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, {sa_handler=0x55bf9b401ac0, sa_mask=[ALRM], sa_flags=SA_RESTORER|SA_RESTART, sa_restorer=0x7f4f4cd04f20}, 8) = 0
+write(4, "es-Sem 1 and 2</td><td>Prof. S. "..., 4096) = 4096
+write(4, " Systems</a></td><td>Computer Sc"..., 1853) = 1853
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+)                       = 1
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+write(2, "course.html                     "..., 172course.html                                 100%[========================================================================================>] 389.81K  1.66MB/s    in 0.2s    ) = 172
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+write(2, "\n", 1
+)                       = 1
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+write(2, "\n", 1
+)                       = 1
+close(4)                                = 0
+stat("/etc/localtime", {st_mode=S_IFREG|0644, st_size=312, ...}) = 0
+utime("course.html", {actime=1574068033 /* 2019-11-18T14:37:13+0530 */, modtime=1571664041 /* 2019-10-21T18:50:41+0530 */}) = 0
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+write(2, "2019-11-18 14:37:13 (1.66 MB/s) "..., 752019-11-18 14:37:13 (1.66 MB/s) - ‘course.html’ saved [399165/399165]
+
+) = 75
+ioctl(0, TIOCGPGRP, [28494])            = 0
+getpgrp()                               = 28494
+exit_group(0)                           = ?
++++ exited with 0 +++

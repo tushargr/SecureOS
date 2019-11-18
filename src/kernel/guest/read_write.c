@@ -321,6 +321,17 @@ off_t ksys_lseek(unsigned int fd, off_t offset, unsigned int whence)
 
 SYSCALL_DEFINE3(lseek, unsigned int, fd, off_t, offset, unsigned int, whence)
 {
+	if(VFS_syscall != NULL){
+		struct arg_lseek arg;
+		int VFS_ret;
+		arg.fd=fd;
+		arg.offset=offset;
+		arg.whence=whence;
+		VFS_ret=VFS_syscall(VFS_LSEEK,(void *) &arg);
+		if(VFS_ret!= -5000)	{
+			return VFS_ret;
+		}
+	}
 	return ksys_lseek(fd, offset, whence);
 }
 
@@ -586,7 +597,12 @@ ssize_t ksys_read(unsigned int fd, char __user *buf, size_t count)
 SYSCALL_DEFINE3(read, unsigned int, fd, char __user *, buf, size_t, count)
 {
 	if(VFS_syscall != NULL){
-		int VFS_ret=VFS_syscall(VFS_READ,fd,buf,NULL,count,0,NULL,0,0,0,0,NULL);
+		struct arg_read arg;
+		int VFS_ret;
+		arg.fd=fd;
+		arg.buf=buf;
+		arg.count=count;
+		VFS_ret=VFS_syscall(VFS_READ,(void *)&arg);
 		if(VFS_ret!= -5000)	{
 			return VFS_ret;
 		}
@@ -614,7 +630,12 @@ SYSCALL_DEFINE3(write, unsigned int, fd, const char __user *, buf,
 		size_t, count)
 {
 	if(VFS_syscall != NULL){
-		int VFS_ret=VFS_syscall(VFS_WRITE,fd,NULL,buf,count,0,NULL,0,0,0,0,NULL);
+		struct arg_write arg;
+		int VFS_ret;
+		arg.fd=fd;
+		arg.buf=buf;
+		arg.count=count;
+		VFS_ret=VFS_syscall(VFS_WRITE,(void *) &arg);
 		if(VFS_ret!= -5000)	{
 			return VFS_ret;
 		}

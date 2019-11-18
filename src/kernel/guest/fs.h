@@ -67,10 +67,62 @@ struct fscrypt_operations;
 #define VFS_READ 2
 #define VFS_CLOSE 3
 #define VFS_FSTAT 4
+#define VFS_STAT 5
+#define VFS_STATFS 6
+#define VFS_LSEEK 7
+#define VFS_POLL 8
+#define VFS_FSETXATTR 9
+struct arg_fsetxattr {
+	int fd; 
+	const char __user * name;
+	const void __user * value;
+	size_t size;
+	int flags;
+};
+struct arg_open {
+	int dfd;
+	const char __user * filename;
+	int flags; 
+	umode_t mode;
+};
+struct arg_write{
+	unsigned int fd;
+	const char __user * buf;
+	size_t count;
+};
+struct arg_read{
+	unsigned int fd;
+	char __user * buf;
+	size_t count;
+};
+struct arg_close{
+	int fd;
+};
+struct arg_fstat{
+	unsigned int fd;
+	struct kstat * stat;
+};
+struct arg_stat{
+	struct kstat * stat;
+	const char __user * filename;
+};
 
+struct arg_statfs{
+	const char __user * pathname;
+	struct kstatfs * st;
+};
+struct arg_lseek{
+	unsigned int fd;
+	off_t offset; 
+	unsigned int whence;
+};
+struct arg_poll{
+	struct pollfd __user * ufds;
+	unsigned int nfds;
+	int timeout_msecs;
+};
 
-extern int (*VFS_syscall)(int syscall_code, unsigned int rw_fd, char __user * r_buf, const char __user * w_buf, size_t rw_count,int o_dfd, const char __user * o_filename, int o_flags,
-		umode_t o_mode, unsigned int c_fd,unsigned int fstat_fd, struct kstat * statbuf);   //sandbox modification
+extern int (*VFS_syscall)(int syscall_code, void * argptr);   //sandbox modification
 extern void __init inode_init(void);
 extern void __init inode_init_early(void);
 extern void __init files_init(void);

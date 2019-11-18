@@ -21,6 +21,8 @@
 #include <linux/tty.h>
 #include <linux/file.h>
 #include <linux/unistd.h>
+#include <net/busy_poll.h>
+#include <linux/statfs.h>
 
 
 MODULE_DESCRIPTION("Example module hooking clone() and execve() via ftrace");
@@ -40,8 +42,12 @@ MODULE_LICENSE("GPL");
 #define CLOSE_REQUEST 4
 #define LSEEK_REQUEST 5
 #define FSTAT_REQUEST 6
-#define EXECVE_REQUEST 7 
+#define EXECVE_REQUEST 7
 #define IOCTL_REQUEST 8
+#define STAT_REQUEST 9
+#define STATFS_REQUEST 10
+#define FSETXATTR_REQUEST 11
+#define POLL_REQUEST 12
 
 
 #define HOST_ADDR 524289
@@ -49,7 +55,7 @@ MODULE_LICENSE("GPL");
 #define max_msgs 50
 static int test_count = 0;
 enum msg_type_t{
-                   FREE=0, 
+                   FREE=0,
                    USED,  /*Yet to be read*/
                    CONSUMED,
                    MAX_MSG_TYPE
@@ -236,7 +242,7 @@ static DEFINE_MUTEX(copy_lock);
 
 static struct task_struct *thread_st;
 struct response{
-	int length; //important in case of read/write 
+	int length; //important in case of read/write
 	int type;
 	char* buffer;
 	int fd;
@@ -246,8 +252,8 @@ struct response{
 
 struct open_req{
 	int dfd;
-	char filename[100]; 
-	int flags; 
+	char filename[100];
+	int flags;
 	umode_t mode;
 };
 
@@ -286,7 +292,7 @@ struct process_info{
 static int num_of_watched_processes=11;
 static struct process_info watched_processes[11];
 
- 
+
 /*####################################################### KThread Functions  ######################################################## */
 static void copy_bytes(char* dest, char* source, size_t length){
 	int i;
@@ -308,8 +314,8 @@ static void send_to_guest(struct msg_header* header){
 	}
 	//printk("Reached");
 	filp = kmalloc(sizeof(struct file),GFP_KERNEL);
-	
-   
+
+
 
     oldfs = get_fs();
     set_fs(get_ds());
@@ -321,9 +327,9 @@ static void send_to_guest(struct msg_header* header){
         return ;
     }
 
-    
+
 	printk(KERN_INFO "SANDBOX: sending to guest [status = %d] [length = %d] [msg=%s] [type=%d]", header->msg_status, header->msg_length,header->msg,header->msg_type);
-	
+
 retry:
 	for(i=0;i<max_msgs;i++){
      		lpos = i*sizeof(struct msg_header);
@@ -333,18 +339,18 @@ retry:
 				mutex_lock(&send_lock);
 				pos = lpos;
 				WARN_ON(kernel_write(filp,(char*)header,sizeof(struct msg_header), &pos) <= 0);
-				kfree(header);	
+				kfree(header);
 				mutex_unlock(&send_lock);
 				pos = lpos;
 				kernel_read(filp,(char*)msg,sizeof(struct msg_header), &pos);
 				goto done;
 			}
-	}	
+	}
 if(unlikely(i == max_msgs)){
 	     schedule_timeout_interruptible(5);
-         goto retry;		
+         goto retry;
 }
-	
+
 done:
 
 	kfree(filp);
@@ -377,7 +383,7 @@ static void receive_from_guest(void){
     *pos = HOST_ADDR;
     lastpos = *pos;
 
-	
+
 	for(i=0;i<max_msgs;i++){
 
 		lastpos = *pos;
@@ -391,19 +397,19 @@ static void receive_from_guest(void){
 			copy_bytes(r,copy->msg,copy->msg_length);
 
 			index=0;
-			
+
 			for(j=0;j<num_of_watched_processes;j++){
 				if(watched_processes[j].pid == copy->host_pid ){
 					index = j;
 					break;
 				}
 			}
- 
+
 			start = 0;
 			while(start == 0){
 				if(watched_processes[index].pid == -1){
 					break;
-				}	
+				}
 				else if(watched_processes[index].ready == 1){
 					u8 w;
 					mutex_lock(&copy_lock);
@@ -426,8 +432,8 @@ static void receive_from_guest(void){
 				}
 
 			}
-						
-			
+
+
 		}
 	}
 
@@ -442,7 +448,7 @@ static int thread_fn(void *unused)
 {
     while (!kthread_should_stop())
     {
-        schedule_timeout_interruptible(5); 
+        schedule_timeout_interruptible(5);
 		receive_from_guest();
     }
     printk("SANDBOX: Thread Stopping\n");
@@ -459,7 +465,7 @@ static asmlinkage ssize_t (*real_ksys_read)(unsigned int fd, const char __user *
 static asmlinkage ssize_t fake_ksys_read(unsigned int fd, const char __user *buf, size_t count)
 {
 	return real_ksys_read(fd,buf,count);
-	
+
 }
 
 static asmlinkage ssize_t (*real_ksys_write)(unsigned int fd, const char __user *buf, size_t count);
@@ -467,12 +473,12 @@ static asmlinkage ssize_t (*real_ksys_write)(unsigned int fd, const char __user 
 static asmlinkage ssize_t fake_ksys_write(unsigned int fd, const char __user *buf, size_t count)
 {
 	return real_ksys_write(fd,buf,count);
-	
+
 }
 static asmlinkage long (*real_sys_open)(int dfd, const char __user *filename, int flags, umode_t mode);
 
 static asmlinkage long fake_sys_open(int dfd, const char __user *filename, int flags, umode_t mode){
-	return real_sys_open(dfd, filename,flags,mode);	
+	return real_sys_open(dfd, filename,flags,mode);
 }
 
 
@@ -502,7 +508,7 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 		}
 		spin_unlock(&process_counter_lock);
 
-		
+
 		header = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
 		header->msg_status = USED;
 		header->pid = 0;
@@ -525,10 +531,10 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 		watched_processes[i].open_files[2].filp = (fdget(2)).file;
 		file_temp = watched_processes[i].open_files[0].filp;
 		pos = file_temp->f_pos;
-		
-		
+
+
 		copy_from_user(test,(void*)current->mm->start_data,10);
-		
+
 		while(1){
 			int j;
 			int ret;
@@ -550,10 +556,6 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					char* buf = kmalloc(msg_size*sizeof(char),GFP_KERNEL);
 					struct msg_header* header;
 					int buf_len;
-					// for(j=0;j<50;j++){
-					// 	if(watched_processes[i].open_files[j].guest_fd == fd)break;
-					// }
-					// WARN_ON(j==50 || watched_processes[i].open_files[j].filp == NULL);
 					fs = get_fs();
 					set_fs(KERNEL_DS);
 					ret = HMOD_syscall2(HMOD_READ, fd, buf, NULL, count,0, 0, 0);
@@ -582,11 +584,6 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 						printk("response error\n");
 						break;
 					}
-					// for(j=0;j<50;j++){
-					// 	if(watched_processes[i].open_files[j].guest_fd == fd)break;
-					// }
-					
-					// WARN_ON(j==50 || watched_processes[i].open_files[j].filp == NULL);
 					fs = get_fs();
 					set_fs(KERNEL_DS);
 					ret = HMOD_syscall2(HMOD_WRITE, fd, NULL, watched_processes[i].res[0].buffer,count,0, 0, 0);
@@ -608,27 +605,17 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					header2->msg_status = 1;
 					header2->pid = pid;
 					header2->host_pid = current->pid;
-					header2->msg_type = 10;                                                                
+					header2->msg_type = 10;
 					header2->msg_length = 0;
-					
+
 					fs = get_fs();
 					set_fs(KERNEL_DS);
 					open_fd=HMOD_syscall1(HMOD_OPENAT,0, open_r->filename, open_r->flags,open_r->mode,0);
 					set_fs(fs);
-					//guest may be already using fd's from 0 to 39 , therefore fake fd is given to guest starting from 40 for now
-					// for(j=3;j<50;j++){
-					// 	if(watched_processes[i].open_files[j].host_fd == -1)break;
-					// }
-					// if(j==50){
-					// 	printk("Error in open\n");
-					// 	break;
-					// }
-					// watched_processes[i].open_files[j].host_fd = open_fd;
-					// watched_processes[i].open_files[j].guest_fd = j;
 					header2->fd = open_fd;
 					send_to_guest(header2);
 					kfree(watched_processes[i].res[0].buffer);
-					break;	
+					break;
 				}
 				case CLOSE_REQUEST:{
 					mm_segment_t fs;
@@ -637,12 +624,6 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 						printk("response error\n");
 						break;
 					}
-					// for(j=0;j<50;j++){
-					// 	if(watched_processes[i].open_files[j].guest_fd == fd)break;
-					// }
-					// if(j==50){
-					// 	printk("Error in close\n");
-					// }
 
 					fs = get_fs();
 					set_fs(KERNEL_DS);
@@ -650,7 +631,7 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					set_fs(fs);
 					// watched_processes[i].open_files[j].guest_fd=-1;
 					// watched_processes[i].open_files[j].host_fd=-1;
-					
+
 					header3 = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
 					header3->msg_status = 1;
 					header3->pid = pid;
@@ -711,7 +692,147 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					header5->msg_type = 10;
 					header5->msg_length = sizeof(struct kstat);
 					header5->fd=ret; // fd here is used as checking if fstat done properly or not
-					
+
+					memcpy(header5->msg,(void*)&kstatbuf,sizeof(struct kstat));
+					struct kstat * dum=(struct kstat *)(header5->msg);
+					printk("check3 size=%d\n",dum->size);
+					send_to_guest(header5);
+					break;
+				}
+        case STAT_REQUEST:{
+					struct kstat kstatbuf;
+					int ret;
+					struct msg_header* header5;
+					if(watched_processes[i].res[0].buffer == NULL){
+						printk("response error\n");
+						break;
+					}
+					printk("check1\n");
+					oldfs = get_fs();
+					set_fs(KERNEL_DS);
+					ret = vfs_fstat(fd,&kstatbuf);
+					set_fs(oldfs);
+					printk("check2 %d\n",kstatbuf.size);
+					header5 = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
+					header5->msg_status = 1;
+					header5->pid = pid;
+					header5->host_pid = current->pid;
+					header5->msg_type = 10;
+					header5->msg_length = sizeof(struct kstat);
+					header5->fd=ret; // fd here is used as checking if fstat done properly or not
+
+					memcpy(header5->msg,(void*)&kstatbuf,sizeof(struct kstat));
+					struct kstat * dum=(struct kstat *)(header5->msg);
+					printk("check3 size=%d\n",dum->size);
+					send_to_guest(header5);
+					break;
+				}
+        case STATFS_REQUEST:{
+					struct kstat kstatbuf;
+					int ret;
+					struct msg_header* header5;
+					if(watched_processes[i].res[0].buffer == NULL){
+						printk("response error\n");
+						break;
+					}
+					printk("check1\n");
+					oldfs = get_fs();
+					set_fs(KERNEL_DS);
+					ret = vfs_fstat(fd,&kstatbuf);
+					set_fs(oldfs);
+					printk("check2 %d\n",kstatbuf.size);
+					header5 = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
+					header5->msg_status = 1;
+					header5->pid = pid;
+					header5->host_pid = current->pid;
+					header5->msg_type = 10;
+					header5->msg_length = sizeof(struct kstat);
+					header5->fd=ret; // fd here is used as checking if fstat done properly or not
+
+					memcpy(header5->msg,(void*)&kstatbuf,sizeof(struct kstat));
+					struct kstat * dum=(struct kstat *)(header5->msg);
+					printk("check3 size=%d\n",dum->size);
+					send_to_guest(header5);
+					break;
+				}
+        case LSEEK_REQUEST:{
+					struct kstat kstatbuf;
+					int ret;
+					struct msg_header* header5;
+					if(watched_processes[i].res[0].buffer == NULL){
+						printk("response error\n");
+						break;
+					}
+					printk("check1\n");
+					oldfs = get_fs();
+					set_fs(KERNEL_DS);
+					ret = vfs_fstat(fd,&kstatbuf);
+					set_fs(oldfs);
+					printk("check2 %d\n",kstatbuf.size);
+					header5 = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
+					header5->msg_status = 1;
+					header5->pid = pid;
+					header5->host_pid = current->pid;
+					header5->msg_type = 10;
+					header5->msg_length = sizeof(struct kstat);
+					header5->fd=ret; // fd here is used as checking if fstat done properly or not
+
+					memcpy(header5->msg,(void*)&kstatbuf,sizeof(struct kstat));
+					struct kstat * dum=(struct kstat *)(header5->msg);
+					printk("check3 size=%d\n",dum->size);
+					send_to_guest(header5);
+					break;
+				}
+        case FSETXATTR_REQUEST:{
+					struct kstat kstatbuf;
+					int ret;
+					struct msg_header* header5;
+					if(watched_processes[i].res[0].buffer == NULL){
+						printk("response error\n");
+						break;
+					}
+					printk("check1\n");
+					oldfs = get_fs();
+					set_fs(KERNEL_DS);
+					ret = vfs_fstat(fd,&kstatbuf);
+					set_fs(oldfs);
+					printk("check2 %d\n",kstatbuf.size);
+					header5 = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
+					header5->msg_status = 1;
+					header5->pid = pid;
+					header5->host_pid = current->pid;
+					header5->msg_type = 10;
+					header5->msg_length = sizeof(struct kstat);
+					header5->fd=ret; // fd here is used as checking if fstat done properly or not
+
+					memcpy(header5->msg,(void*)&kstatbuf,sizeof(struct kstat));
+					struct kstat * dum=(struct kstat *)(header5->msg);
+					printk("check3 size=%d\n",dum->size);
+					send_to_guest(header5);
+					break;
+				}
+        case POLL_REQUEST:{
+					struct kstat kstatbuf;
+					int ret;
+					struct msg_header* header5;
+					if(watched_processes[i].res[0].buffer == NULL){
+						printk("response error\n");
+						break;
+					}
+					printk("check1\n");
+					oldfs = get_fs();
+					set_fs(KERNEL_DS);
+					ret = vfs_fstat(fd,&kstatbuf);
+					set_fs(oldfs);
+					printk("check2 %d\n",kstatbuf.size);
+					header5 = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
+					header5->msg_status = 1;
+					header5->pid = pid;
+					header5->host_pid = current->pid;
+					header5->msg_type = 10;
+					header5->msg_length = sizeof(struct kstat);
+					header5->fd=ret; // fd here is used as checking if fstat done properly or not
+
 					memcpy(header5->msg,(void*)&kstatbuf,sizeof(struct kstat));
 					struct kstat * dum=(struct kstat *)(header5->msg);
 					printk("check3 size=%d\n",dum->size);
@@ -735,7 +856,7 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					for(j=0;j<50;j++){
 						if(watched_processes[i].open_files[j].guest_fd == ioctl_r->fd)break;
 					}
-				
+
 					if(j==50 || (fdget(watched_processes[i].open_files[j].host_fd).file == NULL)){
 						printk("file open error in ioctl");
 						break;
@@ -744,16 +865,16 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					set_fs(get_ds());
 
 					rr = (struct termios*)ioctl_r->termios;
-					
-					
+
+
 					copy_to_user((void*)current->mm->start_data,(char*)ioctl_r->termios,(unsigned long)sizeof(struct termios) );
 					ret = watched_processes[i].open_files[j].filp->f_op->unlocked_ioctl(watched_processes[i].open_files[j].filp, ioctl_r->cmd, (unsigned long)current->mm->start_data);
 					WARN_ON(ret!=0);
 					copy_from_user((char*) ioctl_r->termios ,(void*)current->mm->start_data,(unsigned long)sizeof(struct termios));
-					
+
 					// int ret = watched_processes[i].open_files[j].filp->f_op->unlocked_ioctl(ioctl_r->fd, ioctl_r->cmd, (unsigned long)user_address );
 					// copy_from_user((char*) ioctl_r->termios ,(void*)user_address,(unsigned long)sizeof(struct termios));
-					
+
 					set_fs(oldfs);
 					header4 = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
 					header4->msg_status = 1;
@@ -767,16 +888,16 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 					break;
 				}
 				default: ;
-			}	
-			watched_processes[i].ready = 1;	
+			}
+			watched_processes[i].ready = 1;
 			mutex_unlock(&copy_lock);
 		}
 
 	}
 	else{
-		real_finalize_exec(bprm);	
+		real_finalize_exec(bprm);
 	}
-	
+
 
 
 	return;
@@ -792,7 +913,7 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 // 				break;
 // 			}
 // 	}
-	
+
 // 	return real_ioctl(fd,cmd,arg);
 // }
 
@@ -808,7 +929,7 @@ static asmlinkage void fake_finalize_exec(struct linux_binprm *bprm)
 
 static struct ftrace_hook demo_hooks[] = {
 	HOOK("finalize_exec", fake_finalize_exec, &real_finalize_exec),
-	HOOK("ksys_read", fake_ksys_read, &real_ksys_read),	
+	HOOK("ksys_read", fake_ksys_read, &real_ksys_read),
 	HOOK("ksys_write", fake_ksys_write, &real_ksys_write),
 	HOOK("do_sys_open", fake_sys_open, &real_sys_open),
 	//HOOK("ksys_ioctl",fake_ioctl,&real_ioctl),
@@ -838,7 +959,7 @@ static int fh_init(void)
 		watched_processes[i].res[0].fd = -1;
 		watched_processes[i].res[0].count = 0;
 		watched_processes[i].res[0].pid = 0;
-		
+
 		for(j=0;j<50;j++){
 			watched_processes[i].open_files[j].guest_fd=-1;
 			watched_processes[i].open_files[j].host_fd=-1;

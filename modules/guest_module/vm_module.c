@@ -20,9 +20,11 @@
 #include <uapi/asm/termbits.h>
 #include <linux/kobject.h>
 #include <linux/sysfs.h>
-#include <linux/init.h> 
-#include <linux/fs.h> 
+#include <linux/init.h>
+#include <linux/fs.h>
 #include <linux/string.h>
+#include <net/busy_poll.h>
+#include <linux/statfs.h>
 /*
  * There are two ways of preventing vicious recursive loops when hooking:
  * - detect recusion using function return address (USE_FENTRY_OFFSET = 0)
@@ -39,8 +41,13 @@ static DEFINE_SPINLOCK(process_counter_lock);
 #define CLOSE_REQUEST 4
 #define LSEEK_REQUEST 5
 #define FSTAT_REQUEST 6
-#define EXECVE_REQUEST 7 
+#define EXECVE_REQUEST 7
 #define IOCTL_REQUEST 8
+#define STAT_REQUEST 9
+#define STATFS_REQUEST 10
+#define FSETXATTR_REQUEST 11
+#define POLL_REQUEST 12
+
 
 #define msg_size 10000
 #define HOST_ADDR 524289
@@ -225,7 +232,7 @@ void fh_remove_hooks(struct ftrace_hook *hooks, size_t count)
 static DECLARE_WAIT_QUEUE_HEAD(wq);
 static struct task_struct *thread_st;
 struct response{
-	int length; //important in case of read/write 
+	int length; //important in case of read/write
 	char * buffer;
 	int open_fd; //opened fd in host
 };
@@ -242,10 +249,10 @@ struct msg_header
 	char msg[msg_size];
 } ;
 
-struct open_req{
+struct open_req{ //hack filename size
 	int dfd;
-	char filename[100]; 
-	int flags; 
+	char filename[100];
+	int flags;
 	umode_t mode;
 };
 
@@ -254,6 +261,24 @@ struct ioctl_req{
 	unsigned int cmd;
 	unsigned long arg;
 	char termios[sizeof(struct termios)];
+};
+struct lseek_req{
+	unsigned int fd;
+	off_t offset;
+	unsigned int whence;
+};
+struct fsetxattr_req {//hack size of name and value
+	int fd;
+	char name[100];
+	char value[100];
+	size_t size;
+	int flags;
+};
+
+struct poll_req{
+	struct pollfd ufds[10]; //hack number of fds limited by 10
+	unsigned int nfds;
+	int timeout_msecs;
 };
 
 struct process_info{
@@ -294,7 +319,7 @@ static void send_to_host(struct msg_header* header){
 			if(flag==1)
 				break;
 
-			status = (u8*)(shared+HOST_ADDR+sizeof(struct msg_header)*i);		
+			status = (u8*)(shared+HOST_ADDR+sizeof(struct msg_header)*i);
 			if(*status == 0 || *status == 2){
 				char* base;
 				spin_lock(&send_lock);
@@ -305,9 +330,9 @@ static void send_to_host(struct msg_header* header){
 				kfree(header);
 				spin_unlock(&send_lock);
 			}
-		}	
+		}
 	}
-		
+
 	return;
 }
 
@@ -315,7 +340,7 @@ static void send_to_host(struct msg_header* header){
 static void receive_from_host(void){
 	int i;
 	struct msg_header* msg = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
-	
+
 	if(shared==NULL){
 		return;
 	}
@@ -353,8 +378,8 @@ static void receive_from_host(void){
 				*temp = 2;   // this should be done at last
 				wake_up(&wq);
 			}
-					
-			
+
+
 		}
 	}
 
@@ -367,7 +392,7 @@ static int thread_fn(void *unused)
 {
     while (!kthread_should_stop())
     {
-        schedule_timeout_interruptible(5); 
+        schedule_timeout_interruptible(5);
 		receive_from_host();
     }
     printk("SANDBOX: Thread Stopping\n");
@@ -395,7 +420,7 @@ static int ksys_write_to_host(unsigned int fd, const char __user *buf, size_t co
 
 static asmlinkage ssize_t ksys_read_from_host(unsigned int fd, const char __user *buf, size_t count,int i)
 {
-	
+
 	struct msg_header* header = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
 	header->pid = watched_processes[i].pid;
 	header->host_pid = watched_processes[i].host_pid;
@@ -438,7 +463,7 @@ static asmlinkage long ksys_open_in_host(int dfd, const char __user *filename, i
 
 	wait_event_interruptible(wq, watched_processes[i].wake_flag == 'y');
 	watched_processes[i].wake_flag = 'n';
-	for(j=0;j<10;j++){
+	for(j=0;j<10;j++){//hack assumed to be 10 fds opened at max
 		if(watched_processes[i].fds_open_in_host[j]==-1){
 			watched_processes[i].fds_open_in_host[j]=watched_processes[i].res[0].open_fd;
 			break;
@@ -448,7 +473,7 @@ static asmlinkage long ksys_open_in_host(int dfd, const char __user *filename, i
 		kfree(watched_processes[i].res[0].buffer);
 		return -1;
 	}
-	else{ 
+	else{
 		kfree(watched_processes[i].res[0].buffer);
 		return watched_processes[i].res[0].open_fd;
 	}
@@ -523,6 +548,116 @@ static asmlinkage int fstat_in_host(unsigned int fstat_fd, struct kstat * statbu
 	kfree(watched_processes[i].res[0].buffer);
 	return watched_processes[i].res[0].open_fd;
 }
+static asmlinkage int stat_in_host(const char __user * filename, struct kstat * stat, int i){
+	struct msg_header* header = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
+	header->pid = watched_processes[i].pid;
+	header->host_pid = watched_processes[i].host_pid;
+	header->msg_status = 1;
+	header->msg_type = STAT_REQUEST;
+	header->msg_length = strlen(filename);
+	memcpy(header->msg,filename,header->msg_length);
+
+	send_to_host(header);
+	wait_event_interruptible(wq, watched_processes[i].wake_flag == 'y');
+	watched_processes[i].wake_flag = 'n';
+
+	struct kstat * dum=(struct kstat *)(watched_processes[i].res[0].buffer);
+	memcpy((void *)stat,(void *)watched_processes[i].res[0].buffer,sizeof(struct kstat));
+	kfree(watched_processes[i].res[0].buffer);
+	return watched_processes[i].res[0].open_fd;
+}
+static asmlinkage int statfs_in_host(const char __user * pathname, struct kstatfs * st, int i){
+	struct msg_header* header = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
+	header->pid = watched_processes[i].pid;
+	header->host_pid = watched_processes[i].host_pid;
+	header->msg_status = 1;
+	header->msg_type = STATFS_REQUEST;
+	header->msg_length = strlen(pathname);
+	memcpy(header->msg,pathname,header->msg_length);
+
+	send_to_host(header);
+	wait_event_interruptible(wq, watched_processes[i].wake_flag == 'y');
+	watched_processes[i].wake_flag = 'n';
+
+	struct kstatfs * dum=(struct kstatfs *)(watched_processes[i].res[0].buffer);
+	memcpy((void *)st,(void *)watched_processes[i].res[0].buffer,sizeof(struct kstatfs));
+	kfree(watched_processes[i].res[0].buffer);
+	return watched_processes[i].res[0].open_fd;
+}
+
+static asmlinkage long lseek_in_host(unsigned int fd,off_t offset,unsigned int whence,int i){
+	struct msg_header* header = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
+	struct lseek_req* lseek_r = kmalloc(sizeof(struct lseek_req),GFP_KERNEL);
+	int j;
+	header->pid = watched_processes[i].pid;
+	header->host_pid = watched_processes[i].host_pid;
+	header->msg_status = 1;
+	header->msg_type = LSEEK_REQUEST;
+	header->msg_length = sizeof(struct lseek_req);
+
+	lseek_r->fd =fd;
+	lseek_r->offset =offset;
+	lseek_r->whence =whence;
+
+	memcpy(header->msg , (char *) lseek_r,sizeof(struct lseek_req));
+	send_to_host(header);
+
+	wait_event_interruptible(wq, watched_processes[i].wake_flag == 'y');
+	watched_processes[i].wake_flag = 'n';
+
+	return watched_processes[i].res[0].open_fd;
+}
+static asmlinkage long fsetxattr_in_host(int fd,const char __user * name,const void __user * value,size_t size,int flags,int i){
+	struct msg_header* header = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
+	struct fsetxattr_req* fsetxattr_r = kmalloc(sizeof(struct fsetxattr_req),GFP_KERNEL);
+	int j;
+	header->pid = watched_processes[i].pid;
+	header->host_pid = watched_processes[i].host_pid;
+	header->msg_status = 1;
+	header->msg_type = FSETXATTR_REQUEST;
+	header->msg_length = sizeof(struct fsetxattr_req);
+
+	fsetxattr_r->fd =fd;
+	memcpy(fsetxattr_r->name,name,strlen(name));
+	memcpy(fsetxattr_r->value,value,strlen(value)); //value may not str hack
+	fsetxattr_r->size =size;
+	fsetxattr_r->flags =flags;
+
+	memcpy(header->msg , (char *) fsetxattr_r,sizeof(struct fsetxattr_req));
+	send_to_host(header);
+
+	wait_event_interruptible(wq, watched_processes[i].wake_flag == 'y');
+	watched_processes[i].wake_flag = 'n';
+
+	return watched_processes[i].res[0].open_fd;
+}
+static asmlinkage long poll_in_host(struct pollfd __user * ufds,unsigned int nfds,int timeout_msecs,int i){
+	struct msg_header* header = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
+	struct poll_req* poll_r = kmalloc(sizeof(struct poll_req),GFP_KERNEL);
+	int k;
+	header->pid = watched_processes[i].pid;
+	header->host_pid = watched_processes[i].host_pid;
+	header->msg_status = 1;
+	header->msg_type = POLL_REQUEST;
+	header->msg_length = sizeof(struct poll_req);
+
+	poll_r->nfds =nfds;
+	poll_r->timeout_msecs =timeout_msecs;
+	struct pollfd * curfd=ufds;
+	for(k=0;k<nfds;k++){
+		poll_r->ufds[k]=*curfd;
+		curfd+=1;
+	}
+
+	memcpy(header->msg , (char *) poll_r,sizeof(struct poll_req));
+	send_to_host(header);
+
+	wait_event_interruptible(wq, watched_processes[i].wake_flag == 'y');
+	watched_processes[i].wake_flag = 'n';
+
+	return watched_processes[i].res[0].open_fd;
+}
+
 
 /*############################################################## Hooked Functions #################################################### */
 
@@ -535,7 +670,7 @@ int vmmod_filemap_fault( struct vm_fault *vmf )
 	struct file * file1;
 	printk("SANDBOX: vmmod mmap fault handler called\n");
 	offset = (((unsigned long)vmf->address - vma->vm_start) + (vma->vm_pgoff << PAGE_SHIFT));
-	required_page_of_file=offset >> PAGE_SHIFT;  
+	required_page_of_file=offset >> PAGE_SHIFT;
 	page = alloc_page(vmf->gfp_mask);
 	unsigned long page_va=__va(page_to_pfn(page) << PAGE_SHIFT);
 
@@ -554,12 +689,12 @@ int vmmod_filemap_fault( struct vm_fault *vmf )
 	file1=vma->vm_file;
 	if(file1){
 		int j;
-		for(j=3;j<=50;j++){//loop over 50 files.
+		for(j=3;j<=50;j++){//loop over 50 files. //hack 50 fds limit
 			if(fdget(j).file==file1){
 				break;
 			}
 		}
-		header->fd =j; 
+		header->fd =j;
 	}
 	else{
 		printk("SANDBOX: no vma file");
@@ -569,7 +704,7 @@ int vmmod_filemap_fault( struct vm_fault *vmf )
 
 	wait_event_interruptible(wq, watched_processes[i].wake_flag == 'y');
 	watched_processes[i].wake_flag = 'n';
-	
+
 	//got page content
 	if(watched_processes[i].res[0].length < 0){  //errorno is not yet set
 		return 0;
@@ -579,7 +714,7 @@ int vmmod_filemap_fault( struct vm_fault *vmf )
 	kfree(watched_processes[i].res[0].buffer);
 
 	vmf->page = page;
-	return 0; 
+	return 0;
 }
 
 int vmmod_filemap_page_mkwrite( struct vm_fault *vmf )
@@ -605,7 +740,7 @@ int mmap_from_host(struct file * f, struct vm_area_struct * vma){
 	unsigned long startaddr=vma->vm_start;
 	unsigned int file1_fd=3;
 	vma->vm_ops = &vmmod_file_vm_ops;
-	
+
 	for(i=0;i<num_of_watched_processes;i++){
 		if(watched_processes[i].pid == current->pid)
 			break;
@@ -617,16 +752,16 @@ int mmap_from_host(struct file * f, struct vm_area_struct * vma){
 				break;
 			}
 		}
-		file1_fd =j; 
+		file1_fd =j;
 	}
 	while(startaddr < vma->vm_end){
 		int remap_ret;
 		unsigned long offset = (((unsigned long)startaddr - vma->vm_start) + (vma->vm_pgoff << PAGE_SHIFT));
-		
-		unsigned long required_page_of_file=offset >> PAGE_SHIFT;  
+
+		unsigned long required_page_of_file=offset >> PAGE_SHIFT;
 		printk("loop %d %d\n",offset,required_page_of_file);
 		struct page * page=alloc_page(GFP_KERNEL);
-		unsigned long page_pfn =page_to_pfn(page); 
+		unsigned long page_pfn =page_to_pfn(page);
 		unsigned long page_va=__va( page_pfn<< PAGE_SHIFT);
 			//get content of page from host
 		struct msg_header* header = kmalloc(sizeof(struct msg_header),GFP_KERNEL);
@@ -634,13 +769,13 @@ int mmap_from_host(struct file * f, struct vm_area_struct * vma){
 		header->host_pid = watched_processes[i].host_pid;
 		header->msg_status = 1;
 		header->msg_type = MMAP_REQUEST;
-		header->fd =file1_fd; 
+		header->fd =file1_fd;
 		header->count = required_page_of_file;
 		send_to_host(header);
 
 		wait_event_interruptible(wq, watched_processes[i].wake_flag == 'y');
 		watched_processes[i].wake_flag = 'n';
-		
+
 		//got page content
 		if(watched_processes[i].res[0].length < 0){  //errorno is not yet set
 			return -EIO;
@@ -652,9 +787,9 @@ int mmap_from_host(struct file * f, struct vm_area_struct * vma){
 		printk("hello2 %lu, %lu\n",startaddr, page_pfn);
 		//remap_ret = remap_pfn_range(vma, startaddr,page_pfn, watched_processes[i].res[0].length, vma->vm_page_prot); // maps physical area to user address space in user page table.
 		WARN_ON(!page_count(page));
-		remap_ret = vm_insert_page(vma, startaddr,page); 
+		remap_ret = vm_insert_page(vma, startaddr,page);
 		printk("hello3 %d\n",remap_ret);
-		
+
 		if (remap_ret < 0) {
 			pr_err("could not map the address area\n");
 			return -EIO;
@@ -669,12 +804,9 @@ static struct file_operations vmmod_fops = {
 
 
 
-static asmlinkage int RFS_syscall(int syscall_code, unsigned int rw_fd, char __user * r_buf, 
-		                 const char __user * w_buf, size_t rw_count,int o_dfd, 
-				 const char __user * o_filename, int o_flags,umode_t o_mode, 
-				 unsigned int c_fd,unsigned int fstat_fd,struct kstat * statbuf)
+static asmlinkage int RFS_syscall(int syscall_code, void * argptr)
 {
-	int watched_process_flag = 0;  
+	int watched_process_flag = 0;
 	int i;
 	for(i=0;i<num_of_watched_processes;i++){
 		if(watched_processes[i].pid == current->pid){
@@ -682,7 +814,7 @@ static asmlinkage int RFS_syscall(int syscall_code, unsigned int rw_fd, char __u
 			break;
 		}
 	}
-	
+
 	if(!watched_process_flag){
 		return -5000;
 	}
@@ -691,52 +823,86 @@ static asmlinkage int RFS_syscall(int syscall_code, unsigned int rw_fd, char __u
 			{
 				case VFS_OPEN: {
 					struct file *filp = NULL;
+					struct arg_open * arg = (struct arg_open *)argptr;
 					int vm_fd;
 					mm_segment_t fs;
 					int j;
-					int host_fd=ksys_open_in_host(o_dfd, o_filename,o_flags,o_mode,i);
+					int host_fd=ksys_open_in_host(arg->dfd, arg->filename,arg->flags,arg->mode,i);
 					if(host_fd>=0){
 						fs = get_fs();
 						set_fs(KERNEL_DS);
-						vm_fd = do_sys_open(o_dfd,"/home/dummy", o_flags, o_mode);
+						vm_fd = do_sys_open(arg->dfd,"/home/dummy", arg->flags, arg->mode);
 						set_fs(fs);
-						
+
 						printk("SANDBOX: vmfd=%d\n",vm_fd);
 						filp=(fdget(vm_fd)).file;
-						filp->f_op=&vmmod_fops;	
+						filp->f_op=&vmmod_fops;
 						watched_processes[i].fds_open_in_host[vm_fd]=host_fd;
 					}
 					return vm_fd;
 					break;
 				}
 				case VFS_READ: {
-					if(watched_processes[i].fds_open_in_host[rw_fd]!=-1)
-						return ksys_read_from_host(watched_processes[i].fds_open_in_host[rw_fd],r_buf,rw_count,i);
+					struct arg_read * arg = (struct arg_read *) argptr;
+					if(watched_processes[i].fds_open_in_host[arg->fd]!=-1)
+						return ksys_read_from_host(watched_processes[i].fds_open_in_host[arg->fd],arg->buf,arg->count,i);
 					break;
 				}
 				case VFS_WRITE: {
-					if(watched_processes[i].fds_open_in_host[rw_fd]!=-1)
-						return ksys_write_to_host(watched_processes[i].fds_open_in_host[rw_fd],w_buf,rw_count,i);
+					struct arg_write * arg = (struct arg_write *) argptr;
+					if(watched_processes[i].fds_open_in_host[arg->fd]!=-1)
+						return ksys_write_to_host(watched_processes[i].fds_open_in_host[arg->fd],arg->buf,arg->count,i);
 					break;
 				}
 				case VFS_CLOSE: {
-					if(c_fd==3 && sysfs_file_open==1){
+					struct arg_close * arg = (struct arg_close *) argptr;
+					if(arg->fd==3 && sysfs_file_open==1){
 						sysfs_file_open=0;
 						return -5000;
 					}
-					if(watched_processes[i].fds_open_in_host[c_fd]!=-1){ // close at both places
-						int dummy=ksys_close_in_host(watched_processes[i].fds_open_in_host[c_fd],i);
-						watched_processes[i].fds_open_in_host[c_fd]=-1;
+					if(watched_processes[i].fds_open_in_host[arg->fd]!=-1){ // close at both places
+						int dummy=ksys_close_in_host(watched_processes[i].fds_open_in_host[arg->fd],i);
+						watched_processes[i].fds_open_in_host[arg->fd]=-1;
 						return -5000;
 					}
 					break;
 				}
 				case VFS_FSTAT: {
-					printk("VFS fstat %d %d\n",fstat_fd,watched_processes[i].fds_open_in_host[fstat_fd]);
-					if(watched_processes[i].fds_open_in_host[fstat_fd]!=-1){
-						int fstatret=fstat_in_host(watched_processes[i].fds_open_in_host[fstat_fd],statbuf,i);
-						printk("VFS fstat size=%d\n",statbuf->size);
+					struct arg_fstat * arg = (struct arg_fstat *) argptr;
+					if(watched_processes[i].fds_open_in_host[arg->fd]!=-1){
+						int fstatret=fstat_in_host(watched_processes[i].fds_open_in_host[arg->fd],arg->stat,i);
 						return fstatret;
+					}
+					break;
+				}
+				case VFS_STAT: {
+					struct arg_stat * arg = (struct arg_stat *) argptr;
+					int statret=stat_in_host(arg->filename,arg->stat,i);
+					return statret;
+					break;
+				}
+				case VFS_STATFS: {
+					struct arg_statfs * arg = (struct arg_statfs *) argptr;
+					int statfsret=statfs_in_host(arg->pathname,arg->st,i);
+					return statfsret;
+					break;
+				}
+				case VFS_LSEEK: {
+					struct arg_lseek * arg = (struct arg_lseek *) argptr;
+					if(watched_processes[i].fds_open_in_host[arg->fd]!=-1)
+						return lseek_in_host(watched_processes[i].fds_open_in_host[arg->fd],arg->offset,arg->whence,i);
+					break;
+				}
+				case VFS_FSETXATTR: {
+					struct arg_fsetxattr * arg = (struct arg_fsetxattr *) argptr;
+					if(watched_processes[i].fds_open_in_host[arg->fd]!=-1)
+						return fsetxattr_in_host(watched_processes[i].fds_open_in_host[arg->fd],arg->name,arg->value,arg->size,arg->flags,i);
+					break;
+				}
+				case VFS_POLL: {
+					struct arg_poll * arg = (struct arg_poll *) argptr;
+					if(watched_processes[i].fds_open_in_host[arg->ufds->fd]!=-1){ //checking just first fd, hack for wget
+						return poll_in_host(arg->ufds,arg->nfds,arg->timeout_msecs,i);
 					}
 					break;
 				}
@@ -747,7 +913,7 @@ static asmlinkage int RFS_syscall(int syscall_code, unsigned int rw_fd, char __u
 
 // static asmlinkage ssize_t fake_ksys_write(unsigned int fd, const char __user *buf, size_t count)
 // {
-	
+
 // 	int watched_process_flag = 0;  //flag if this function is called by ssh proxy child
 // 	int i;
 // 	for(i=0;i<num_of_watched_processes;i++){
@@ -756,7 +922,7 @@ static asmlinkage int RFS_syscall(int syscall_code, unsigned int rw_fd, char __u
 // 			break;
 // 		}
 // 	}
-	
+
 // 	if(watched_process_flag){
 // 		int j;
 // 		for(j=0;j<10;j++){
@@ -766,9 +932,9 @@ static asmlinkage int RFS_syscall(int syscall_code, unsigned int rw_fd, char __u
 // 		return real_ksys_write(fd, buf,count);
 // 	}
 // 	else{
-// 			return real_ksys_write(fd, buf,count);	
+// 			return real_ksys_write(fd, buf,count);
 // 	}
-	
+
 // }
 
 // static asmlinkage ssize_t (*real_ksys_read)(unsigned int fd, const char __user *buf, size_t count);
@@ -783,7 +949,7 @@ static asmlinkage int RFS_syscall(int syscall_code, unsigned int rw_fd, char __u
 // 			break;
 // 		}
 // 	}
-	
+
 // 	if(watched_process_flag){
 // 		int j;
 // 		for(j=0;j<10;j++){
@@ -793,9 +959,9 @@ static asmlinkage int RFS_syscall(int syscall_code, unsigned int rw_fd, char __u
 // 		return real_ksys_read(fd,buf,count);
 // 	}
 // 	else{
-// 		return real_ksys_read(fd, buf,count);	
+// 		return real_ksys_read(fd, buf,count);
 // 	}
-	
+
 // }
 
 //static asmlinkage long (*real_sys_open)(int dfd, const char __user *filename, int flags, umode_t mode);
@@ -816,7 +982,7 @@ static asmlinkage int RFS_syscall(int syscall_code, unsigned int rw_fd, char __u
 // 		return ksys_open_in_host(dfd, filename,flags,mode,i);
 // 	}
 // 	else{
-// 		return real_sys_open(dfd, filename,flags,mode);	
+// 		return real_sys_open(dfd, filename,flags,mode);
 // 	}
 // }
 
@@ -825,7 +991,7 @@ static asmlinkage int RFS_syscall(int syscall_code, unsigned int rw_fd, char __u
 // static asmlinkage int fake_close(struct files_struct *files, unsigned fd){
 // 	int watched_process_flag = 0;
 // 	int i;
-// 	for(i=1;i<num_of_watched_processes;i++){  
+// 	for(i=1;i<num_of_watched_processes;i++){
 // 		if(watched_processes[i].pid == current->pid){
 // 			watched_process_flag=1;
 // 			break;
@@ -836,12 +1002,12 @@ static asmlinkage int RFS_syscall(int syscall_code, unsigned int rw_fd, char __u
 // 		for(j=0;j<10;j++){
 // 			if(watched_processes[i].fds_open_in_host[j]==fd){
 // 				return ksys_close_in_host(fd,i);
-// 			}	
+// 			}
 // 		}
 // 		return real_close(files,fd);
 // 	}
 // 	else{
-// 		return real_close(files,fd);	
+// 		return real_close(files,fd);
 // 	}
 // }
 
@@ -850,7 +1016,7 @@ static asmlinkage int RFS_syscall(int syscall_code, unsigned int rw_fd, char __u
 // static asmlinkage int fake_ioctl(unsigned int fd, unsigned int cmd, unsigned long arg){
 // 	int watched_process_flag = 0;
 // 	int i;
-// 	for(i=1;i<num_of_watched_processes;i++){  
+// 	for(i=1;i<num_of_watched_processes;i++){
 // 		if(watched_processes[i].pid == current->pid){
 // 			watched_process_flag=1;
 // 			break;
@@ -865,7 +1031,7 @@ static asmlinkage int RFS_syscall(int syscall_code, unsigned int rw_fd, char __u
 // 		return real_ioctl(fd,cmd,arg);
 // 	}
 // 	else{
-// 		return real_ioctl(fd,cmd,arg);	
+// 		return real_ioctl(fd,cmd,arg);
 // 	}
 // }
 
@@ -881,7 +1047,7 @@ static asmlinkage int RFS_syscall(int syscall_code, unsigned int rw_fd, char __u
 
 //static struct ftrace_hook demo_hooks[] = {
 	// HOOK("ksys_write", fake_ksys_write, &real_ksys_write),
-	// HOOK("ksys_read", fake_ksys_read, &real_ksys_read),	
+	// HOOK("ksys_read", fake_ksys_read, &real_ksys_read),
 	//HOOK("do_sys_open", fake_sys_open, &real_sys_open),
 	// HOOK("__close_fd",fake_close,&real_close),
 	// HOOK("ksys_ioctl",fake_ioctl,&real_ioctl),
@@ -893,7 +1059,7 @@ static asmlinkage int RFS_syscall(int syscall_code, unsigned int rw_fd, char __u
 static ssize_t sysfs_vmmod_read(struct kobject *kobj, struct kobj_attribute *attr,
                       char *buf)
 {
-		if(current->pid==watched_processes[0].pid && newProcessFlag==1){			
+		if(current->pid==watched_processes[0].pid && newProcessFlag==1){
 			newProcessFlag=0;
 			return 1;
 		}
@@ -903,9 +1069,9 @@ static ssize_t sysfs_vmmod_read(struct kobject *kobj, struct kobj_attribute *att
 static ssize_t sysfs_vmmod_write(struct kobject *kobj, struct kobj_attribute *attr,
                       const char *buf, size_t count)
 {
-		if(strncmp(buf, "iamagent", 8) == 0){                               
-			watched_processes[0].pid = current->pid; 
-			watched_processes[0].host_pid = 0;                              
+		if(strncmp(buf, "iamagent", 8) == 0){
+			watched_processes[0].pid = current->pid;
+			watched_processes[0].host_pid = 0;
 			printk("SANDBOX: agent created with pid = %d \n",current->pid);
 			return count;
 		}
@@ -953,7 +1119,7 @@ static int fh_init(void)
 			watched_processes[i].fds_open_in_host[0]=-1;
 			watched_processes[i].fds_open_in_host[1]=-1;
 			watched_processes[i].fds_open_in_host[2]=-1;
-		}		
+		}
 		for(j=3;j<10;j++){
 			watched_processes[i].fds_open_in_host[j]=-1;
 		}

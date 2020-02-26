@@ -1,5 +1,5 @@
 /*
-*  Kernel to kernel shared memory. Host side implementation. 
+*  Kernel to kernel shared memory. Host side implementation.
 */
 
 #include<stdio.h>
@@ -18,6 +18,7 @@
 #define UNIX_SOCK_PATH "/tmp/ivshmem.sock"
 #define VERSION 0
 #define VMID 2
+#define max_shm_processes 5
 
 struct shm_information{
                          int vmfd;
@@ -26,11 +27,16 @@ struct shm_information{
                          int guest_eventfd;
                          void *shmhandle;
                          unsigned long size;
+                         int pid_mapping[max_shm_processes];
+                         int message_count[max_shm_processes];
+                         void *receive_handle;
+                         void *send_handle;
+                         int metadata_size;
+                         int slot_size;
 };
 
 
-static int
-send_one_msg(int sock_fd, long msg_t, int fd)
+static int send_one_msg(int sock_fd, long msg_t, int fd)
 {
     int ret;
     struct msghdr msg;
@@ -81,12 +87,12 @@ void send_init_messages(struct shm_information *shm)
    assert(send_one_msg(shm->vmfd, -1, shm->shmfd) == 0);
    assert(send_one_msg(shm->vmfd, 1, shm->host_eventfd) == 0);
    assert(send_one_msg(shm->vmfd, 2, shm->guest_eventfd) == 0);
-   
+
 }
 
-/* 
+/*
   Create the server to catch the VM start and a default client in the host
-  We only use two eventfds one for the host and other for the guest 
+  We only use two eventfds one for the host and other for the guest
 */
 
 void init_and_start_host(struct shm_information *shminfo)
@@ -94,23 +100,23 @@ void init_and_start_host(struct shm_information *shminfo)
     int sockfd, vmfd, ret;
     struct sockaddr_un sun;
     socklen_t unaddr_len;
-   
+
     shminfo->shmfd = shm_open("ivshmem", O_CREAT | O_RDWR, S_IRWXU);
 
     assert(shminfo->shmfd >= 0);
-    assert(!ftruncate(shminfo->shmfd, SHM_SIZE)); 
+    assert(!ftruncate(shminfo->shmfd, SHM_SIZE));
 
     shminfo->shmhandle = mmap(NULL, SHM_SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, shminfo->shmfd, 0);
     assert(shminfo->shmhandle != MAP_FAILED);
-    
-    shminfo->host_eventfd = eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC); 
+
+    shminfo->host_eventfd = eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC);
     shminfo->guest_eventfd = eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC);
-    
+
     assert(shminfo->host_eventfd >=0 && shminfo->guest_eventfd >=0);
     shminfo->size = SHM_SIZE;
-    
+
     /*
-      Wait for the connection 
+      Wait for the connection
       XXX get rid of this nonsense when chardev is ready
      */
     sockfd = socket(AF_UNIX, SOCK_STREAM, 0);
@@ -120,21 +126,21 @@ void init_and_start_host(struct shm_information *shminfo)
     ret = snprintf(sun.sun_path, sizeof(sun.sun_path), "%s",
                    UNIX_SOCK_PATH);
     assert(ret == strlen(UNIX_SOCK_PATH));
-    
+
     assert(bind(sockfd, (struct sockaddr *)&sun, sizeof(sun)) == 0);
 
     assert(listen(sockfd, 5) == 0);
 
     unaddr_len = sizeof(sun);
     shminfo->vmfd = accept(sockfd, (struct sockaddr *)&sun, &unaddr_len);
-    
+
     assert(shminfo->vmfd >= 0);
-     
+
     send_init_messages(shminfo);
 
     close(shminfo->vmfd);
     close(sockfd);
-    return; 
+    return;
 }
 
 int main()
@@ -143,7 +149,7 @@ int main()
    struct shm_information shinfo;
    fd = open("/sys/kernel/netsandbox/shinfo", O_RDWR);
    assert(fd >= 0);
-   
+
    init_and_start_host(&shinfo);
 
 
@@ -156,13 +162,13 @@ int main()
       assert(write(fd, &shinfo, sizeof(shinfo)) == sizeof(shinfo));
       close(fd);
    }
-    
+
 #if 0
    /* Qemu sets the host eventfd to nonblocking. We don't want that */
    ctr = fcntl(shinfo.host_eventfd, F_GETFL);
    assert(ctr >= 0);
    printf("flags = %x\n", ctr);
-   ctr = ctr & (~O_NONBLOCK); 
+   ctr = ctr & (~O_NONBLOCK);
    assert(fcntl(shinfo.host_eventfd, F_SETFL, ctr) == 0);
 
    while(getchar()){
@@ -173,7 +179,7 @@ int main()
           assert(write(shinfo.guest_eventfd, &kick, sizeof(kick)) == sizeof(kick));
 
           if(read(shinfo.host_eventfd, &kick, sizeof(kick)) < 0){
-              perror("read"); 
+              perror("read");
               assert(0);
           }
           //while(read(shinfo.host_eventfd, &kick, sizeof(kick)) < 0);
@@ -182,6 +188,6 @@ int main()
       }
   }
 #else
-   
+
 #endif
 }

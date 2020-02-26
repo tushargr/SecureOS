@@ -52,6 +52,7 @@ struct ivshmem_kern_client{
 static DEFINE_MUTEX(notify_vm_lock);
 struct mutex message_array_lock[max_shm_processes];
 static DECLARE_WAIT_QUEUE_HEAD(wq);
+atomic_t in_kernel;
 
 struct shm_information{
                          void *shmhandle;
@@ -227,6 +228,56 @@ static irqreturn_t ivshmem_handler(int irq, void *arg){
         return IRQ_HANDLED;
 }
 
+static ssize_t sandbox_kickstart_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf){
+        return sprintf(buf, "started = %d\n", atomic_read(&in_kernel));
+}
+
+static DEFINE_MUTEX(sendmsg_lock1);
+
+static ssize_t sandbox_kickstart_set(struct kobject *kobj,struct kobj_attribute *attr, const char *buf, size_t count){
+        atomic_set(&in_kernel, 1);
+        int freeslot=-1;
+        mutex_lock(&sendmsg_lock1);
+        for(i=0;i<max_shm_processes;i++){
+            if(shinfo->pid_mapping[i]==-1){
+                freeslot=i;break;
+            }
+        }
+        mutex_unlock(&sendmsg_lock1);
+        BUG_ON(freeslot==-1);
+        shinfo->pid_mapping[freeslot]=current->pid;
+
+
+        int ctr;
+        for(ctr=1;ctr<=10;ctr++){
+            unsigned long size;
+            char * msg = (char *)receivemsg(&size);
+            printk("%d %s\n",ctr,msg);
+            free(msg);
+            if(freeslot!=0){
+                msg= (char *)kmalloc(10*i* sizeof(char), GFP_KERNEL);
+                memset(msg, 'A', 10*i* sizeof(char));
+                int ret=sendmsg((void *)msg,10*i);
+                free(msg);
+            }
+        }
+        return count;
+}
+
+static struct kobj_attribute sandbox_kickstart_attribute = __ATTR(kickstart, 0644, sandbox_kickstart_show, sandbox_kickstart_set);
+
+
+static struct attribute *sandbox_attrs[] = {
+        &sandbox_kickstart_attribute.attr,
+        NULL,
+};
+static struct attribute_group sandbox_attr_group = {
+        .attrs = sandbox_attrs,
+        .name = "netsandbox",
+};
+
+
+
 static int ivshmem_pci_probe(struct pci_dev *dev, const struct pci_device_id *id){
 
         struct ivshmem_kern_client *client;
@@ -309,6 +360,13 @@ client->name, client))
         shinfo->receive_handle = shinfo->shmhandle;
         shinfo->send_handle = (shinfo->size / 2);
         shinfo->slot_size= ((shinfo->size - (shinfo->metadata_size * 2)) / 2) / max_shm_processes;
+        int err;
+
+        err = sysfs_create_group (kernel_kobj, &sandbox_attr_group);
+        if(unlikely(err))
+                printk(KERN_INFO "sandbox: can't create sysfs\n");
+
+        atomic_set(&in_kernel, 0);
 
         printk(KERN_INFO "ivshmem successfully loaded and initialized\n");
         //strncpy((char*)regs,"I m guest",9 );
@@ -345,6 +403,7 @@ static void ivshmem_pci_remove(struct pci_dev *dev){
         pci_disable_device(dev);
         kfree(client);
         kfree(ivshmem_info);
+        sysfs_remove_group (kernel_kobj, &sandbox_attr_group);
         //fh_exit();
 }
 
@@ -364,6 +423,7 @@ static struct pci_driver ivshmem_pci_driver = {
         .probe = ivshmem_pci_probe,
         .remove = ivshmem_pci_remove,
 };
+
 
 module_pci_driver(ivshmem_pci_driver);
 MODULE_DEVICE_TABLE(pci, ivshmem_pci_ids);

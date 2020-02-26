@@ -165,7 +165,7 @@ int sendmsg(void * msg, unsigned long size){
             }
         }
         BUG_ON(freeslot==-1);
-        pid_mapping[freeslot]=current->pid;
+        shinfo->pid_mapping[freeslot]=current->pid;
         mutex_unlock(&sendmsg_lock1);
 
         //modify msg to include allotted slot
@@ -283,7 +283,17 @@ static ssize_t sandbox_kickstart_show(struct kobject *kobj, struct kobj_attribut
 
 static ssize_t sandbox_kickstart_set(struct kobject *kobj,struct kobj_attribute *attr, const char *buf, size_t count){
         atomic_set(&in_kernel, 1);
-        handle_comm(shinfo, (char *)buf);
+        int ctr;
+        for(ctr=1;ctr<=10;ctr++){
+            char * msg= (char *)kmalloc(10*i* sizeof(char), GFP_KERNEL);
+            memset(msg, 'A', 10*i* sizeof(char));
+            int ret=sendmsg((void *)msg,10*i);
+            free(msg);
+            unsigned long size;
+            msg = (char *)receivemsg(&size);
+            printk("%d %s\n",ctr,msg);
+            free(msg);
+        }
         return count;
 }
 

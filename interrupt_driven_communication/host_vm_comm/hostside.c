@@ -157,10 +157,10 @@ int main()
    close(fd);
 
    while(getchar()){
-      fd = open("/sys/kernel/netsandbox/kickstart", O_RDWR);
-      assert(fd >= 0);
-      assert(write(fd, &shinfo, sizeof(shinfo)) == sizeof(shinfo));
-      close(fd);
+      // fd = open("/sys/kernel/netsandbox/kickstart", O_RDWR);
+      // assert(fd >= 0);
+      // assert(write(fd, &shinfo, sizeof(shinfo)) == sizeof(shinfo));
+      // close(fd);
    }
 
 #if 0
